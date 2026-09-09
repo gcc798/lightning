@@ -102,7 +102,18 @@ docker compose up -d --build
 docker build --build-arg TARGET=scheduler -t lightning-native-scheduler .
 ```
 
-Compose 默认启动 Consul、gateway、iam、sys、resource、scheduler、PostgreSQL、Redis 和 RustFS，即完整微服务形态。Consul UI/API 位于 `8500`，所有前端 HTTP 请求统一进入 gateway 的 `9009`。
+Compose 默认启动 Consul、gateway、iam、sys、resource、scheduler、PostgreSQL、Redis 和 RustFS，即完整微服务形态。Consul UI/API 映射到宿主机 `8501`，所有前端 HTTP 请求统一进入 gateway 的 `9009`。
+
+启动固定的本地扩容拓扑（Gateway 1、Scheduler 1、IAM 3、SYS 5、Resource 1）：
+
+```bash
+export LIGHTNING_JWT_SECRET='replace-with-at-least-32-random-characters'
+./scripts/microservices.sh start
+./scripts/microservices.sh stop     # 停止但保留容器和数据
+./scripts/microservices.sh destroy  # 删除容器、网络和数据卷
+```
+
+Consul 服务列表访问 `http://localhost:8501/ui/dc1/services`。容器入口会在未显式设置 `LIGHTNING_SERVICE_ADVERTISE_HOST` 时注入当前容器 IP，使每个扩容副本注册自己的真实 HTTP/gRPC 地址。PostgreSQL、Redis 和 RustFS 只在 Compose 网络内提供给服务使用，不占用宿主机端口。
 
 PostgreSQL、Redis 和 RustFS 带有本地默认值；需要覆盖时使用 `LIGHTNING_POSTGRES_PASSWORD`、`LIGHTNING_REDIS_PASSWORD` 和 `LIGHTNING_RUSTFS_*`。RustFS 提供 S3 兼容对象存储；resource 启动时会检查并按需创建 `lightning` Bucket。
 

@@ -52,7 +52,7 @@ IAM 提供认证授权 HTTP/gRPC 接口，拥有 IAM 数据、Redis 会话、JWT
 | `server.port` | `LIGHTNING_SERVER_PORT` | IAM HTTP 监听端口。 |
 | `grpc.port` | `LIGHTNING_GRPC_PORT` | IAM gRPC 监听端口。 |
 | `service.id` | `LIGHTNING_SERVICE_ID` | 注册中心实例 ID；可显式留空，由程序按服务名、主机名和 HTTP 端口生成。 |
-| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 注册给其他进程访问的主机名或 IP，不是监听地址。 |
+| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 注册给其他进程访问的主机名或 IP，不是监听地址；Docker 镜像未显式注入时使用当前容器 IP。 |
 | `registry.driver` | `LIGHTNING_REGISTRY_DRIVER` | 注册自身并发现 SYS。 |
 | `registry.address` | `LIGHTNING_REGISTRY_ADDRESS` | 注册中心地址。 |
 | `registry.prefix` | `LIGHTNING_REGISTRY_PREFIX` | 注册中心 key 前缀。 |
@@ -85,7 +85,7 @@ SYS 提供系统配置和日志 HTTP/gRPC 接口，依赖 IAM 鉴权、PostgreSQ
 | `server.port` | `LIGHTNING_SERVER_PORT` | SYS HTTP 监听端口。 |
 | `grpc.port` | `LIGHTNING_GRPC_PORT` | SYS gRPC 监听端口。 |
 | `service.id` | `LIGHTNING_SERVICE_ID` | 注册中心实例 ID；允许显式留空后自动生成。 |
-| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 其他进程访问 SYS 的主机名或 IP。 |
+| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 其他进程访问 SYS 的主机名或 IP；Docker 镜像未显式注入时使用当前容器 IP。 |
 | `registry.driver` | `LIGHTNING_REGISTRY_DRIVER` | 注册自身并发现 IAM。 |
 | `registry.address` | `LIGHTNING_REGISTRY_ADDRESS` | 注册中心地址。 |
 | `registry.prefix` | `LIGHTNING_REGISTRY_PREFIX` | 注册中心 key 前缀。 |
@@ -109,7 +109,7 @@ Resource 提供资源 HTTP/gRPC 接口，依赖 IAM 鉴权、PostgreSQL 和 S3 �
 | `server.port` | `LIGHTNING_SERVER_PORT` | Resource HTTP 监听端口。 |
 | `grpc.port` | `LIGHTNING_GRPC_PORT` | Resource gRPC 监听端口。 |
 | `service.id` | `LIGHTNING_SERVICE_ID` | 注册中心实例 ID；允许显式留空后自动生成。 |
-| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 其他进程访问 Resource 的主机名或 IP。 |
+| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 其他进程访问 Resource 的主机名或 IP；Docker 镜像未显式注入时使用当前容器 IP。 |
 | `registry.driver` | `LIGHTNING_REGISTRY_DRIVER` | 注册自身并发现 IAM、SYS。 |
 | `registry.address` | `LIGHTNING_REGISTRY_ADDRESS` | 注册中心地址。 |
 | `registry.prefix` | `LIGHTNING_REGISTRY_PREFIX` | 注册中心 key 前缀。 |

@@ -37,7 +37,6 @@ services:
       <<: [*database-environment, *registry-environment]
       LIGHTNING_SERVER_PORT: 9010
       LIGHTNING_GRPC_PORT: 9110
-      LIGHTNING_SERVICE_ADVERTISE_HOST: iam
       LIGHTNING_REDIS_ADDR: redis:6379
       LIGHTNING_REDIS_PASSWORD: "${LIGHTNING_REDIS_PASSWORD:-123456}"
       LIGHTNING_JWT_SECRET: "${LIGHTNING_JWT_SECRET:?set LIGHTNING_JWT_SECRET}"
@@ -61,7 +60,6 @@ services:
       <<: [*database-environment, *registry-environment]
       LIGHTNING_SERVER_PORT: 9011
       LIGHTNING_GRPC_PORT: 9111
-      LIGHTNING_SERVICE_ADVERTISE_HOST: sys
       LIGHTNING_REDIS_ADDR: redis:6379
       LIGHTNING_REDIS_PASSWORD: "${LIGHTNING_REDIS_PASSWORD:-123456}"
     depends_on:
@@ -84,7 +82,6 @@ services:
       <<: [*database-environment, *registry-environment]
       LIGHTNING_SERVER_PORT: 9012
       LIGHTNING_GRPC_PORT: 9112
-      LIGHTNING_SERVICE_ADVERTISE_HOST: resource
       LIGHTNING_STORAGE_ENDPOINT: rustfs:9000
       LIGHTNING_STORAGE_ACCESS_KEY: "${LIGHTNING_RUSTFS_ACCESS_KEY:-rustfsadmin}"
       LIGHTNING_STORAGE_SECRET_KEY: "${LIGHTNING_RUSTFS_SECRET_KEY:-rustfsadmin}"
@@ -117,7 +114,7 @@ services:
   consul:
     image: hashicorp/consul:1.21
     command: ["agent", "-dev", "-client=0.0.0.0"]
-    ports: ["8500:8500"]
+    ports: ["8501:8500"]
     healthcheck:
       test: ["CMD", "consul", "members"]
       interval: 5s
@@ -130,7 +127,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "${LIGHTNING_POSTGRES_PASSWORD:-post123}"
       POSTGRES_DB: lightning
-    ports: ["5432:5432"]
     volumes: ["postgres-data:/var/lib/postgresql/data"]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d lightning"]
@@ -141,7 +137,6 @@ services:
   redis:
     image: redis:7-alpine
     command: ["redis-server", "--requirepass", "${LIGHTNING_REDIS_PASSWORD:-123456}"]
-    ports: ["6379:6379"]
     volumes: ["redis-data:/data"]
     healthcheck:
       test: ["CMD-SHELL", "redis-cli -a '${LIGHTNING_REDIS_PASSWORD:-123456}' ping >/dev/null"]
@@ -151,7 +146,6 @@ services:
 
   rustfs:
     image: rustfs/rustfs:1.0.0-beta.10
-    ports: ["9000:9000", "9001:9001"]
     environment:
       RUSTFS_VOLUMES: /data
       RUSTFS_ADDRESS: 0.0.0.0:9000

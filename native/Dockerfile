@@ -18,6 +18,7 @@ WORKDIR /app
 COPY --from=builder /out/service /app/service
 COPY application/${TARGET}/conf.prod.yaml /app/conf.prod.yaml
 COPY application/${TARGET}/zaplogger.prod.yaml /app/zaplogger.prod.yaml
+COPY scripts/docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chown -R lightning:lightning /app
 USER lightning
-ENTRYPOINT ["/app/service"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
