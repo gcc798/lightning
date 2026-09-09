@@ -40,6 +40,8 @@ Gateway 只负责 HTTP/WS 接入、鉴权代理和服务发现，不连接数据
 | `registry.driver` | `LIGHTNING_REGISTRY_DRIVER` | 用于发现 IAM、SYS、Resource。 |
 | `registry.address` | `LIGHTNING_REGISTRY_ADDRESS` | 注册中心地址。 |
 | `registry.prefix` | `LIGHTNING_REGISTRY_PREFIX` | 注册中心 key 前缀。 |
+| `service.id` | `LIGHTNING_SERVICE_ID` | Gateway 注册中心实例 ID；允许显式留空后自动生成。 |
+| `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | Gateway 注册的 HTTP 地址主机名或 IP；Docker 镜像未显式注入时使用当前容器 IP。 |
 | `gateway.rateLimitPerMinute` | `LIGHTNING_GATEWAY_RATE_LIMIT_PER_MINUTE` | 单来源 IP 每分钟请求上限；`0` 表示不限制，不能为负数。 |
 | `cors.enabled` | `LIGHTNING_CORS_ENABLED` | 是否允许跨域；生产环境必须为 `false`。 |
 
@@ -129,7 +131,7 @@ Resource 提供资源 HTTP/gRPC 接口，依赖 IAM 鉴权、PostgreSQL 和 S3 �
 
 ## Scheduler
 
-Scheduler 不监听 HTTP/gRPC，也不注册服务实例。它从注册中心发现 SYS、Resource，并使用数据库读取调度配置。
+Scheduler 不监听 HTTP/gRPC，但会注册进程实例，便于观察存活拓扑。它从注册中心发现 SYS、Resource，并使用数据库读取调度配置。
 
 | YAML 键 | 环境变量 | 说明 |
 | --- | --- | --- |
@@ -141,8 +143,9 @@ Scheduler 不监听 HTTP/gRPC，也不注册服务实例。它从注册中心发
 | `registry.driver` | `LIGHTNING_REGISTRY_DRIVER` | 用于发现 SYS、Resource。 |
 | `registry.address` | `LIGHTNING_REGISTRY_ADDRESS` | 注册中心地址。 |
 | `registry.prefix` | `LIGHTNING_REGISTRY_PREFIX` | 注册中心 key 前缀。 |
+| `service.id` | `LIGHTNING_SERVICE_ID` | Scheduler 注册中心实例 ID；允许显式留空后自动生成。 |
 
-Scheduler 没有 `LIGHTNING_SERVER_*`、`LIGHTNING_GRPC_*` 或 `LIGHTNING_SERVICE_*` 配置，因为它不提供网络服务。
+Scheduler 没有 `LIGHTNING_SERVER_*`、`LIGHTNING_GRPC_*` 或 `LIGHTNING_SERVICE_ADVERTISE_HOST`，因为它不提供网络 endpoint。
 
 ## User Manager
 

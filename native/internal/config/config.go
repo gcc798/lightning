@@ -152,6 +152,7 @@ func requireExplicitConfiguration(v *viper.Viper, service Service) error {
 	case ServiceGateway:
 		keys = append(server, "server.tlsCertFile", "server.tlsKeyFile", "gateway.rateLimitPerMinute", "cors.enabled")
 		keys = append(keys, registry...)
+		keys = append(keys, "service.id", "service.advertiseHost")
 	case ServiceIAM:
 		keys = append(keys, server...)
 		keys = append(keys, grpc...)
@@ -178,6 +179,7 @@ func requireExplicitConfiguration(v *viper.Viper, service Service) error {
 	case ServiceScheduler:
 		keys = append(keys, database...)
 		keys = append(keys, registry...)
+		keys = append(keys, "service.id")
 	case ServiceUserManager:
 		keys = []string{"database.dsn"}
 	}
@@ -264,6 +266,9 @@ func (c *Config) Validate(profile string, service Service) error {
 	if service == ServiceScheduler {
 		return nil
 	}
+	if c.Service.AdvertiseHost == "" {
+		return fmt.Errorf("service.advertiseHost is required")
+	}
 	if service == ServiceGateway {
 		if (c.Server.TLSCertFile == "") != (c.Server.TLSKeyFile == "") {
 			return fmt.Errorf("both server.tlsCertFile and server.tlsKeyFile are required for TLS")
@@ -272,9 +277,6 @@ func (c *Config) Validate(profile string, service Service) error {
 			return fmt.Errorf("gateway.rateLimitPerMinute cannot be negative")
 		}
 		return nil
-	}
-	if c.Service.AdvertiseHost == "" {
-		return fmt.Errorf("service.advertiseHost is required")
 	}
 	if (service == ServiceIAM || service == ServiceSystem) && c.Redis.Addr == "" {
 		return fmt.Errorf("redis.addr is required")

@@ -17,6 +17,18 @@ type RegisteredGRPC struct {
 	Instance registry.ServiceInstance
 }
 
+func RegisterService(ctx context.Context, reg registry.Registry, name, id string, endpoints map[string]string) (registry.ServiceInstance, error) {
+	if id == "" {
+		host, _ := os.Hostname()
+		id = fmt.Sprintf("%s-%s", name, host)
+	}
+	if endpoints == nil {
+		endpoints = map[string]string{}
+	}
+	instance := registry.ServiceInstance{ID: id, Name: name, Endpoints: endpoints}
+	return instance, reg.Register(ctx, instance)
+}
+
 func StartRegisteredGRPC(ctx context.Context, cfg *config.Config, name string, register func(*grpc.Server)) (*RegisteredGRPC, error) {
 	reg, err := registry.New(cfg.Registry.Driver, cfg.Registry.Address, cfg.Registry.Prefix)
 	if err != nil {
@@ -28,15 +40,10 @@ func StartRegisteredGRPC(ctx context.Context, cfg *config.Config, name string, r
 		return nil, err
 	}
 	register(server.Server())
-	id := cfg.Service.ID
-	if id == "" {
-		host, _ := os.Hostname()
-		id = fmt.Sprintf("%s-%s-%d", name, host, cfg.Server.Port)
-	}
 	host := cfg.Service.AdvertiseHost
-	instance := registry.ServiceInstance{ID: id, Name: name, Endpoints: map[string]string{registry.EndpointHTTP: "http://" + host + ":" + strconv.Itoa(cfg.Server.Port), registry.EndpointGRPC: host + ":" + strconv.Itoa(cfg.GRPC.Port)}}
 	go func() { _ = server.Serve() }()
-	if err := reg.Register(ctx, instance); err != nil {
+	instance, err := RegisterService(ctx, reg, name, cfg.Service.ID, map[string]string{registry.EndpointHTTP: "http://" + host + ":" + strconv.Itoa(cfg.Server.Port), registry.EndpointGRPC: host + ":" + strconv.Itoa(cfg.GRPC.Port)})
+	if err != nil {
 		server.GracefulStop()
 		_ = reg.Close()
 		return nil, err

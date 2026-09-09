@@ -17,6 +17,7 @@ services:
       <<: *registry-environment
       LIGHTNING_APP_ENV: prod
       LIGHTNING_SERVER_PORT: 9009
+      LIGHTNING_SERVICE_ID: ""
     depends_on:
       iam: { condition: service_healthy }
       sys: { condition: service_healthy }
@@ -106,6 +107,7 @@ services:
       args: { TARGET: scheduler }
     environment:
       <<: [*database-environment, *registry-environment]
+      LIGHTNING_SERVICE_ID: ""
     depends_on:
       sys: { condition: service_healthy }
       resource: { condition: service_healthy }

@@ -78,6 +78,23 @@ func main() {
 			errorsCh <- serveErr
 		}
 	}()
+	scheme := "http"
+	if cfg.Server.TLSCertFile != "" {
+		scheme = "https"
+	}
+	instance, err := transport.RegisterService(ctx, reg, string(config.ServiceGateway), cfg.Service.ID, map[string]string{
+		registry.EndpointHTTP: fmt.Sprintf("%s://%s:%d", scheme, cfg.Service.AdvertiseHost, cfg.Server.Port),
+	})
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		exitCode = 1
+		return
+	}
+	defer func() {
+		shutdown, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		_ = reg.Deregister(shutdown, instance)
+	}()
 	log.Info("gateway started")
 	select {
 	case <-ctx.Done():

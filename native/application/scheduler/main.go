@@ -64,6 +64,17 @@ func main() {
 		exitCode = 1
 		return
 	}
+	instance, err := transport.RegisterService(ctx, reg, string(config.ServiceScheduler), cfg.Service.ID, nil)
+	if err != nil {
+		log.Error("scheduler process exited with error", zap.Error(err))
+		exitCode = 1
+		return
+	}
+	defer func() {
+		shutdown, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		_ = reg.Deregister(shutdown, instance)
+	}()
 	if err := cont.StartModules(ctx); err != nil {
 		log.Error("scheduler process exited with error", zap.Error(fmt.Errorf("start scheduler modules: %w", err)))
 		exitCode = 1

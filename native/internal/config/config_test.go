@@ -55,11 +55,11 @@ func TestServiceConfigsContainOnlyOwnedSections(t *testing.T) {
 		service  Service
 		sections []string
 	}{
-		{name: "gateway", service: ServiceGateway, sections: []string{"cors", "gateway", "registry", "server"}},
+		{name: "gateway", service: ServiceGateway, sections: []string{"cors", "gateway", "registry", "server", "service"}},
 		{name: "iam", service: ServiceIAM, sections: []string{"auth", "cors", "database", "grpc", "jwt", "redis", "registry", "server", "service", "websocket"}},
 		{name: "sys", service: ServiceSystem, sections: []string{"auth", "cors", "database", "grpc", "redis", "registry", "server", "service"}},
 		{name: "resource", service: ServiceResource, sections: []string{"auth", "cors", "database", "grpc", "registry", "server", "service", "storage"}},
-		{name: "scheduler", service: ServiceScheduler, sections: []string{"database", "registry"}},
+		{name: "scheduler", service: ServiceScheduler, sections: []string{"database", "registry", "service"}},
 	}
 	for _, tt := range services {
 		t.Run(tt.name, func(t *testing.T) {

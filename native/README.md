@@ -45,7 +45,7 @@ go run ./application/scheduler
 
 Git 只管理每个服务的 `conf.example.yaml` 和 `zaplogger.example.yaml`。`make init-config` 会在文件不存在时把模板分别复制为 `*.dev.yaml` 和 `*.prod.yaml`，不会覆盖已有配置；这些实际运行配置已被 Git 忽略。模板只声明该进程实际使用的配置段，例如 Gateway 只配置接入与注册中心，Resource 配置数据库和对象存储，Scheduler 配置数据库和注册中心。创建后应按环境修改地址和凭据；生产敏感值也可以通过对应的 `LIGHTNING_*` 环境变量注入。
 
-IAM、SYS、Resource 的 `service.id` 是注册中心中的实例唯一标识；留空时程序按“服务名 + 主机名 + HTTP 端口”自动生成，只有需要固定实例 ID 时才填写。`service.advertiseHost` 是写入注册中心、供 Gateway 和其他服务访问该实例的地址；本机开发使用 `127.0.0.1`，Docker Compose 使用服务名 `iam`、`sys`、`resource`，Kubernetes 使用可被其他 Pod 解析的 Service DNS 或 Pod 地址。它不是监听地址，HTTP/gRPC 仍由 `server.port` 和 `grpc.port` 监听。
+Gateway、IAM、SYS、Resource、Scheduler 的 `service.id` 是注册中心中的实例唯一标识；留空时程序按“服务名 + 主机名”自动生成，只有需要固定实例 ID 时才填写。Gateway、IAM、SYS、Resource 的 `service.advertiseHost` 是写入注册中心、供其他进程访问该实例的地址；本机开发使用 `127.0.0.1`，容器部署使用实例自身可达的地址。它不是监听地址，HTTP/gRPC 仍由 `server.port` 和 `grpc.port` 监听。Scheduler 不提供网络 endpoint，因此只配置实例 ID。
 
 生产环境默认关闭 CORS，前后端通过 Nginx 同源代理；开发环境可在 `conf.dev.yaml` 中开启。
 
