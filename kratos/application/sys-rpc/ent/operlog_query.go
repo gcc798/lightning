@@ -11,8 +11,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/operlog"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/operlog"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
 )
 
 // OperLogQuery is the builder for querying OperLog entities.

@@ -135,7 +135,7 @@ kratos/
 
 更详细的变量和目标说明见：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/makefile-reference.md](/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/makefile-reference.md)
+- [docs/makefile-reference.md](docs/makefile-reference.md)
 
 ## 已抽取到 pkg 的通用能力
 
@@ -235,12 +235,12 @@ kratos/
 如果你要继续了解这套工程，建议按下面顺序阅读：
 
 1. proto 到 HTTP / gRPC 串联流程：
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/proto-http-grpc-flow.md](/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/proto-http-grpc-flow.md)
+   - [docs/proto-http-grpc-flow.md](docs/proto-http-grpc-flow.md)
 2. Ent 使用说明：
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/ent-usage.md](/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/ent-usage.md)
+   - [docs/ent-usage.md](docs/ent-usage.md)
 3. Wire 使用说明：
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/wire-usage.md](/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/wire-usage.md)
+   - [docs/wire-usage.md](docs/wire-usage.md)
 4. HTTP 手工路由与 proto 路由边界：
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/http-routing-boundary.md](/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/http-routing-boundary.md)
+   - [docs/http-routing-boundary.md](docs/http-routing-boundary.md)
 5. Makefile 详细说明：
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/makefile-reference.md](/Users/guoc/dev/code_go/src/quick.admin/kratos/docs/makefile-reference.md)
+   - [docs/makefile-reference.md](docs/makefile-reference.md)

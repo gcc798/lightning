@@ -2,6 +2,7 @@ package websocket
 
 import (
 	"encoding/json"
+	"errors"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -11,6 +12,9 @@ import (
 	"go.uber.org/zap"
 )
 
+// ErrHubClosed 表示 Hub 已停止，无法再投递消息。
+var ErrHubClosed = errors.New("websocket hub 已关闭")
+
 // Hub 是 WebSocket 连接管理中心。
 type Hub struct {
 	clients    map[int64]map[*Client]bool
@@ -18,7 +22,9 @@ type Hub struct {
 	unregister chan *Client
 	broadcast  chan *Message
 	quit       chan struct{}
+	startOnce  sync.Once
 	stopOnce   sync.Once
+	wg         sync.WaitGroup
 	mu         sync.RWMutex
 	logger     logging.Logger
 }
@@ -54,31 +60,29 @@ func NewHub(logger logging.Logger) *Hub {
 	}
 }
 
-// Name 返回组件名称。
-func (h *Hub) Name() string {
-	return "WebSocket Hub"
+// Start 启动 Hub 处理循环，可重复调用但只生效一次。
+func (h *Hub) Start() {
+	h.startOnce.Do(func() {
+		h.wg.Add(1)
+		go h.run()
+	})
 }
 
-// Start 启动组件。
-func (h *Hub) Start() error {
-	go h.Run()
-	return nil
-}
-
-// Stop 停止组件。
-func (h *Hub) Stop() error {
+// Close 停止 Hub 并等待处理循环退出、全部连接关闭，可重复调用。
+func (h *Hub) Close() {
 	h.stopOnce.Do(func() {
 		close(h.quit)
 	})
-	return nil
+	h.wg.Wait()
 }
 
-// Run 启动 Hub 处理循环。
-func (h *Hub) Run() {
+func (h *Hub) run() {
+	defer h.wg.Done()
+	defer h.closeAll()
+
 	for {
 		select {
 		case <-h.quit:
-			h.logger.Info("websocket hub stopped")
 			return
 		case client := <-h.register:
 			h.mu.Lock()
@@ -92,19 +96,7 @@ func (h *Hub) Run() {
 				zap.Int("totalConnections", len(h.clients[client.UserId])))
 
 		case client := <-h.unregister:
-			h.mu.Lock()
-			if connections, ok := h.clients[client.UserId]; ok {
-				if _, exists := connections[client]; exists {
-					delete(connections, client)
-					client.Conn.Close()
-					if len(connections) == 0 {
-						delete(h.clients, client.UserId)
-					}
-					h.logger.Info("websocket client unregistered",
-						zap.Int64("userId", client.UserId))
-				}
-			}
-			h.mu.Unlock()
+			h.removeClient(client)
 
 		case message := <-h.broadcast:
 			h.sendToUser(message)
@@ -112,17 +104,42 @@ func (h *Hub) Run() {
 	}
 }
 
-func (h *Hub) sendToUser(message *Message) {
-	h.mu.RLock()
-	connections, ok := h.clients[message.UserId]
-	h.mu.RUnlock()
-
-	if !ok || len(connections) == 0 {
-		h.logger.Debug("no websocket connections for user",
-			zap.Int64("userId", message.UserId))
+// removeClient 摘除并关闭连接，仅由处理循环调用。
+func (h *Hub) removeClient(client *Client) {
+	h.mu.Lock()
+	connections, ok := h.clients[client.UserId]
+	if !ok || !connections[client] {
+		h.mu.Unlock()
 		return
 	}
+	delete(connections, client)
+	if len(connections) == 0 {
+		delete(h.clients, client.UserId)
+	}
+	h.mu.Unlock()
 
+	client.Conn.Close()
+	h.logger.Info("websocket client unregistered", zap.Int64("userId", client.UserId))
+}
+
+// closeAll 关闭全部残留连接，处理循环退出时调用。
+func (h *Hub) closeAll() {
+	h.mu.Lock()
+	clients := h.clients
+	h.clients = make(map[int64]map[*Client]bool)
+	h.mu.Unlock()
+
+	total := 0
+	for _, connections := range clients {
+		for client := range connections {
+			client.Conn.Close()
+			total++
+		}
+	}
+	h.logger.Info("websocket hub stopped", zap.Int("closedConnections", total))
+}
+
+func (h *Hub) sendToUser(message *Message) {
 	if message.payload == nil {
 		payload, err := json.Marshal(message)
 		if err != nil {
@@ -135,34 +152,35 @@ func (h *Hub) sendToUser(message *Message) {
 	}
 
 	h.mu.RLock()
-	defer h.mu.RUnlock()
+	targets := make([]*Client, 0, len(h.clients[message.UserId]))
+	for client := range h.clients[message.UserId] {
+		targets = append(targets, client)
+	}
+	h.mu.RUnlock()
 
-	for client := range connections {
+	if len(targets) == 0 {
+		h.logger.Debug("no websocket connections for user", zap.Int64("userId", message.UserId))
+		return
+	}
+
+	for _, client := range targets {
 		if err := client.WriteMessage(websocket.TextMessage, message.payload); err != nil {
 			h.logger.Error("failed to send websocket message",
 				zap.Int64("userId", message.UserId),
 				zap.Error(err))
-			go func(c *Client) {
-				h.unregister <- c
-			}(client)
+			h.removeClient(client)
 		}
 	}
 
 	h.logger.Debug("websocket message sent",
 		zap.Int64("userId", message.UserId),
 		zap.String("type", message.Type),
-		zap.Int("connections", len(connections)))
+		zap.Int("connections", len(targets)))
 }
 
 // SendToUser 发送消息给指定用户。
 func (h *Hub) SendToUser(userId int64, msgType string, data interface{}) error {
-	message := &Message{
-		UserId: userId,
-		Type:   msgType,
-		Data:   data,
-	}
-	h.broadcast <- message
-	return nil
+	return h.enqueue(&Message{UserId: userId, Type: msgType, Data: data})
 }
 
 // SendJSONToUser 发送已组装好的 JSON 结构给指定用户。
@@ -171,21 +189,34 @@ func (h *Hub) SendJSONToUser(userId int64, payload interface{}) error {
 	if err != nil {
 		return err
 	}
-	h.broadcast <- &Message{
-		UserId:  userId,
-		payload: data,
+	return h.enqueue(&Message{UserId: userId, payload: data})
+}
+
+// enqueue 投递消息，Hub 已关闭时立即返回 ErrHubClosed，避免调用方永久阻塞。
+func (h *Hub) enqueue(message *Message) error {
+	select {
+	case <-h.quit:
+		return ErrHubClosed
+	case h.broadcast <- message:
+		return nil
 	}
-	return nil
 }
 
-// Register 注册客户端连接。
+// Register 注册客户端连接，Hub 已关闭时直接关闭连接。
 func (h *Hub) Register(client *Client) {
-	h.register <- client
+	select {
+	case <-h.quit:
+		client.Conn.Close()
+	case h.register <- client:
+	}
 }
 
-// Unregister 注销客户端连接。
+// Unregister 注销客户端连接，Hub 已关闭时直接返回（连接由 closeAll 关闭）。
 func (h *Hub) Unregister(client *Client) {
-	h.unregister <- client
+	select {
+	case <-h.quit:
+	case h.unregister <- client:
+	}
 }
 
 // GetConnectionCount 获取指定用户的连接数。

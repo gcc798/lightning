@@ -19,7 +19,7 @@
 这类路由通过生成代码里的 `Register*HTTPServer(...)` 完成注册。
 
 当前入口文件：
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http_routes.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http_routes.go)
+- [../application/sys-api/internal/server/http_routes.go](../application/sys-api/internal/server/http_routes.go)
 
 对应函数：
 - `registerProtoHTTPRoutes(...)`
@@ -50,7 +50,7 @@
 这类路由保留手工注册，不强行塞进 proto HTTP 生成链路。
 
 当前入口文件：
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http_routes.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http_routes.go)
+- [../application/sys-api/internal/server/http_routes.go](../application/sys-api/internal/server/http_routes.go)
 
 对应函数：
 - `registerManualHTTPRoutes(...)`
@@ -109,11 +109,11 @@
 ## 当前相关代码位置
 
 主 HTTP Server 装配：
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http.go)
+- [../application/sys-api/internal/server/http.go](../application/sys-api/internal/server/http.go)
 
 手工 Handler 相关文件：
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/attachment_handler.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/attachment_handler.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/metrics_handler.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/metrics_handler.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/health_handler.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/health_handler.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/swagger_handler.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/swagger_handler.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/websocket_handler.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/websocket_handler.go)
+- [../application/sys-api/internal/server/attachment_handler.go](../application/sys-api/internal/server/attachment_handler.go)
+- [../application/sys-api/internal/server/metrics_handler.go](../application/sys-api/internal/server/metrics_handler.go)
+- [../application/sys-api/internal/server/health_handler.go](../application/sys-api/internal/server/health_handler.go)
+- [../application/sys-api/internal/server/swagger_handler.go](../application/sys-api/internal/server/swagger_handler.go)
+- [../application/sys-api/internal/server/websocket_handler.go](../application/sys-api/internal/server/websocket_handler.go)

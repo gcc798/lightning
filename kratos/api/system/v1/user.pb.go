@@ -972,7 +972,7 @@ const file_system_v1_user_proto_rawDesc = "" +
 	"\vImportUsers\x12&.api.system.v1.BatchImportUsersRequest\x1a\x1f.api.system.v1.ImportUsersReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/api/v1/user/import\x12|\n" +
 	"\rResetPassword\x12#.api.system.v1.ResetPasswordRequest\x1a\x1b.api.system.v1.MessageReply\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/api/v1/user/{userId}/password\x12h\n" +
 	"\bPageUser\x12\x1f.api.system.v1.PageUsersRequest\x1a\x1d.api.system.v1.PageUsersReply\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/v1/user/page\x12|\n" +
-	"\x0eChangePassword\x12$.api.system.v1.ChangePasswordRequest\x1a\x1b.api.system.v1.MessageReply\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/v1/user/password/changeB7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"\x0eChangePassword\x12$.api.system.v1.ChangePasswordRequest\x1a\x1b.api.system.v1.MessageReply\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/v1/user/password/changeB5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_user_proto_rawDescOnce sync.Once

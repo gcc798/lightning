@@ -10,7 +10,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/dictdata"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/dictdata"
 )
 
 // DictDataCreate is the builder for creating a DictData entity.

@@ -1,6 +1,6 @@
 package server
 
-import v1 "github.com/gcc798/quick.admin/kratos/api/system/v1"
+import v1 "github.com/gcc798/lightning/kratos/api/system/v1"
 
 const (
 	operationHealthReady   = "/custom.health/Ready"

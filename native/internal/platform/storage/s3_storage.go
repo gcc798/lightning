@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"time"
@@ -12,24 +13,12 @@ import (
 
 // S3Storage S3 存储实现（支持 MinIO/AWS S3）
 type S3Storage struct {
-	client    *minio.Client
-	bucket    string
-	region    string
-	urlPrefix string
-}
-
-// S3Config S3 配置
-type S3Config struct {
-	Endpoint  string `json:"endpoint"`
-	AccessKey string `json:"accessKey"`
-	SecretKey string `json:"secretKey"`
-	Bucket    string `json:"bucket"`
-	Region    string `json:"region"`
-	UseSSL    bool   `json:"useSSL"`
+	client *minio.Client
+	bucket string
 }
 
 // NewS3Storage 创建 S3 存储实例
-func NewS3Storage(config S3Config) (*S3Storage, error) {
+func NewS3Storage(config Config) (*S3Storage, error) {
 	// 初始化 MinIO 客户端
 	client, err := minio.New(config.Endpoint, &minio.Options{
 		Creds:  credentials.NewStaticV4(config.AccessKey, config.SecretKey, ""),
@@ -39,11 +28,24 @@ func NewS3Storage(config S3Config) (*S3Storage, error) {
 	if err != nil {
 		return nil, fmt.Errorf("初始化 S3 客户端失败: %w", err)
 	}
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+	exists, err := client.BucketExists(ctx, config.Bucket)
+	if err != nil {
+		return nil, fmt.Errorf("检查 S3 Bucket 失败: %w", err)
+	}
+	if !exists {
+		if err := client.MakeBucket(ctx, config.Bucket, minio.MakeBucketOptions{Region: config.Region}); err != nil {
+			exists, checkErr := client.BucketExists(ctx, config.Bucket)
+			if checkErr != nil || !exists {
+				return nil, fmt.Errorf("创建 S3 Bucket 失败: %w", errors.Join(err, checkErr))
+			}
+		}
+	}
 
 	return &S3Storage{
 		client: client,
 		bucket: config.Bucket,
-		region: config.Region,
 	}, nil
 }
 
@@ -136,45 +138,4 @@ func (s *S3Storage) GetInfo(ctx context.Context, key string) (*FileInfo, error) 
 		ContentType:  stat.ContentType,
 		ETag:         stat.ETag,
 	}, nil
-}
-
-// S3StorageFactory S3 存储工厂
-type S3StorageFactory struct{}
-
-// NewS3StorageFactory 创建组件实例。
-func NewS3StorageFactory() *S3StorageFactory {
-	return &S3StorageFactory{}
-}
-
-// Create 创建业务数据。
-func (f *S3StorageFactory) Create(config map[string]interface{}) (Storage, error) {
-	s3Config := S3Config{
-		Endpoint:  getStringValue(config, "endpoint", ""),
-		AccessKey: getStringValue(config, "accessKey", ""),
-		SecretKey: getStringValue(config, "secretKey", ""),
-		Bucket:    getStringValue(config, "bucket", ""),
-		Region:    getStringValue(config, "region", "us-east-1"),
-		UseSSL:    getBoolValue(config, "useSSL", false),
-	}
-
-	return NewS3Storage(s3Config)
-}
-
-// 辅助函数
-func getStringValue(config map[string]interface{}, key, defaultValue string) string {
-	if v, ok := config[key]; ok {
-		if str, ok := v.(string); ok {
-			return str
-		}
-	}
-	return defaultValue
-}
-
-func getBoolValue(config map[string]interface{}, key string, defaultValue bool) bool {
-	if v, ok := config[key]; ok {
-		if b, ok := v.(bool); ok {
-			return b
-		}
-	}
-	return defaultValue
 }

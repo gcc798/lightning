@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gcc798/quick.admin/application/sys-api/internal/config"
-	"github.com/gcc798/quick.admin/application/sys-api/internal/handler"
-	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
-	"github.com/gcc798/quick.admin/common/middleware"
+	"github.com/gcc798/lightning/application/sys-api/internal/config"
+	"github.com/gcc798/lightning/application/sys-api/internal/handler"
+	"github.com/gcc798/lightning/application/sys-api/internal/svc"
+	"github.com/gcc798/lightning/common/middleware"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

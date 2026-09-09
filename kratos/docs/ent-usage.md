@@ -7,9 +7,9 @@
 
 如果你想先建立整体理解，建议先看这份文档，再去看：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data)
+- [../application/sys-rpc/ent/schema](../application/sys-rpc/ent/schema)
+- [../application/sys-rpc/internal/data/resources.go](../application/sys-rpc/internal/data/resources.go)
+- [../application/sys-rpc/internal/data](../application/sys-rpc/internal/data)
 
 ---
 
@@ -55,7 +55,7 @@ ent/
 
 比如当前工程中的用户 schema：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/user.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/user.go)
+- [../application/sys-rpc/ent/schema/user.go](../application/sys-rpc/ent/schema/user.go)
 
 这里做了几件事：
 
@@ -72,7 +72,7 @@ ent/
 
 当前工程对应命令在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/Makefile](/Users/guoc/dev/code_go/src/quick.admin/kratos/Makefile)
+- [../Makefile](../Makefile)
 
 对应 target：
 
@@ -113,7 +113,7 @@ make ent
 
 代码在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go)
+- [../application/sys-rpc/internal/data/resources.go](../application/sys-rpc/internal/data/resources.go)
 
 里面的关键逻辑是：
 
@@ -198,8 +198,8 @@ _, err := client.User.Delete().
 
 例如：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go)
+- [../application/sys-rpc/internal/data/user_repo.go](../application/sys-rpc/internal/data/user_repo.go)
+- [../application/sys-rpc/internal/data/role_repo.go](../application/sys-rpc/internal/data/role_repo.go)
 
 ---
 
@@ -227,7 +227,7 @@ tx.Role.UpdateOneID(...)...
 
 当前工程已经把这个模式封装到：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go)
+- [../application/sys-rpc/internal/data/resources.go](../application/sys-rpc/internal/data/resources.go)
 
 函数：
 
@@ -251,7 +251,7 @@ tx.Role.UpdateOneID(...)...
 
 目录：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema)
+- [../application/sys-rpc/ent/schema](../application/sys-rpc/ent/schema)
 
 这里是开发者手写的地方。
 
@@ -272,7 +272,7 @@ tx.Role.UpdateOneID(...)...
 
 公共 mixin：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/audit_mixin.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/audit_mixin.go)
+- [../application/sys-rpc/ent/schema/audit_mixin.go](../application/sys-rpc/ent/schema/audit_mixin.go)
 
 它统一提供：
 
@@ -290,7 +290,7 @@ tx.Role.UpdateOneID(...)...
 
 目录：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent)
+- [../application/sys-rpc/ent](../application/sys-rpc/ent)
 
 这里基本都是 `ent generate` 自动生成的代码。
 
@@ -321,7 +321,7 @@ make ent
 
 目录：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data)
+- [../application/sys-rpc/internal/data](../application/sys-rpc/internal/data)
 
 这是当前工程把 `ent` 真正接入业务的地方。
 
@@ -347,8 +347,8 @@ make ent
 
 配置来自：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/conf/conf.proto](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/conf/conf.proto)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/configs/config.yaml](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/configs/config.yaml)
+- [../application/sys-rpc/internal/conf/conf.proto](../application/sys-rpc/internal/conf/conf.proto)
+- [../application/sys-rpc/configs/config.yaml](../application/sys-rpc/configs/config.yaml)
 
 对应 `Data.Database` 配置里至少要有：
 
@@ -363,7 +363,7 @@ make ent
 
 入口：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/data.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/data.go)
+- [../application/sys-rpc/internal/data/data.go](../application/sys-rpc/internal/data/data.go)
 
 这里的 `ProviderSet` 最终会把：
 
@@ -388,7 +388,7 @@ make ent
 
 核心文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go)
+- [../application/sys-rpc/internal/data/resources.go](../application/sys-rpc/internal/data/resources.go)
 
 这里的 `Resources` 里包含：
 
@@ -438,7 +438,7 @@ repo / biz 使用
 
 例如用户：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go)
+- [../application/sys-rpc/internal/data/user_repo.go](../application/sys-rpc/internal/data/user_repo.go)
 
 函数：
 
@@ -537,7 +537,7 @@ _, err := r.Ent.User.UpdateOneID(req.GetUserId()).
 
 代码在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go)
+- [../application/sys-rpc/internal/data/role_repo.go](../application/sys-rpc/internal/data/role_repo.go)
 
 这里走的是：
 
@@ -569,7 +569,7 @@ return r.withTx(ctx, func(tx *entpkg.Tx) error {
 
 在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema)
+- [../application/sys-rpc/ent/schema](../application/sys-rpc/ent/schema)
 
 新增一个文件，比如：
 
@@ -603,7 +603,7 @@ make ent
 
 在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data)
+- [../application/sys-rpc/internal/data](../application/sys-rpc/internal/data)
 
 新增对应 repo 文件，例如：
 
@@ -624,7 +624,7 @@ make ent
 
 在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz)
+- [../application/sys-rpc/internal/biz](../application/sys-rpc/internal/biz)
 
 增加 usecase 方法，把 data 层暴露出去。
 
@@ -634,7 +634,7 @@ make ent
 
 在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/service](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/service)
+- [../application/sys-rpc/internal/service](../application/sys-rpc/internal/service)
 
 把 proto server 接口实现补齐。
 
@@ -677,7 +677,7 @@ make wire
 
 这个规则来自：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/audit_mixin.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/audit_mixin.go)
+- [../application/sys-rpc/ent/schema/audit_mixin.go](../application/sys-rpc/ent/schema/audit_mixin.go)
 
 所以很多 repo 里会出现：
 
@@ -694,8 +694,8 @@ make wire
 
 例如：
 
-- [`activeUsers(...)`](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go)
-- [`activeRoles(...)`](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go)
+- [`activeUsers(...)`](../application/sys-rpc/internal/data/user_repo.go)
+- [`activeRoles(...)`](../application/sys-rpc/internal/data/role_repo.go)
 
 这是当前工程的实际状态，不是 Ent 的限制。
 
@@ -776,8 +776,8 @@ ent generate ./application/sys-rpc/ent/schema
 
 例如：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go)
+- [../application/sys-rpc/internal/data/user_repo.go](../application/sys-rpc/internal/data/user_repo.go)
+- [../application/sys-rpc/internal/data/role_repo.go](../application/sys-rpc/internal/data/role_repo.go)
 
 ---
 
@@ -808,16 +808,16 @@ ent generate ./application/sys-rpc/ent/schema
 如果你想靠当前工程理解 Ent，最推荐的顺序是：
 
 1. 看 schema
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/user.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/user.go)
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/audit_mixin.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/ent/schema/audit_mixin.go)
+   - [../application/sys-rpc/ent/schema/user.go](../application/sys-rpc/ent/schema/user.go)
+   - [../application/sys-rpc/ent/schema/audit_mixin.go](../application/sys-rpc/ent/schema/audit_mixin.go)
 2. 看资源初始化
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/resources.go)
+   - [../application/sys-rpc/internal/data/resources.go](../application/sys-rpc/internal/data/resources.go)
 3. 看一个简单 repo
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/user_repo.go)
+   - [../application/sys-rpc/internal/data/user_repo.go](../application/sys-rpc/internal/data/user_repo.go)
 4. 看一个带事务的 repo
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/role_repo.go)
+   - [../application/sys-rpc/internal/data/role_repo.go](../application/sys-rpc/internal/data/role_repo.go)
 5. 再看 biz 怎么调用 data
-   - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz/user.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz/user.go)
+   - [../application/sys-rpc/internal/biz/user.go](../application/sys-rpc/internal/biz/user.go)
 
 按这个顺序看，会比直接扎进 `ent` 生成代码里更容易理解。
 

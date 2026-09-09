@@ -1,0 +1,32 @@
+server:
+  port: 9011
+
+grpc:
+  port: 9111
+
+registry:
+  driver: consul
+  address: http://127.0.0.1:8500
+  prefix: /lightning/services
+
+service:
+  id: ""
+  advertiseHost: 127.0.0.1
+
+database:
+  dsn: "host=127.0.0.1 user=postgres password=post123 dbname=lightning port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+  maxOpenConns: 100
+  maxIdleConns: 10
+  connMaxLifetimeMinutes: 60
+  slowThreshold: 500
+
+redis:
+  addr: 127.0.0.1:6379
+  password: "123456"
+  db: 0
+
+auth:
+  tokenHeader: Authorization
+
+cors:
+  enabled: false

@@ -1,6 +1,7 @@
 package websocket
 
 import (
+	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
@@ -11,15 +12,34 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestOriginAllowed(t *testing.T) {
+	for _, test := range []struct {
+		name, origin, host string
+		allow, want        bool
+	}{
+		{name: "no browser origin", host: "api.example.com", want: true},
+		{name: "same origin", origin: "https://api.example.com", host: "api.example.com", want: true},
+		{name: "cross origin blocked", origin: "https://evil.example.com", host: "api.example.com"},
+		{name: "development override", origin: "http://localhost:5173", host: "localhost:9009", allow: true, want: true},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			req := &http.Request{Host: test.host, Header: http.Header{"Origin": []string{test.origin}}}
+			if got := originAllowed(req, test.allow); got != test.want {
+				t.Fatalf("originAllowed() = %v, want %v", got, test.want)
+			}
+		})
+	}
+}
+
 func TestHandlerUpgradesEchoResponse(t *testing.T) {
 	log, err := logging.NewLoggerWithConfig(&logging.Config{Level: "error", Output: "console", Encoding: "json"})
 	require.NoError(t, err)
 	hub := NewHub(log)
-	require.NoError(t, hub.Start())
-	t.Cleanup(func() { _ = hub.Stop() })
+	hub.Start()
+	t.Cleanup(hub.Close)
 
 	e := echo.New()
-	handler := NewHandler(hub, log)
+	handler := NewHandler(hub, log, false)
 	e.GET("/resource/websocket", func(c *echo.Context) error {
 		handler.ServeWs(c)
 		return nil

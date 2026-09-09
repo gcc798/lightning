@@ -121,7 +121,7 @@ const file_system_v1_health_proto_rawDesc = "" +
 	"\tPingReply\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage2^\n" +
 	"\rHealthService\x12M\n" +
-	"\x04Ping\x12\x1a.api.system.v1.PingRequest\x1a\x18.api.system.v1.PingReply\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/healthB7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"\x04Ping\x12\x1a.api.system.v1.PingRequest\x1a\x18.api.system.v1.PingReply\"\x0f\x82\xd3\xe4\x93\x02\t\x12\a/healthB5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_health_proto_rawDescOnce sync.Once

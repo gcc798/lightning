@@ -575,7 +575,7 @@ const file_system_v1_storage_proto_rawDesc = "" +
 	"\x10UpdateStorageEnv\x12&.api.system.v1.UpdateStorageEnvRequest\x1a\x1b.api.system.v1.MessageReply\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\x1a\x18/api/v1/storage-env/{id}\x12q\n" +
 	"\rGetStorageEnv\x12\x1f.api.system.v1.StorageIdRequest\x1a\x1d.api.system.v1.StorageEnvItem\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/storage-env/{id}\x12\x82\x01\n" +
 	"\x18TestStorageEnvConnection\x12\x1f.api.system.v1.StorageIdRequest\x1a\x1b.api.system.v1.MessageReply\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/v1/storage-env/{id}/test\x12r\n" +
-	"\x10DeleteStorageEnv\x12\x1f.api.system.v1.StorageIdRequest\x1a\x1b.api.system.v1.MessageReply\" \x82\xd3\xe4\x93\x02\x1a*\x18/api/v1/storage-env/{id}B7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"\x10DeleteStorageEnv\x12\x1f.api.system.v1.StorageIdRequest\x1a\x1b.api.system.v1.MessageReply\" \x82\xd3\xe4\x93\x02\x1a*\x18/api/v1/storage-env/{id}B5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_storage_proto_rawDescOnce sync.Once

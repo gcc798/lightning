@@ -1,6 +1,6 @@
 package menu
 
-import "github.com/gcc798/quick.admin/application/sys-rpc/client/sysservice"
+import "github.com/gcc798/lightning/application/sys-rpc/client/sysservice"
 
 type nativeMenuTree struct {
 	Id          int64             `json:"id"`

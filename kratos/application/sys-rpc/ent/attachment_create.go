@@ -10,7 +10,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/attachment"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/attachment"
 )
 
 // AttachmentCreate is the builder for creating a Attachment entity.

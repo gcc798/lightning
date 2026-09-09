@@ -7,7 +7,7 @@ package sysservice
 import (
 	"context"
 
-	"github.com/gcc798/quick.admin/application/sys-rpc/pb"
+	"github.com/gcc798/lightning/application/sys-rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

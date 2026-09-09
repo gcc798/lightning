@@ -1,0 +1,24 @@
+FROM golang:1.26.5-alpine AS builder
+
+ARG TARGET
+WORKDIR /src
+RUN apk add --no-cache ca-certificates git
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/service ./application/${TARGET}
+
+FROM alpine:3.22
+
+ARG TARGET
+
+RUN apk add --no-cache ca-certificates tzdata wget curl \
+    && addgroup -S lightning \
+    && adduser -S -G lightning lightning
+WORKDIR /app
+COPY --from=builder /out/service /app/service
+COPY application/${TARGET}/conf.prod.yaml /app/conf.prod.yaml
+COPY application/${TARGET}/zaplogger.prod.yaml /app/zaplogger.prod.yaml
+RUN chown -R lightning:lightning /app
+USER lightning
+ENTRYPOINT ["/app/service"]

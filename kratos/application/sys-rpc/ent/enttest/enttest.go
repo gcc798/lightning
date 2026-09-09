@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
 	// required by schema hooks.
-	_ "github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/runtime"
+	_ "github.com/gcc798/lightning/kratos/application/sys-rpc/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/migrate"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/migrate"
 )
 
 type (

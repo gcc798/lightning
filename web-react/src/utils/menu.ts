@@ -24,6 +24,9 @@ export function normalizeMenuRecord(raw: unknown): MenuRecord {
     visible: toOptionalNumber(source.visible),
     status: toOptionalNumber(source.status),
     perms: toStringValue(source.perms),
+    apiPermissionIds: Array.isArray(source.apiPermissionIds)
+      ? source.apiPermissionIds as MenuRecord['apiPermissionIds']
+      : [],
     icon: toStringValue(source.icon),
     remark: toStringValue(source.remark),
   };

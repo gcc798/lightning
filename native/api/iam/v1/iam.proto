@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package lightning.iam.v1;
+
+option go_package = "github.com/gcc798/lightning/internal/api/iam/v1;iamv1";
+
+service IAMService {
+  rpc ValidateAccessToken(ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
+  rpc CheckPermission(CheckPermissionRequest) returns (CheckPermissionResponse);
+}
+
+message ValidateAccessTokenRequest {
+  string token = 1;
+}
+
+message ValidateAccessTokenResponse {
+  int64 user_id = 1;
+  string user_name = 2;
+  string client_id = 3;
+  string device_type = 4;
+}
+
+message CheckPermissionRequest {
+  int64 user_id = 1;
+  string resource = 2;
+  string action = 3;
+}
+
+message CheckPermissionResponse {
+  bool allowed = 1;
+}

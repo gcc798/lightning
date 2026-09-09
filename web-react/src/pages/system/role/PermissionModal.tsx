@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Key } from 'react';
-import { App, Spin, Tree } from 'antd';
+import { App, Space, Spin, Tag, Tree } from 'antd';
 import type { SnowflakeId } from '@/types/api';
 import { BasicModal } from '@/components/common/BasicModal';
 import { menuApi } from '@/api/menu';
@@ -24,6 +24,19 @@ export function PermissionModal({
   const [loading, setLoading] = useState(false);
   const [treeData, setTreeData] = useState<MenuRecord[]>([]);
   const [checkedKeys, setCheckedKeys] = useState<Key[]>([]);
+
+  const derivedCount = useMemo(() => {
+    const selected = new Set(checkedKeys);
+    const permissions = new Set<SnowflakeId>();
+    const walk = (nodes: MenuRecord[]) => nodes.forEach((menu) => {
+      if (selected.has(menu.id)) {
+        menu.apiPermissionIds?.forEach((id) => permissions.add(id));
+      }
+      if (menu.children) walk(menu.children);
+    });
+    walk(treeData);
+    return permissions.size;
+  }, [checkedKeys, treeData]);
 
   useEffect(() => {
     if (!open || !roleId) {
@@ -76,15 +89,18 @@ export function PermissionModal({
       onOk={() => void handleSubmit()}
     >
       <Spin spinning={loading}>
-        <Tree
-          checkable
-          checkedKeys={checkedKeys}
-          defaultExpandAll
-          fieldNames={{ title: 'menuName', key: 'id', children: 'children' }}
-          selectable={false}
-          treeData={treeData}
-          onCheck={(keys) => setCheckedKeys(Array.isArray(keys) ? keys : keys.checked)}
-        />
+        <Space direction="vertical" size={12} style={{ width: '100%' }}>
+          <Tag color="blue">将派生 {derivedCount} 个 API 权限</Tag>
+          <Tree
+            checkable
+            checkedKeys={checkedKeys}
+            defaultExpandAll
+            fieldNames={{ title: 'menuName', key: 'id', children: 'children' }}
+            selectable={false}
+            treeData={treeData}
+            onCheck={(keys) => setCheckedKeys(Array.isArray(keys) ? keys : keys.checked)}
+          />
+        </Space>
       </Spin>
     </BasicModal>
   );

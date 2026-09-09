@@ -695,7 +695,7 @@ const file_system_v1_menu_proto_rawDesc = "" +
 	"\n" +
 	"UpdateMenu\x12 .api.system.v1.UpdateMenuRequest\x1a\x1b.api.system.v1.MessageReply\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\x1a\x11/api/v1/menu/{id}\x12b\n" +
 	"\n" +
-	"DeleteMenu\x12\x1c.api.system.v1.MenuIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/menu/{id}B7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"DeleteMenu\x12\x1c.api.system.v1.MenuIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/menu/{id}B5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_menu_proto_rawDescOnce sync.Once

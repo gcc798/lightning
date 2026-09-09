@@ -1,0 +1,35 @@
+server:
+  port: 9012
+
+grpc:
+  port: 9112
+
+registry:
+  driver: consul
+  address: http://127.0.0.1:8500
+  prefix: /lightning/services
+
+service:
+  id: ""
+  advertiseHost: 127.0.0.1
+
+database:
+  dsn: "host=127.0.0.1 user=postgres password=post123 dbname=lightning port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+  maxOpenConns: 100
+  maxIdleConns: 10
+  connMaxLifetimeMinutes: 60
+  slowThreshold: 500
+
+storage:
+  endpoint: 127.0.0.1:9000
+  accessKey: rustfsadmin
+  secretKey: rustfsadmin
+  region: us-east-1
+  bucket: lightning
+  useSSL: false
+
+auth:
+  tokenHeader: Authorization
+
+cors:
+  enabled: false

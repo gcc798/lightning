@@ -2,11 +2,11 @@
 
 `web-react` 是对现有 `web` 管理后台的 React + TypeScript 重写版本，同时也作为 React 学习工程使用。
 
-详细开发约束见：[docs/react-dev-spec.md](/Users/guoc/dev/code_go/src/quick.admin/web-react/docs/react-dev-spec.md)
+详细开发约束见：[docs/react-dev-spec.md](docs/react-dev-spec.md)
 
 如果你想把这个工程当成 React 学习案例来看，建议从这里开始：
 
-- [docs/learn-react/README.md](/Users/guoc/dev/code_go/src/quick.admin/web-react/docs/learn-react/README.md)
+- [docs/learn-react/README.md](docs/learn-react/README.md)
 
 ## 运行环境
 
@@ -20,7 +20,7 @@
 在项目根目录执行：
 
 ```bash
-cd /Users/guoc/dev/code_go/src/quick.admin/web-react
+cd web-react
 pnpm install
 ```
 
@@ -28,7 +28,7 @@ pnpm install
 
 ### 1. 启动后端依赖
 
-`sys-api` 当前配置文件在 [sys-api.yaml](/Users/guoc/dev/code_go/src/quick.admin/gozero/application/sys-api/etc/sys-api.yaml)，默认依赖如下：
+`sys-api` 当前配置文件在 [sys-api.yaml](../gozero/application/sys-api/etc/sys-api.yaml)，默认依赖如下：
 
 - `sys-api`：`http://localhost:9009`
 - `sys-rpc`：`127.0.0.1:9002`
@@ -38,21 +38,21 @@ pnpm install
 先启动 `sys-rpc`：
 
 ```bash
-cd /Users/guoc/dev/code_go/src/quick.admin/gozero/application/sys-rpc
-GOCACHE=/tmp/quick.admin-go-build go run sys.go -f etc/sys-rpc.yaml
+cd gozero/application/sys-rpc
+GOCACHE=/tmp/lightning-go-build go run sys.go -f etc/sys-rpc.yaml
 ```
 
 再启动 `sys-api`：
 
 ```bash
-cd /Users/guoc/dev/code_go/src/quick.admin/gozero/application/sys-api
-GOCACHE=/tmp/quick.admin-go-build go run sys.go -f etc/sys-api.yaml
+cd gozero/application/sys-api
+GOCACHE=/tmp/lightning-go-build go run sys.go -f etc/sys-api.yaml
 ```
 
 ### 2. 启动前端开发服务
 
 ```bash
-cd /Users/guoc/dev/code_go/src/quick.admin/web-react
+cd web-react
 pnpm dev
 ```
 
@@ -64,7 +64,7 @@ pnpm dev
 ### 3. 生产构建
 
 ```bash
-cd /Users/guoc/dev/code_go/src/quick.admin/web-react
+cd web-react
 pnpm build
 ```
 
@@ -73,7 +73,7 @@ pnpm build
 ### 4. 本地预览构建结果
 
 ```bash
-cd /Users/guoc/dev/code_go/src/quick.admin/web-react
+cd web-react
 pnpm preview
 ```
 
@@ -83,11 +83,11 @@ pnpm preview
 
 开发环境配置文件：
 
-- [web-react/.env.development](/Users/guoc/dev/code_go/src/quick.admin/web-react/.env.development)
+- [web-react/.env.development](.env.development)
 
 生产环境配置文件：
 
-- [web-react/.env.production](/Users/guoc/dev/code_go/src/quick.admin/web-react/.env.production)
+- [web-react/.env.production](.env.production)
 
 当前支持的主要配置项：
 
@@ -104,7 +104,7 @@ pnpm preview
 示例：
 
 ```env
-VITE_APP_TITLE=quick.admin Admin React
+VITE_APP_TITLE=lightning Admin React
 VITE_API_BASE_URL=http://localhost:9009
 VITE_CLIENT_KEY=web-admin
 VITE_CLIENT_SECRET=web-secret-2024
@@ -114,7 +114,7 @@ VITE_CLIENT_SECRET=web-secret-2024
 
 ### 2. 修改前端开发端口
 
-开发端口配置在 [web-react/vite.config.ts](/Users/guoc/dev/code_go/src/quick.admin/web-react/vite.config.ts)：
+开发端口配置在 [web-react/vite.config.ts](vite.config.ts)：
 
 ```ts
 server: {
@@ -128,7 +128,7 @@ server: {
 
 后端主配置文件：
 
-- [sys-api.yaml](/Users/guoc/dev/code_go/src/quick.admin/gozero/application/sys-api/etc/sys-api.yaml)
+- [sys-api.yaml](../gozero/application/sys-api/etc/sys-api.yaml)
 
 这个文件里可以调整：
 
@@ -150,7 +150,7 @@ server: {
 
 - `sys-rpc` 是否已经启动
 - `sys-api` 是否已经启动
-- PostgreSQL 和 Redis 是否与 [sys-api.yaml](/Users/guoc/dev/code_go/src/quick.admin/gozero/application/sys-api/etc/sys-api.yaml) 一致
+- PostgreSQL 和 Redis 是否与 [sys-api.yaml](../gozero/application/sys-api/etc/sys-api.yaml) 一致
 - `VITE_API_BASE_URL` 是否指向正确地址
 
 ### 2. 修改了 `.env` 但页面没变化
@@ -166,7 +166,7 @@ pnpm dev
 
 检查两个地方：
 
-- 是否真的修改了 [web-react/.env.development](/Users/guoc/dev/code_go/src/quick.admin/web-react/.env.development) 或 [web-react/.env.production](/Users/guoc/dev/code_go/src/quick.admin/web-react/.env.production)
+- 是否真的修改了 [web-react/.env.development](.env.development) 或 [web-react/.env.production](.env.production)
 - 前端开发服务是否已经重启
 
 ## 目录说明

@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	v1 "github.com/gcc798/quick.admin/kratos/api/system/v1"
-	entpkg "github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/loginlog"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/operlog"
+	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
+	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/loginlog"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/operlog"
 )
 
 func loginLogEntityToItem(item *entpkg.LoginLog) *v1.LogItem {

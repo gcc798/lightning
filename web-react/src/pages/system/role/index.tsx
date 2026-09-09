@@ -90,7 +90,7 @@ export default function RolePage() {
             },
             {
               key: 'apiPermission',
-              label: 'API权限',
+              label: 'API权限（高级）',
               permission: 'api_permission.assign',
               onClick: () => {
                 setCurrentRoleId(record.id);
@@ -196,7 +196,7 @@ export default function RolePage() {
         open={apiPermissionModalOpen}
         targetId={currentRoleId}
         targetType="role"
-        title="分配角色 API 权限"
+        title="高级 API 授权"
         onCancel={() => setApiPermissionModalOpen(false)}
         onSuccess={() => {
           setApiPermissionModalOpen(false);

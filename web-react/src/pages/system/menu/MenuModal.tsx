@@ -103,7 +103,7 @@ export function MenuModal({
       },
       {
         name: 'perms',
-        label: '权限标识',
+        label: '前端权限标识',
         component: 'Select',
         hidden: (values) => isNumericValue(values.menuType, 0),
         props: {
@@ -116,6 +116,25 @@ export function MenuModal({
             .map((item) => ({
               label: `${item.code} - ${item.name}`,
               value: item.code,
+            })),
+        },
+      },
+      {
+        name: 'apiPermissionIds',
+        label: '关联 API 权限',
+        component: 'Select',
+        hidden: (values) => isNumericValue(values.menuType, 0),
+        props: {
+          allowClear: true,
+          mode: 'multiple',
+          showSearch: true,
+          optionFilterProp: 'label',
+          placeholder: '请选择该菜单使用的 API 权限',
+          options: apiPermissions
+            .filter((item) => isNumericValue(item.status, 0))
+            .map((item) => ({
+              label: `${item.code} - ${item.name}`,
+              value: item.id,
             })),
         },
       },

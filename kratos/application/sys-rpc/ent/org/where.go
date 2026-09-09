@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

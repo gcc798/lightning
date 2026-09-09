@@ -1,4 +1,4 @@
-module github.com/gcc798/quick.admin
+module github.com/gcc798/lightning
 
 go 1.25.0
 

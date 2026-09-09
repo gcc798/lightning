@@ -1,31 +1,49 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: quick-admin-api
-  labels:
-    app: quick-admin-api
+  name: lightning-gateway
 spec:
-  type: ClusterIP
+  selector: { app: lightning-gateway }
   ports:
-  - port: 80
-    targetPort: 9009
-    protocol: TCP
-    name: http
-  selector:
-    app: quick-admin-api
+    - { name: http, port: 80, targetPort: http }
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: quick-admin-api-metrics
-  labels:
-    app: quick-admin-api
+  name: lightning-iam
 spec:
-  type: ClusterIP
+  selector: { app: lightning-iam }
   ports:
-  - port: 9009
-    targetPort: 9009
-    protocol: TCP
-    name: metrics
-  selector:
-    app: quick-admin-api
+    - { name: http, port: 9010, targetPort: http }
+    - { name: grpc, port: 9110, targetPort: grpc }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lightning-sys
+spec:
+  selector: { app: lightning-sys }
+  ports:
+    - { name: http, port: 9011, targetPort: http }
+    - { name: grpc, port: 9111, targetPort: grpc }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lightning-resource
+spec:
+  selector: { app: lightning-resource }
+  ports:
+    - { name: http, port: 9012, targetPort: http }
+    - { name: grpc, port: 9112, targetPort: grpc }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lightning-consul
+spec:
+  selector: { app: lightning-consul }
+  ports:
+    - { name: http, port: 8500, targetPort: http }
+    - { name: server, port: 8300, targetPort: server }
+    - { name: serf-lan, port: 8301, targetPort: serf-lan }

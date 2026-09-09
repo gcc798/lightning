@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	v1 "github.com/gcc798/quick.admin/kratos/api/system/v1"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/internal/data"
+	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/data"
 )
 
 type OrgUsecase struct {

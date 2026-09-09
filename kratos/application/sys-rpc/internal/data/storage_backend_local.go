@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	entpkg "github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent"
+	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
 )
 
 type localStorageBackend struct {

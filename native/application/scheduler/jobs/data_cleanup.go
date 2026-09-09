@@ -2,44 +2,41 @@ package jobs
 
 import (
 	"context"
-	"time"
 
-	"github.com/gcc798/lightning/internal/domain/model"
+	resourcev1 "github.com/gcc798/lightning/internal/api/resource/v1"
+	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
 	logging "github.com/gcc798/lightning/internal/logger"
 	"go.uber.org/zap"
-	"gorm.io/gorm"
 )
 
 // DataCleanupJob 定义业务数据结构。
 type DataCleanupJob struct {
-	db     *gorm.DB
-	logger logging.Logger
+	system   sysv1.API
+	resource resourcev1.API
+	logger   logging.Logger
 }
 
 // NewDataCleanupJob 创建组件实例。
-func NewDataCleanupJob(db *gorm.DB, logger logging.Logger) *DataCleanupJob {
-	return &DataCleanupJob{db: db, logger: logger}
+func NewDataCleanupJob(system sysv1.API, resource resourcev1.API, logger logging.Logger) *DataCleanupJob {
+	return &DataCleanupJob{system: system, resource: resource, logger: logger}
 }
 
 // Run 执行业务任务。
 func (j *DataCleanupJob) Run() {
 	j.logger.Info("starting data cleanup")
 
-	cutoffDate := time.Now().AddDate(0, 0, -90)
-	if result := j.db.WithContext(context.Background()).
-		Where("login_time < ?", cutoffDate).
-		Delete(&model.LoginLog{}); result.Error != nil {
-		j.logger.Error("failed to cleanup login logs", zap.Error(result.Error))
+	ctx := context.Background()
+	logs, err := j.system.CleanLogs(ctx, 90)
+	if err != nil {
+		j.logger.Error("failed to cleanup system logs", zap.Error(err))
 	} else {
-		j.logger.Info("cleaned up login logs", zap.Int64("rows", result.RowsAffected))
+		j.logger.Info("cleaned up system logs", zap.Int64("loginLogs", logs.LoginLogs), zap.Int64("operationLogs", logs.OperationLogs))
 	}
-
-	if result := j.db.WithContext(context.Background()).
-		Where("oper_time < ?", cutoffDate).
-		Delete(&model.OperLog{}); result.Error != nil {
-		j.logger.Error("failed to cleanup oper logs", zap.Error(result.Error))
+	attachments, err := j.resource.CleanExpired(ctx)
+	if err != nil {
+		j.logger.Error("failed to cleanup expired attachments", zap.Error(err))
 	} else {
-		j.logger.Info("cleaned up oper logs", zap.Int64("rows", result.RowsAffected))
+		j.logger.Info("cleaned up expired attachments", zap.Int64("cleaned", attachments.Cleaned), zap.Int64("failed", attachments.Failed))
 	}
 
 	j.logger.Info("data cleanup completed")

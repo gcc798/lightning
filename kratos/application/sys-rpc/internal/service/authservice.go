@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/gcc798/quick.admin/kratos/api/system/v1"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/internal/biz"
+	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/biz"
 )
 
 type AuthServiceService struct {

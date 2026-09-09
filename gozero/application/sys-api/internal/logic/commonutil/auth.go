@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
-	commonauth "github.com/gcc798/quick.admin/common/auth"
+	"github.com/gcc798/lightning/application/sys-api/internal/svc"
+	commonauth "github.com/gcc798/lightning/common/auth"
 )
 
 func BearerToken(r *http.Request, header string) string {

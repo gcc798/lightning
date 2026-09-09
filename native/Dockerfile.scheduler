@@ -5,17 +5,17 @@ RUN apk add --no-cache ca-certificates git
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/quick-admin-scheduler ./application/scheduler
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/lightning-scheduler ./application/scheduler
 
 FROM alpine:3.22
 
 RUN apk add --no-cache ca-certificates tzdata \
-    && addgroup -S quickadmin \
-    && adduser -S -G quickadmin quickadmin
+    && addgroup -S lightning \
+    && adduser -S -G lightning lightning
 WORKDIR /app
-COPY --from=builder /out/quick-admin-scheduler /app/quick-admin-scheduler
-COPY application/scheduler/conf.example.yaml /app/conf.prod.yaml
-COPY application/scheduler/zaplogger.example.yaml /app/zaplogger.prod.yaml
-RUN chown -R quickadmin:quickadmin /app
-USER quickadmin
-ENTRYPOINT ["/app/quick-admin-scheduler"]
+COPY --from=builder /out/lightning-scheduler /app/lightning-scheduler
+COPY application/scheduler/conf.prod.yaml /app/conf.prod.yaml
+COPY application/scheduler/zaplogger.prod.yaml /app/zaplogger.prod.yaml
+RUN chown -R lightning:lightning /app
+USER lightning
+ENTRYPOINT ["/app/lightning-scheduler"]

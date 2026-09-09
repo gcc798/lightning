@@ -194,9 +194,6 @@ stack="goroutine 123 [running]:\nruntime/debug.Stack()\n..."
     20201: S3 错误
     20202: S3 上传失败
 
-  - 消息队列：203xx
-    20301: RabbitMQ 错误
-
 系统级错误码（30000-39999）：需记录堆栈，返回统一文案
   30001: Panic 错误
   30002: 数组越界

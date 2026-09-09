@@ -1,6 +1,6 @@
 syntax = "proto3";
 package api.system.v1;
-option go_package = "github.com/gcc798/quick.admin/kratos/api/system/v1;v1";
+option go_package = "github.com/gcc798/lightning/kratos/api/system/v1;v1";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 service CaptchaService {

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/data"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/data"
 	kerrors "github.com/go-kratos/kratos/v2/errors"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/gorilla/websocket"

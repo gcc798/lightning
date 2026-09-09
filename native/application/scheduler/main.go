@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"os"
 	"os/signal"
@@ -10,40 +9,65 @@ import (
 	"time"
 
 	"github.com/gcc798/lightning/application/scheduler/jobs"
-	"github.com/gcc798/lightning/internal/app"
+	resourcev1 "github.com/gcc798/lightning/internal/api/resource/v1"
+	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
 	"github.com/gcc798/lightning/internal/config"
 	"github.com/gcc798/lightning/internal/container"
+	logging "github.com/gcc798/lightning/internal/logger"
 	"github.com/gcc798/lightning/internal/modules"
+	"github.com/gcc798/lightning/internal/registry"
+	"github.com/gcc798/lightning/internal/transport"
 	"go.uber.org/zap"
 )
 
 func main() {
-	base, err := app.New("application/scheduler", config.ServiceScheduler)
+	exitCode := 0
+	defer func() {
+		if exitCode != 0 {
+			os.Exit(exitCode)
+		}
+	}()
+	cfg, v, err := config.Load("application/scheduler", config.ServiceScheduler)
 	if err != nil {
-		fmt.Printf("failed to initialize scheduler process: %v\n", err)
-		os.Exit(1)
+		fmt.Fprintln(os.Stderr, err)
+		exitCode = 1
+		return
+	}
+	log, err := logging.NewLogger(config.CurrentEnv(), cfg.AppDir)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		exitCode = 1
+		return
+	}
+	cont, err := container.New(cfg, v, log)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		exitCode = 1
+		return
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
-	if err := run(ctx, base.Container); err != nil {
-		base.Logger.Error("scheduler process exited with error", zap.Error(err))
-		os.Exit(1)
+	reg, err := registry.New(cfg.Registry.Driver, cfg.Registry.Address, cfg.Registry.Prefix)
+	if err != nil {
+		log.Error("scheduler process exited with error", zap.Error(err))
+		exitCode = 1
+		return
 	}
-}
-
-func run(ctx context.Context, cont container.Container) error {
-	definitions := jobs.Definitions(cont.GetDB(), cont.GetLogger())
+	defer reg.Close()
+	pool := transport.NewClientPool(reg)
+	defer pool.Close()
+	definitions := jobs.Definitions(sysv1.NewRemote(pool), resourcev1.NewRemote(pool), cont.GetLogger())
 	if err := cont.RegisterModules(ctx,
 		modules.NewSchedulerModule(definitions),
 	); err != nil {
-		return fmt.Errorf("initialize scheduler modules: %w", err)
-	}
-	if err := cont.Start(); err != nil {
-		return fmt.Errorf("start scheduler infrastructure: %w", err)
+		log.Error("scheduler process exited with error", zap.Error(fmt.Errorf("initialize scheduler modules: %w", err)))
+		exitCode = 1
+		return
 	}
 	if err := cont.StartModules(ctx); err != nil {
-		cont.Stop()
-		return fmt.Errorf("start scheduler modules: %w", err)
+		log.Error("scheduler process exited with error", zap.Error(fmt.Errorf("start scheduler modules: %w", err)))
+		exitCode = 1
+		return
 	}
 	cont.GetLogger().Info("scheduler process started")
 	<-ctx.Done()
@@ -51,7 +75,9 @@ func run(ctx context.Context, cont container.Container) error {
 
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
-	moduleErr := cont.StopModules(shutdownCtx)
-	cont.Stop()
-	return errors.Join(moduleErr)
+	if err := cont.StopModules(shutdownCtx); err != nil {
+		log.Error("scheduler process exited with error", zap.Error(err))
+		exitCode = 1
+		return
+	}
 }

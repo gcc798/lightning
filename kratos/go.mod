@@ -1,4 +1,4 @@
-module github.com/gcc798/quick.admin/kratos
+module github.com/gcc798/lightning/kratos
 
 go 1.24.0
 

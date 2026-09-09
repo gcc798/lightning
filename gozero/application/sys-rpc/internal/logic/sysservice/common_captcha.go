@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/quick.admin/application/sys-rpc/internal/svc"
-	"github.com/gcc798/quick.admin/application/sys-rpc/pb"
+	"github.com/gcc798/lightning/application/sys-rpc/internal/svc"
+	"github.com/gcc798/lightning/application/sys-rpc/pb"
 	"github.com/google/uuid"
 	base64Captcha "github.com/mojocn/base64Captcha"
 )

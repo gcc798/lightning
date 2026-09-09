@@ -8,7 +8,7 @@
 - 平时开发时应该怎么使用
 
 主文件：
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/Makefile](/Users/guoc/dev/code_go/src/quick.admin/kratos/Makefile)
+- [../Makefile](../Makefile)
 
 ---
 
@@ -92,7 +92,7 @@
   - 其他生成工具
 
 ### `GOCACHE`
-- 值：`/tmp/quick.admin-kratos-go-build`
+- 值：`/tmp/lightning-kratos-go-build`
 - 作用：给当前项目单独指定 Go 编译缓存目录
 - 好处：
   - 不污染仓库
@@ -179,12 +179,12 @@
 - 当前输出规则：
   - `api/<service>/<version>.openapi.yaml`
 - 当前 system 输出示例：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1.openapi.yaml](/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1.openapi.yaml)
+  - [../api/system/v1.openapi.yaml](../api/system/v1.openapi.yaml)
 - 为什么需要聚合：
   - `protoc-gen-openapi` 直接对我们当前这套 proto 目录执行时，不能稳定产出完整的 service 级单文档
   - 之前会只保留最后一个 proto 的结果
 - 所以现在引入了聚合工具：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/cmd/openapi-merge/main.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/cmd/openapi-merge/main.go)
+  - [../cmd/openapi-merge/main.go](../cmd/openapi-merge/main.go)
 
 ### `proto-all`
 - 全量生成入口
@@ -351,20 +351,20 @@ make build-all
 ## 六、最常受影响的文件区域
 
 ### Proto 相关
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1](/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/servicegen](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/servicegen)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/servicegen](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/servicegen)
+- [../api/system/v1](../api/system/v1)
+- [../application/sys-api/internal/servicegen](../application/sys-api/internal/servicegen)
+- [../application/sys-rpc/internal/servicegen](../application/sys-rpc/internal/servicegen)
 
 ### 配置相关
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/conf](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/conf)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/conf](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/conf)
+- [../application/sys-api/internal/conf](../application/sys-api/internal/conf)
+- [../application/sys-rpc/internal/conf](../application/sys-rpc/internal/conf)
 
 ### OpenAPI 相关
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1.openapi.yaml](/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1.openapi.yaml)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/cmd/openapi-merge/main.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/cmd/openapi-merge/main.go)
+- [../api/system/v1.openapi.yaml](../api/system/v1.openapi.yaml)
+- [../cmd/openapi-merge/main.go](../cmd/openapi-merge/main.go)
 
 ### Wire 相关
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire_gen.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire_gen.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire_gen.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire_gen.go)
+- [../application/sys-api/cmd/server/wire.go](../application/sys-api/cmd/server/wire.go)
+- [../application/sys-api/cmd/server/wire_gen.go](../application/sys-api/cmd/server/wire_gen.go)
+- [../application/sys-rpc/cmd/server/wire.go](../application/sys-rpc/cmd/server/wire.go)
+- [../application/sys-rpc/cmd/server/wire_gen.go](../application/sys-rpc/cmd/server/wire_gen.go)

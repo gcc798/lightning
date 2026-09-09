@@ -34,7 +34,7 @@
 
 登录接口定义在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1/auth.proto](/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1/auth.proto)
+- [../api/system/v1/auth.proto](../api/system/v1/auth.proto)
 
 关键定义：
 
@@ -83,7 +83,7 @@ make proto-all
 
 生成文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1/auth_http.pb.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1/auth_http.pb.go)
+- [../api/system/v1/auth_http.pb.go](../api/system/v1/auth_http.pb.go)
 
 你可以直接看到：
 
@@ -109,7 +109,7 @@ post: "/login"
 
 生成文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1/auth_grpc.pb.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/api/system/v1/auth_grpc.pb.go)
+- [../api/system/v1/auth_grpc.pb.go](../api/system/v1/auth_grpc.pb.go)
 
 这里会生成：
 
@@ -142,7 +142,7 @@ type AuthServiceServer interface {
 
 注册位置：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/http.go)
+- [../application/sys-api/internal/server/http.go](../application/sys-api/internal/server/http.go)
 
 关键代码：
 
@@ -164,7 +164,7 @@ v1.RegisterAuthServiceHTTPServer(srv, authSvc)
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/service/authservice.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/service/authservice.go)
+- [../application/sys-api/internal/service/authservice.go](../application/sys-api/internal/service/authservice.go)
 
 关键代码：
 
@@ -188,7 +188,7 @@ func (s *AuthServiceService) Login(ctx context.Context, req *v1.LoginRequest) (*
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/biz/auth.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/biz/auth.go)
+- [../application/sys-api/internal/biz/auth.go](../application/sys-api/internal/biz/auth.go)
 
 关键代码：
 
@@ -208,7 +208,7 @@ func (uc *AuthUsecase) Login(ctx context.Context, req *v1.LoginRequest) (*v1.Log
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/data/auth.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/data/auth.go)
+- [../application/sys-api/internal/data/auth.go](../application/sys-api/internal/data/auth.go)
 
 关键代码：
 
@@ -244,7 +244,7 @@ func (r *AuthRepo) Login(ctx context.Context, req *v1.LoginRequest) (*v1.LoginRe
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/data/rpc_client.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/data/rpc_client.go)
+- [../application/sys-api/internal/data/rpc_client.go](../application/sys-api/internal/data/rpc_client.go)
 
 ### 5.1 统一建连
 
@@ -314,7 +314,7 @@ POST /login
 
 装配位置：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go)
+- [../application/sys-rpc/cmd/server/wire.go](../application/sys-rpc/cmd/server/wire.go)
 
 这里会创建：
 
@@ -325,7 +325,7 @@ POST /login
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/service/authservice.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/service/authservice.go)
+- [../application/sys-rpc/internal/service/authservice.go](../application/sys-rpc/internal/service/authservice.go)
 
 关键代码：
 
@@ -353,7 +353,7 @@ client.Login(ctx, req)
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz/auth.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz/auth.go)
+- [../application/sys-rpc/internal/biz/auth.go](../application/sys-rpc/internal/biz/auth.go)
 
 这个文件里就是登录的核心业务逻辑。
 
@@ -398,7 +398,7 @@ uc.res.CreateLoginLogEntry(...)
 
 这部分资源初始化在：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go)
+- [../application/sys-rpc/cmd/server/wire.go](../application/sys-rpc/cmd/server/wire.go)
 
 并由：
 
@@ -466,7 +466,7 @@ AuthServiceClient.Login(ctx, req)
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire.go)
+- [../application/sys-api/cmd/server/wire.go](../application/sys-api/cmd/server/wire.go)
 
 这里的装配顺序是：
 
@@ -490,7 +490,7 @@ Repositories
 
 文件：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go)
+- [../application/sys-rpc/cmd/server/wire.go](../application/sys-rpc/cmd/server/wire.go)
 
 这里的装配顺序是：
 

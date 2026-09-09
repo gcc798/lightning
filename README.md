@@ -2,7 +2,7 @@
 
 Lightning 是一个后台管理系统脚手架 Monorepo。同一套业务能力提供三种 Go 后端实现，并由一个 React 前端通过统一 HTTP 契约接入。
 
-项目以 `native` 作为业务语义和接口行为基线，用于探索不依赖完整开源微服务框架的渐进式微服务工程；`kratos` 和 `gozero` 用于对照实现相同业务能力，而不是形成三套不同的接口。
+项目以 `native` 作为业务语义和接口行为基线，用于探索不依赖完整开源微服务框架的微服务工程；`kratos` 和 `gozero` 用于对照实现相同业务能力，而不是形成三套不同的接口。
 
 ## 工程组成
 
@@ -20,14 +20,14 @@ lightning/
 
 `native` 是当前主要演进的后端实现，Go Module 为 `github.com/gcc798/lightning`，使用 Go 1.26.5。
 
-它从模块化单体起步，通过新增 `application/<service>` 组合共享 Module，按真实的扩容、发布和隔离需求渐进拆分服务。当前包含：
+它只保留微服务部署形态，`application/` 下一级目录对应一个真实进程。当前包含：
 
-- `application/api`：无状态 HTTP API，拥有路由、controller、service、DTO、中间件、OpenAPI 和数据库迁移。
+- `application/{gateway,iam,sys,resource}`：独立微服务进程；每个服务在自己的 `internal/` 下拥有 controller、router、DTO 和领域代码。
 - `application/scheduler`：有状态定时任务进程，不提供 HTTP 服务，也不执行数据库迁移。
-- `application/usermgr`：创建管理员、重置密码的一次性管理工具。
-- `internal`：多个应用共享、但禁止当前 Go Module 之外导入的基础能力。
+- `cmd/usermgr`：创建管理员、重置密码的一次性管理工具。
+- `internal`：多个进程共享、但禁止当前 Go Module 之外导入的技术设施和 gRPC 契约，不存放领域业务实现。
 
-API 启动时执行嵌入二进制的 Goose 版本化迁移；数据库结构不使用 GORM `AutoMigrate`。验证码、微信、短信、邮件和 Scheduler 等运行期模块配置保存在 `s_config`，不写入服务 YAML。
+IAM、SYS、Resource 启动时分别执行自己嵌入二进制的 Goose 版本化迁移；数据库结构不使用 GORM `AutoMigrate`。验证码、微信、短信、邮件和 Scheduler 等运行期模块配置保存在 `s_config`，不写入服务 YAML。
 
 详细启动、配置、认证、迁移和部署说明见 [native/README.md](native/README.md)。
 
@@ -60,26 +60,25 @@ API 启动时执行嵌入二进制的 Goose 版本化迁移；数据库结构不
 
 ## 快速启动 native
 
-本地依赖 Go 1.26.5、PostgreSQL 16；API 另外使用 Redis 7。首次启动先生成不会提交到 Git 的本地配置：
+本地依赖 Go 1.26.5、PostgreSQL 16、Redis 7、RustFS 和 Consul。先从 Git 托管的 example 模板创建本地配置，再显式选择开发环境：
 
 ```bash
 cd native
 make init-config
+export LIGHTNING_APP_ENV=dev
 ```
 
-根据需要修改 `application/api/conf.dev.yaml`，然后启动 API：
+根据需要修改各服务的 `conf.dev.yaml`，然后分别启动服务：
 
 ```bash
-go run ./application/api
-```
-
-需要运行定时任务时，另开进程启动 Scheduler：
-
-```bash
+go run ./application/iam
+go run ./application/sys
+go run ./application/resource
+go run ./application/gateway
 go run ./application/scheduler
 ```
 
-也可以通过 Docker Compose 启动 API、Scheduler、PostgreSQL、Redis 和 RustFS：
+也可以通过 Docker Compose 启动完整微服务栈：
 
 ```bash
 cd native

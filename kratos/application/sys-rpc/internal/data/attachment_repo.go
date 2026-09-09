@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	v1 "github.com/gcc798/quick.admin/kratos/api/system/v1"
-	entpkg "github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent"
+	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
+	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
 )
 
 func (r *Resources) attachmentEntityToItem(ctx context.Context, item *entpkg.Attachment) *v1.AttachmentItem {

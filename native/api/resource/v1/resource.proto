@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package lightning.resource.v1;
+
+option go_package = "github.com/gcc798/lightning/internal/api/resource/v1;resourcev1";
+
+service ResourceService {
+  rpc CleanExpired(CleanExpiredRequest) returns (CleanExpiredResponse);
+}
+
+message CleanExpiredRequest {}
+
+message CleanExpiredResponse {
+  int64 cleaned = 1;
+  int64 failed = 2;
+}

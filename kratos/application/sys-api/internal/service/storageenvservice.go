@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	v1 "github.com/gcc798/quick.admin/kratos/api/system/v1"
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/biz"
+	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/biz"
 )
 
 type StorageEnvServiceService struct {

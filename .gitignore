@@ -80,16 +80,16 @@ logs/
 *.log.*
 *.log.gz
 
-# native 服务本地配置（conf.example.yaml、zaplogger.example.yaml 纳入版本管理）
-native/application/*/conf.dev.yaml
-native/application/*/conf.prod.yaml
-native/application/*/zaplogger.dev.yaml
-native/application/*/zaplogger.prod.yaml
-
 # 环境变量文件
 .env
 .env.local
 .env.*.local
+
+# native 运行配置：从各服务的 *.example.yaml 复制后按环境修改，不提交实际配置
+native/application/*/conf.dev.yaml
+native/application/*/conf.prod.yaml
+native/application/*/zaplogger.dev.yaml
+native/application/*/zaplogger.prod.yaml
 
 # 临时文件和缓存
 tmp/

@@ -762,7 +762,7 @@ const file_system_v1_dict_proto_rawDesc = "" +
 	"UpdateDict\x12 .api.system.v1.UpdateDictRequest\x1a\x1b.api.system.v1.MessageReply\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\x1a\x11/api/v1/dict/{id}\x12_\n" +
 	"\vGetDictById\x12\x1c.api.system.v1.DictIdRequest\x1a\x17.api.system.v1.DictItem\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/api/v1/dict/{id}\x12b\n" +
 	"\n" +
-	"DeleteDict\x12\x1c.api.system.v1.DictIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/dict/{id}B7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"DeleteDict\x12\x1c.api.system.v1.DictIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/dict/{id}B5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_dict_proto_rawDescOnce sync.Once

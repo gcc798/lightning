@@ -856,7 +856,7 @@ const file_system_v1_role_proto_rawDesc = "" +
 	"\fGetUserRoles\x12\".api.system.v1.GetUserRolesRequest\x1a .api.system.v1.GetUserRolesReply\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/api/v1/role/user\x12z\n" +
 	"\x11AddRolePermission\x12$.api.system.v1.RolePermissionRequest\x1a\x1b.api.system.v1.MessageReply\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/role/permission\x12}\n" +
 	"\x14DeleteRolePermission\x12$.api.system.v1.RolePermissionRequest\x1a\x1b.api.system.v1.MessageReply\"\"\x82\xd3\xe4\x93\x02\x1c:\x01**\x17/api/v1/role/permission\x12\x88\x01\n" +
-	"\x12GetRolePermissions\x12(.api.system.v1.GetRolePermissionsRequest\x1a&.api.system.v1.GetRolePermissionsReply\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/role/permissionsB7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"\x12GetRolePermissions\x12(.api.system.v1.GetRolePermissionsRequest\x1a&.api.system.v1.GetRolePermissionsReply\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/api/v1/role/permissionsB5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_role_proto_rawDescOnce sync.Once

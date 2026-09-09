@@ -64,30 +64,30 @@ var ProviderSet = wire.NewSet(...)
 ### sys-api
 
 - 手写入口：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire.go)
+  - [../application/sys-api/cmd/server/wire.go](../application/sys-api/cmd/server/wire.go)
 - 自动生成：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire_gen.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire_gen.go)
+  - [../application/sys-api/cmd/server/wire_gen.go](../application/sys-api/cmd/server/wire_gen.go)
 - 分层 ProviderSet：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/data/data.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/data/data.go)
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/biz/biz.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/biz/biz.go)
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/service/service.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/service/service.go)
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/server.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/internal/server/server.go)
+  - [../application/sys-api/internal/data/data.go](../application/sys-api/internal/data/data.go)
+  - [../application/sys-api/internal/biz/biz.go](../application/sys-api/internal/biz/biz.go)
+  - [../application/sys-api/internal/service/service.go](../application/sys-api/internal/service/service.go)
+  - [../application/sys-api/internal/server/server.go](../application/sys-api/internal/server/server.go)
 
 ### sys-rpc
 
 - 手写入口：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire.go)
+  - [../application/sys-rpc/cmd/server/wire.go](../application/sys-rpc/cmd/server/wire.go)
 - 自动生成：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire_gen.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire_gen.go)
+  - [../application/sys-rpc/cmd/server/wire_gen.go](../application/sys-rpc/cmd/server/wire_gen.go)
 - 分层 ProviderSet：
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/data.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/data/data.go)
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz/biz.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/biz/biz.go)
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/service/service.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/service/service.go)
-  - [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/server/server.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/internal/server/server.go)
+  - [../application/sys-rpc/internal/data/data.go](../application/sys-rpc/internal/data/data.go)
+  - [../application/sys-rpc/internal/biz/biz.go](../application/sys-rpc/internal/biz/biz.go)
+  - [../application/sys-rpc/internal/service/service.go](../application/sys-rpc/internal/service/service.go)
+  - [../application/sys-rpc/internal/server/server.go](../application/sys-rpc/internal/server/server.go)
 
 ### 生成命令
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/Makefile](/Users/guoc/dev/code_go/src/quick.admin/kratos/Makefile)
+- [../Makefile](../Makefile)
 
 当前命令：
 
@@ -165,8 +165,8 @@ Wire 不会替你发明这些构造函数，它只是使用这些构造函数。
 
 例如：
 
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire_gen.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-api/cmd/server/wire_gen.go)
-- [/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire_gen.go](/Users/guoc/dev/code_go/src/quick.admin/kratos/application/sys-rpc/cmd/server/wire_gen.go)
+- [../application/sys-api/cmd/server/wire_gen.go](../application/sys-api/cmd/server/wire_gen.go)
+- [../application/sys-rpc/cmd/server/wire_gen.go](../application/sys-rpc/cmd/server/wire_gen.go)
 
 文件头会明确写着：
 

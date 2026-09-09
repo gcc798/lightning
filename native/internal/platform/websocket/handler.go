@@ -6,7 +6,9 @@ import (
 	"errors"
 	"net"
 	"net/http"
+	"net/url"
 	"strconv"
+	"strings"
 	"time"
 
 	logging "github.com/gcc798/lightning/internal/logger"
@@ -14,14 +16,6 @@ import (
 	"github.com/labstack/echo/v5"
 	"go.uber.org/zap"
 )
-
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin: func(r *http.Request) bool {
-		return true // 生产环境应该检查 Origin。
-	},
-}
 
 // TextMessageHandler 处理客户端文本消息。
 type TextMessageHandler func(client *Client, message []byte) bool
@@ -38,13 +32,15 @@ type Handler struct {
 	writeTimeout        time.Duration
 	maxReadTimeouts     int
 	heartbeatMsgBuilder HeartbeatMessageBuilder
+	allowCrossOrigin    bool
 }
 
 // NewHandler 创建 WebSocket 处理器。
-func NewHandler(hub *Hub, logger logging.Logger) *Handler {
+func NewHandler(hub *Hub, logger logging.Logger, allowCrossOrigin bool) *Handler {
 	return &Handler{
-		hub:    hub,
-		logger: logger,
+		hub:              hub,
+		logger:           logger,
+		allowCrossOrigin: allowCrossOrigin,
 	}
 }
 
@@ -94,6 +90,13 @@ func (h *Handler) ServeWs(c *echo.Context) {
 	}
 
 	// 升级 HTTP 连接为 WebSocket。
+	upgrader := websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
+		CheckOrigin: func(r *http.Request) bool {
+			return originAllowed(r, h.allowCrossOrigin)
+		},
+	}
 	conn, err := upgrader.Upgrade(c.Response(), c.Request(), nil)
 	if err != nil {
 		h.logger.Error("failed to upgrade websocket connection",
@@ -128,6 +131,14 @@ func (h *Handler) ServeWs(c *echo.Context) {
 	h.logger.Info("websocket connection established",
 		zap.Int64("userId", userId),
 		zap.String("remoteAddr", c.Request().RemoteAddr))
+}
+
+func originAllowed(r *http.Request, allowCrossOrigin bool) bool {
+	if allowCrossOrigin || r.Header.Get("Origin") == "" {
+		return true
+	}
+	origin, err := url.Parse(r.Header.Get("Origin"))
+	return err == nil && strings.EqualFold(origin.Host, r.Host)
 }
 
 // readPump 读取客户端消息并保持连接。

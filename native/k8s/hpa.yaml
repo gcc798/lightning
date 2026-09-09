@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: quick-admin-api-hpa
+  name: lightning-gateway-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: quick-admin-api
+    name: lightning-gateway
   minReplicas: 2
   maxReplicas: 10
   metrics:

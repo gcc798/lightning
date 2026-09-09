@@ -1,16 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: quick-admin-ingress
+  name: lightning-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
     - api.yourdomain.com
-    secretName: quick-admin-tls
+    secretName: lightning-tls
   rules:
   - host: api.yourdomain.com
     http:
@@ -19,6 +18,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: quick-admin-api
+            name: lightning-gateway
             port:
               number: 80

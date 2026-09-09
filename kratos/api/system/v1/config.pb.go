@@ -642,7 +642,7 @@ const file_system_v1_config_proto_rawDesc = "" +
 	"\x13GetConfigDataByCode\x12%.api.system.v1.GetConfigByCodeRequest\x1a\x1e.api.system.v1.ConfigDataReply\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/api/v1/config/data\x12o\n" +
 	"\fUpdateConfig\x12\".api.system.v1.UpdateConfigRequest\x1a\x1b.api.system.v1.MessageReply\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\x1a\x13/api/v1/config/{id}\x12a\n" +
 	"\rGetConfigById\x12\x18.api.system.v1.IdRequest\x1a\x19.api.system.v1.ConfigItem\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/api/v1/config/{id}\x12b\n" +
-	"\fDeleteConfig\x12\x18.api.system.v1.IdRequest\x1a\x1b.api.system.v1.MessageReply\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/v1/config/{id}B7Z5github.com/gcc798/quick.admin/kratos/api/system/v1;v1b\x06proto3"
+	"\fDeleteConfig\x12\x18.api.system.v1.IdRequest\x1a\x1b.api.system.v1.MessageReply\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/v1/config/{id}B5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_config_proto_rawDescOnce sync.Once

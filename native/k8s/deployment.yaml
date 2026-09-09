@@ -1,75 +1,98 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quick-admin-api
-  labels:
-    app: quick-admin-api
+  name: lightning-gateway
 spec:
   replicas: 2
   selector:
-    matchLabels:
-      app: quick-admin-api
+    matchLabels: { app: lightning-gateway }
   template:
     metadata:
-      labels:
-        app: quick-admin-api
+      labels: { app: lightning-gateway }
     spec:
       terminationGracePeriodSeconds: 40
       containers:
-        - name: api
-          image: ghcr.io/your-org/quick-admin-api:0.1.0
+        - name: gateway
+          image: ghcr.io/your-org/lightning-gateway:0.1.0
           ports:
-            - containerPort: 9009
-              name: http
+            - { name: http, containerPort: 9009 }
           env:
-            - name: LIGHTNING_APP_ENV
-              value: prod
-            - name: LIGHTNING_SERVER_PORT
-              value: "9009"
+            - { name: LIGHTNING_APP_ENV, value: prod }
+            - { name: LIGHTNING_SERVER_PORT, value: "9009" }
+            - { name: LIGHTNING_REGISTRY_DRIVER, value: consul }
+            - name: LIGHTNING_REGISTRY_ADDRESS
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: registry-address }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+          startupProbe:
+            httpGet: { path: /health/startup, port: http }
+            periodSeconds: 2
+            failureThreshold: 15
+          livenessProbe:
+            httpGet: { path: /health/live, port: http }
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health/ready, port: http }
+            periodSeconds: 5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lightning-iam
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: lightning-iam }
+  template:
+    metadata:
+      labels: { app: lightning-iam }
+    spec:
+      terminationGracePeriodSeconds: 40
+      containers:
+        - name: iam
+          image: ghcr.io/your-org/lightning-iam:0.1.0
+          ports:
+            - { name: http, containerPort: 9010 }
+            - { name: grpc, containerPort: 9110 }
+          env:
+            - { name: LIGHTNING_APP_ENV, value: prod }
+            - { name: LIGHTNING_SERVER_PORT, value: "9010" }
+            - { name: LIGHTNING_GRPC_PORT, value: "9110" }
+            - name: LIGHTNING_SERVICE_ADVERTISE_HOST
+              valueFrom:
+                fieldRef: { fieldPath: status.podIP }
+            - { name: LIGHTNING_REGISTRY_DRIVER, value: consul }
+            - name: LIGHTNING_REGISTRY_ADDRESS
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: registry-address }
             - name: LIGHTNING_DATABASE_DSN
               valueFrom:
-                secretKeyRef:
-                  name: quick-admin-secret
-                  key: database-dsn
+                secretKeyRef: { name: lightning-secret, key: database-dsn }
             - name: LIGHTNING_REDIS_ADDR
               valueFrom:
-                configMapKeyRef:
-                  name: quick-admin-config
-                  key: redis-addr
+                configMapKeyRef: { name: lightning-config, key: redis-addr }
             - name: LIGHTNING_REDIS_PASSWORD
               valueFrom:
-                secretKeyRef:
-                  name: quick-admin-secret
-                  key: redis-password
+                secretKeyRef: { name: lightning-secret, key: redis-password }
             - name: LIGHTNING_JWT_SECRET
               valueFrom:
-                secretKeyRef:
-                  name: quick-admin-secret
-                  key: jwt-secret
+                secretKeyRef: { name: lightning-secret, key: jwt-secret }
           resources:
-            requests:
-              memory: 256Mi
-              cpu: 250m
-            limits:
-              memory: 1Gi
-              cpu: "1"
-          startupProbe:
-            httpGet:
-              path: /health/startup
-              port: http
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { cpu: "1", memory: 1Gi }
+          startupProbe: &service-startup
+            httpGet: { path: /health/startup, port: http }
             periodSeconds: 5
             failureThreshold: 30
-          livenessProbe:
-            httpGet:
-              path: /health/live
-              port: http
+          livenessProbe: &service-live
+            httpGet: { path: /health/live, port: http }
             periodSeconds: 10
             timeoutSeconds: 3
             failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /health/ready
-              port: http
+          readinessProbe: &service-ready
+            httpGet: { path: /health/ready, port: http }
             periodSeconds: 5
             timeoutSeconds: 3
             failureThreshold: 3
@@ -77,35 +100,180 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quick-admin-scheduler
-  labels:
-    app: quick-admin-scheduler
+  name: lightning-sys
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: quick-admin-scheduler
+    matchLabels: { app: lightning-sys }
   template:
     metadata:
-      labels:
-        app: quick-admin-scheduler
+      labels: { app: lightning-sys }
+    spec:
+      terminationGracePeriodSeconds: 40
+      containers:
+        - name: sys
+          image: ghcr.io/your-org/lightning-sys:0.1.0
+          ports:
+            - { name: http, containerPort: 9011 }
+            - { name: grpc, containerPort: 9111 }
+          env:
+            - { name: LIGHTNING_APP_ENV, value: prod }
+            - { name: LIGHTNING_SERVER_PORT, value: "9011" }
+            - { name: LIGHTNING_GRPC_PORT, value: "9111" }
+            - name: LIGHTNING_SERVICE_ADVERTISE_HOST
+              valueFrom:
+                fieldRef: { fieldPath: status.podIP }
+            - { name: LIGHTNING_REGISTRY_DRIVER, value: consul }
+            - name: LIGHTNING_REGISTRY_ADDRESS
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: registry-address }
+            - name: LIGHTNING_DATABASE_DSN
+              valueFrom:
+                secretKeyRef: { name: lightning-secret, key: database-dsn }
+            - name: LIGHTNING_REDIS_ADDR
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: redis-addr }
+            - name: LIGHTNING_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef: { name: lightning-secret, key: redis-password }
+          resources:
+            requests: { cpu: 200m, memory: 256Mi }
+            limits: { cpu: "1", memory: 1Gi }
+          startupProbe:
+            httpGet: { path: /health/startup, port: http }
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet: { path: /health/live, port: http }
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            httpGet: { path: /health/ready, port: http }
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lightning-resource
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: lightning-resource }
+  template:
+    metadata:
+      labels: { app: lightning-resource }
+    spec:
+      terminationGracePeriodSeconds: 40
+      containers:
+        - name: resource
+          image: ghcr.io/your-org/lightning-resource:0.1.0
+          ports:
+            - { name: http, containerPort: 9012 }
+            - { name: grpc, containerPort: 9112 }
+          env:
+            - { name: LIGHTNING_APP_ENV, value: prod }
+            - { name: LIGHTNING_SERVER_PORT, value: "9012" }
+            - { name: LIGHTNING_GRPC_PORT, value: "9112" }
+            - name: LIGHTNING_SERVICE_ADVERTISE_HOST
+              valueFrom:
+                fieldRef: { fieldPath: status.podIP }
+            - { name: LIGHTNING_REGISTRY_DRIVER, value: consul }
+            - name: LIGHTNING_REGISTRY_ADDRESS
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: registry-address }
+            - name: LIGHTNING_DATABASE_DSN
+              valueFrom:
+                secretKeyRef: { name: lightning-secret, key: database-dsn }
+            - name: LIGHTNING_STORAGE_ENDPOINT
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: storage-endpoint }
+            - name: LIGHTNING_STORAGE_ACCESS_KEY
+              valueFrom:
+                secretKeyRef: { name: lightning-secret, key: storage-access-key }
+            - name: LIGHTNING_STORAGE_SECRET_KEY
+              valueFrom:
+                secretKeyRef: { name: lightning-secret, key: storage-secret-key }
+          resources:
+            requests: { cpu: 200m, memory: 256Mi }
+            limits: { cpu: "1", memory: 1Gi }
+          startupProbe:
+            httpGet: { path: /health/startup, port: http }
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet: { path: /health/live, port: http }
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            httpGet: { path: /health/ready, port: http }
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lightning-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: lightning-scheduler }
+  template:
+    metadata:
+      labels: { app: lightning-scheduler }
     spec:
       terminationGracePeriodSeconds: 40
       containers:
         - name: scheduler
-          image: ghcr.io/your-org/quick-admin-scheduler:0.1.0
+          image: ghcr.io/your-org/lightning-scheduler:0.1.0
           env:
-            - name: LIGHTNING_APP_ENV
-              value: prod
+            - { name: LIGHTNING_APP_ENV, value: prod }
             - name: LIGHTNING_DATABASE_DSN
               valueFrom:
-                secretKeyRef:
-                  name: quick-admin-secret
-                  key: database-dsn
+                secretKeyRef: { name: lightning-secret, key: database-dsn }
+            - { name: LIGHTNING_REGISTRY_DRIVER, value: consul }
+            - name: LIGHTNING_REGISTRY_ADDRESS
+              valueFrom:
+                configMapKeyRef: { name: lightning-config, key: registry-address }
           resources:
-            requests:
-              memory: 128Mi
-              cpu: 100m
-            limits:
-              memory: 512Mi
-              cpu: 500m
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 512Mi }
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: lightning-consul
+spec:
+  serviceName: lightning-consul
+  replicas: 1
+  selector:
+    matchLabels: { app: lightning-consul }
+  template:
+    metadata:
+      labels: { app: lightning-consul }
+    spec:
+      containers:
+        - name: consul
+          image: hashicorp/consul:1.21
+          args: ["agent", "-server", "-bootstrap-expect=1", "-client=0.0.0.0", "-data-dir=/consul/data"]
+          ports:
+            - { name: http, containerPort: 8500 }
+            - { name: server, containerPort: 8300 }
+            - { name: serf-lan, containerPort: 8301 }
+          readinessProbe:
+            exec:
+              command: ["consul", "members"]
+            periodSeconds: 5
+          volumeMounts:
+            - { name: data, mountPath: /consul/data }
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests: { storage: 1Gi }

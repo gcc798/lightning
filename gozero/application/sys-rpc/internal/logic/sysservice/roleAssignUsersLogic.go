@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gcc798/quick.admin/application/sys-rpc/internal/svc"
-	"github.com/gcc798/quick.admin/application/sys-rpc/pb"
+	"github.com/gcc798/lightning/application/sys-rpc/internal/svc"
+	"github.com/gcc798/lightning/application/sys-rpc/pb"
 	"github.com/lib/pq"
 
 	"github.com/zeromicro/go-zero/core/logx"

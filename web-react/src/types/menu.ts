@@ -14,6 +14,7 @@ export interface MenuRecord {
   visible?: number;
   status?: number;
   perms?: string;
+  apiPermissionIds?: SnowflakeId[];
   icon?: string;
   remark?: string;
   children?: MenuRecord[];

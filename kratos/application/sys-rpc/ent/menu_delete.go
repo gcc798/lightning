@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/menu"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/menu"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
 )
 
 // MenuDelete is the builder for deleting a Menu entity.

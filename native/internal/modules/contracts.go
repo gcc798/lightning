@@ -8,6 +8,7 @@ import (
 
 	"github.com/gcc798/lightning/internal/platform/captcha"
 	"github.com/gcc798/lightning/internal/platform/thirdparty/wechat"
+	"github.com/gcc798/lightning/internal/platform/websocket"
 )
 
 const (
@@ -16,6 +17,7 @@ const (
 	EmailName     = "email"
 	CaptchaName   = "captcha"
 	SchedulerName = "scheduler"
+	WebSocketName = "websocket"
 )
 
 var ErrDisabled = errors.New("module is disabled")
@@ -74,4 +76,13 @@ func GetCaptcha(cont Container) (Captcha, error) {
 		return nil, fmt.Errorf("module %q is not registered as a captcha capability", CaptchaName)
 	}
 	return value, nil
+}
+
+// WebSocketHub 返回已注册的连接管理中心，模块未注册或被禁用时返回 nil。
+func WebSocketHub(cont Container) *websocket.Hub {
+	value, ok := cont.GetModule(WebSocketName).(*WebSocketModule)
+	if !ok {
+		return nil
+	}
+	return value.Hub()
 }

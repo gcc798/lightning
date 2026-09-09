@@ -15,12 +15,9 @@ import (
 	"github.com/gcc798/lightning/internal/logger"
 	"github.com/gcc798/lightning/internal/modules"
 	"github.com/gcc798/lightning/internal/platform/jwt"
-	"github.com/gcc798/lightning/internal/platform/rabbitmq"
 	redisclient "github.com/gcc798/lightning/internal/platform/redis"
 	"github.com/gcc798/lightning/internal/platform/redislock"
-	"github.com/gcc798/lightning/internal/platform/s3"
 	"github.com/gcc798/lightning/internal/platform/storage"
-	"github.com/gcc798/lightning/internal/platform/websocket"
 	"github.com/gcc798/lightning/internal/runtimeconfig"
 	goredis "github.com/redis/go-redis/v9"
 	"github.com/spf13/viper"
@@ -30,46 +27,28 @@ import (
 	gormlogger "gorm.io/gorm/logger"
 )
 
-// Component 统一组件接口
-type Component interface {
-	Name() string
-	Start() error
-	Stop() error
-}
-
 // Container 依赖注入容器接口
 type Container interface {
 	modules.Container
 	GetConfig() *config.Config
 	GetViper() *viper.Viper
 	GetJWT() *jwt.Jwt
-	GetRabbitMQProducer() *rabbitmq.ProducerService
-	GetS3() *s3.Manager
-	GetStorageManager() storage.StorageManager
-	GetWebSocketHub() *websocket.Hub
-	RegisterComponent(comp Component)
+	GetStorage() storage.Storage
 	RegisterModules(ctx context.Context, candidates ...modules.Module) error
 	StartModules(ctx context.Context) error
 	StopModules(ctx context.Context) error
 	RefreshModule(ctx context.Context, name string, req modules.ModuleRefreshRequest) error
-	Start() error
-	Stop()
 }
 
 type container struct {
-	config         *config.Config
-	viper          *viper.Viper
-	db             *gorm.DB
-	redis          *goredis.Client
-	jwt            *jwt.Jwt
-	logger         logger.Logger
-	rabbitMQ       *rabbitmq.Manager
-	s3Manager      *s3.Manager
-	storageManager storage.StorageManager
-	wsHub          *websocket.Hub
-	runtimeConfig  *runtimeconfig.Store
-
-	components []Component
+	config        *config.Config
+	viper         *viper.Viper
+	db            *gorm.DB
+	redis         *goredis.Client
+	jwt           *jwt.Jwt
+	logger        logger.Logger
+	storage       storage.Storage
+	runtimeConfig *runtimeconfig.Store
 
 	moduleMu          sync.RWMutex
 	moduleLifecycleMu sync.Mutex
@@ -82,24 +61,29 @@ type container struct {
 // Option composes process-specific infrastructure without coupling modules to cmd entries.
 type Option func(*container) error
 
-// WithAPIInfrastructure enables integrations used by the HTTP API process.
-func WithAPIInfrastructure() Option {
+func WithIAMInfrastructure() Option {
 	return func(c *container) error {
 		if err := c.initRedis(); err != nil {
 			return err
 		}
 		c.initRuntimeConfig()
 		c.initJWT()
-		if err := c.initRabbitMQ(); err != nil {
-			return err
-		}
-		if err := c.initS3(); err != nil {
-			return err
-		}
-		c.initStorageManager()
-		c.initWebSocket()
 		return nil
 	}
+}
+
+func WithSystemInfrastructure() Option {
+	return func(c *container) error {
+		if err := c.initRedis(); err != nil {
+			return err
+		}
+		c.initRuntimeConfig()
+		return nil
+	}
+}
+
+func WithResourceInfrastructure() Option {
+	return func(c *container) error { return c.initStorage() }
 }
 
 // NewEmpty 创建一个空容器，调用方可以按需初始化指定组件。
@@ -108,7 +92,6 @@ func NewEmpty(cfg *config.Config, v *viper.Viper, log logger.Logger) *container 
 		config:          cfg,
 		viper:           v,
 		logger:          log,
-		components:      make([]Component, 0),
 		modules:         make(map[string]modules.Module),
 		moduleOrder:     make([]string, 0),
 		moduleRefreshMu: make(map[string]*sync.Mutex),
@@ -135,11 +118,6 @@ func New(cfg *config.Config, v *viper.Viper, log logger.Logger, options ...Optio
 // InitDBOnly 仅初始化数据库连接，适合一次性工具复用现有连库逻辑。
 func (c *container) InitDBOnly() error {
 	return c.initDB()
-}
-
-// RegisterComponent 执行业务逻辑。
-func (c *container) RegisterComponent(comp Component) {
-	c.components = append(c.components, comp)
 }
 
 // initDB 初始化数据库
@@ -197,125 +175,29 @@ func (c *container) initJWT() {
 	c.jwt = jwt.New(c.config.JWT.Secret, int64(c.config.JWT.Expire))
 }
 
-// initRabbitMQ 初始化RabbitMQ
-func (c *container) initRabbitMQ() error {
-	if !c.config.RabbitMQ.Enabled {
-		return nil
-	}
-	manager, err := rabbitmq.NewManager(&rabbitmq.Config{
-		URL:     c.config.RabbitMQ.URL,
-		Enabled: c.config.RabbitMQ.Enabled,
-	}, c.logger)
-	if err != nil {
-		c.logger.Warn("failed to create RabbitMQ manager", zap.Error(err))
-		return nil // 允许失败，不阻断启动
-	}
-	c.rabbitMQ = manager
-	c.RegisterComponent(manager)
-	return nil
-}
-
-// initS3 initializes the startup-configured storage integration.
-func (c *container) initS3() error {
-	if !c.config.S3.Enabled {
-		return nil
-	}
-	manager, err := s3.NewManager(&s3.Config{
-		Enabled:         true,
-		Endpoint:        c.config.S3.Endpoint,
-		AccessKeyID:     c.config.S3.AccessKeyID,
-		SecretAccessKey: c.config.S3.SecretAccessKey,
-		Region:          c.config.S3.Region,
-		Bucket:          c.config.S3.Bucket,
-		UseSSL:          c.config.S3.UseSSL,
-		ForcePathStyle:  c.config.S3.ForcePathStyle,
-	}, c.logger)
-	if err != nil {
-		return fmt.Errorf("initialize S3 storage: %w", err)
-	}
-	c.s3Manager = manager
-	return nil
-}
-
 func (c *container) initRuntimeConfig() {
 	locker := redislock.New(c.redis)
 	c.runtimeConfig = runtimeconfig.NewStore(c.redis, runtimeconfig.NewGormSource(c.db), locker)
 }
 
-// initStorageManager 初始化存储管理器
-func (c *container) initStorageManager() {
-	// 创建存储管理器
-	c.storageManager = storage.NewStorageManager(c.db, c.logger)
-
-	// 注册存储类型工厂
-	c.storageManager.RegisterStorageType("s3", storage.NewS3StorageFactory())
-	c.storageManager.RegisterStorageType("local", storage.NewLocalStorageFactory())
-
-	c.logger.Info("storage manager initialized successfully")
-}
-
-// initWebSocket 初始化WebSocket
-func (c *container) initWebSocket() {
-	if !c.config.WebSocket.Enabled {
-		return
+func (c *container) initStorage() error {
+	store, err := storage.New(c.config.Storage)
+	if err != nil {
+		return fmt.Errorf("initialize storage: %w", err)
 	}
-	c.wsHub = websocket.NewHub(c.logger)
-	c.RegisterComponent(c.wsHub)
+	c.storage = store
+	c.logger.Info("storage initialized", zap.String("bucket", c.config.Storage.Bucket))
+	return nil
 }
 
-// GetConfig 获取业务数据。
-func (c *container) GetConfig() *config.Config {
-	return c.config
-}
-
-// GetViper 获取业务数据。
-func (c *container) GetViper() *viper.Viper { return c.viper }
-
-// GetDB 获取业务数据。
-func (c *container) GetDB() *gorm.DB {
-	return c.db
-}
-
-// GetRedis 获取业务数据。
-func (c *container) GetRedis() *goredis.Client {
-	return c.redis
-}
-
-// GetRuntimeConfig returns the shared database-backed runtime configuration store.
+func (c *container) GetConfig() *config.Config              { return c.config }
+func (c *container) GetViper() *viper.Viper                 { return c.viper }
+func (c *container) GetDB() *gorm.DB                        { return c.db }
+func (c *container) GetRedis() *goredis.Client              { return c.redis }
 func (c *container) GetRuntimeConfig() *runtimeconfig.Store { return c.runtimeConfig }
-
-// GetJWT 获取业务数据。
-func (c *container) GetJWT() *jwt.Jwt {
-	return c.jwt
-}
-
-// GetLogger 获取业务数据。
-func (c *container) GetLogger() logger.Logger {
-	return c.logger
-}
-
-// GetRabbitMQProducer 获取业务数据。
-func (c *container) GetRabbitMQProducer() *rabbitmq.ProducerService {
-	if c.rabbitMQ == nil {
-		return nil
-	}
-	return c.rabbitMQ.GetProducer()
-}
-
-// GetS3 获取业务数据。
-func (c *container) GetS3() *s3.Manager {
-	return c.s3Manager
-}
-
-// GetStorageManager 获取业务数据。
-func (c *container) GetStorageManager() storage.StorageManager {
-	return c.storageManager
-}
-
-// GetWebSocketHub 获取业务数据。
-func (c *container) GetWebSocketHub() *websocket.Hub {
-	return c.wsHub
-}
+func (c *container) GetJWT() *jwt.Jwt                       { return c.jwt }
+func (c *container) GetLogger() logger.Logger               { return c.logger }
+func (c *container) GetStorage() storage.Storage            { return c.storage }
 
 // RegisterModules initializes and registers modules in deterministic order.
 func (c *container) RegisterModules(ctx context.Context, candidates ...modules.Module) error {
@@ -459,30 +341,4 @@ func (c *container) RefreshModule(ctx context.Context, name string, req modules.
 		return fmt.Errorf("refresh module %q: %w", name, err)
 	}
 	return nil
-}
-
-// Start 启动组件。
-func (c *container) Start() error {
-	for _, comp := range c.components {
-		c.logger.Info("starting component", zap.String("name", comp.Name()))
-		if err := comp.Start(); err != nil {
-			c.logger.Error("failed to start component", zap.String("name", comp.Name()), zap.Error(err))
-			return err
-		}
-	}
-	c.logger.Info("all components started successfully")
-	return nil
-}
-
-// Stop 停止组件。
-func (c *container) Stop() {
-	// 反向停止
-	for i := len(c.components) - 1; i >= 0; i-- {
-		comp := c.components[i]
-		c.logger.Info("stopping component", zap.String("name", comp.Name()))
-		if err := comp.Stop(); err != nil {
-			c.logger.Error("failed to stop component", zap.String("name", comp.Name()), zap.Error(err))
-		}
-	}
-	c.logger.Info("all components stopped")
 }

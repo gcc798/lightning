@@ -5,11 +5,11 @@ package main
 import (
 	"github.com/google/wire"
 
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/biz"
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/conf"
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/data"
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/server"
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/service"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/biz"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/data"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/server"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/service"
 	kratos "github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"

@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/attachment"
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/attachment"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
 )
 
 // AttachmentDelete is the builder for deleting a Attachment entity.

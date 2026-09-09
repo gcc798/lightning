@@ -46,7 +46,7 @@ func (s *Jwt) GenerateToken(userId int64, userName, clientId, deviceType string,
 			ID:        uuid.NewString(),
 			ExpiresAt: jwt.NewNumericDate(now.Add(expire)),
 			IssuedAt:  jwt.NewNumericDate(now),
-			Issuer:    "quick-admin",
+			Issuer:    "lightning",
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -63,7 +63,7 @@ func (s *Jwt) ValidateToken(tokenString string) (*Claims, error) {
 		&Claims{},
 		func(token *jwt.Token) (interface{}, error) { return s.secret, nil },
 		jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}),
-		jwt.WithIssuer("quick-admin"),
+		jwt.WithIssuer("lightning"),
 	)
 	if err != nil {
 		return nil, err

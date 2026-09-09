@@ -822,7 +822,7 @@ const file_application_sys_rpc_internal_conf_conf_proto_rawDesc = "" +
 	"\rObservability\x12,\n" +
 	"\x11dbSlowThresholdMs\x18\x01 \x01(\x03R\x11dbSlowThresholdMs\x122\n" +
 	"\x14redisSlowThresholdMs\x18\x02 \x01(\x03R\x14redisSlowThresholdMs\x122\n" +
-	"\x14dbPoolSampleInterval\x18\x03 \x01(\tR\x14dbPoolSampleIntervalBMZKgithub.com/gcc798/quick.admin/kratos/application/sys-rpc/internal/conf;confb\x06proto3"
+	"\x14dbPoolSampleInterval\x18\x03 \x01(\tR\x14dbPoolSampleIntervalBKZIgithub.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf;confb\x06proto3"
 
 var (
 	file_application_sys_rpc_internal_conf_conf_proto_rawDescOnce sync.Once

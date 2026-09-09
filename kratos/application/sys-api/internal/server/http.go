@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/conf"
-	"github.com/gcc798/quick.admin/kratos/application/sys-api/internal/service"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/lightning/kratos/application/sys-api/internal/service"
 	selector "github.com/go-kratos/kratos/v2/middleware/selector"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 )

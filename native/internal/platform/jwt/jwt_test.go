@@ -30,7 +30,7 @@ func TestValidateTokenRejectsWrongAlgorithmAndIssuer(t *testing.T) {
 
 	wrongAlgorithm := jwtlib.NewWithClaims(jwtlib.SigningMethodHS384, Claims{
 		RegisteredClaims: jwtlib.RegisteredClaims{
-			Issuer:    "quick-admin",
+			Issuer:    "lightning",
 			ExpiresAt: jwtlib.NewNumericDate(time.Now().Add(time.Minute)),
 		},
 	})

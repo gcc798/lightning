@@ -1,0 +1,15 @@
+server:
+  port: 9009
+  tlsCertFile: ""
+  tlsKeyFile: ""
+
+registry:
+  driver: consul
+  address: http://127.0.0.1:8500
+  prefix: /lightning/services
+
+gateway:
+  rateLimitPerMinute: 300
+
+cors:
+  enabled: false

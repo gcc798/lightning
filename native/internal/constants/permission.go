@@ -105,19 +105,6 @@ const (
 	// ResourceOperLogDelete 定义业务常量。
 	ResourceOperLogDelete = "oper_log.delete"
 
-	// ResourceStorageEnv 存储环境管理
-	ResourceStorageEnv = "storage_env"
-	// ResourceStorageEnvRead 定义业务常量。
-	ResourceStorageEnvRead = "storage_env.read"
-	// ResourceStorageEnvCreate 定义业务常量。
-	ResourceStorageEnvCreate = "storage_env.create"
-	// ResourceStorageEnvUpdate 定义业务常量。
-	ResourceStorageEnvUpdate = "storage_env.update"
-	// ResourceStorageEnvDelete 定义业务常量。
-	ResourceStorageEnvDelete = "storage_env.delete"
-	// ResourceStorageEnvManage 定义业务常量。
-	ResourceStorageEnvManage = "storage_env.manage"
-
 	// ResourceAttachment 附件管理
 	ResourceAttachment = "attachment"
 	// ResourceAttachmentRead 定义业务常量。

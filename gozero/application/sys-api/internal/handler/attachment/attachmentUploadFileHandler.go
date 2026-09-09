@@ -7,9 +7,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/gcc798/quick.admin/application/sys-api/internal/logic/attachment"
-	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
-	"github.com/gcc798/quick.admin/application/sys-api/internal/types"
+	"github.com/gcc798/lightning/application/sys-api/internal/logic/attachment"
+	"github.com/gcc798/lightning/application/sys-api/internal/svc"
+	"github.com/gcc798/lightning/application/sys-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

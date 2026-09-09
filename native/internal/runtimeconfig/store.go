@@ -6,15 +6,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gcc798/lightning/internal/domain/model"
 	"github.com/gcc798/lightning/internal/platform/redislock"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
 const (
-	cacheKeyPrefix = "quick-admin:config:"
-	lockKeyPrefix  = "quick-admin:lock:config:"
+	cacheKeyPrefix = "lightning:config:"
+	lockKeyPrefix  = "lightning:lock:config:"
 )
 
 // Source loads persistent configuration when Redis has no value.
@@ -24,11 +23,19 @@ type Source interface {
 
 type gormSource struct{ db *gorm.DB }
 
+// configRow is the small persistence projection needed by shared runtime config;
+// SYS owns the full domain model and is intentionally not imported here.
+type configRow struct {
+	Data []byte `gorm:"column:data"`
+}
+
+func (configRow) TableName() string { return "s_config" }
+
 // NewGormSource creates an s_config-backed source.
 func NewGormSource(db *gorm.DB) Source { return &gormSource{db: db} }
 
 func (s *gormSource) Load(ctx context.Context, code string) ([]byte, error) {
-	var config model.Config
+	var config configRow
 	if err := s.db.WithContext(ctx).Where("code = ?", code).First(&config).Error; err != nil {
 		return nil, err
 	}

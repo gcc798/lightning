@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "github.com/gcc798/quick.admin/kratos/api/system/v1"
+	pb "github.com/gcc798/lightning/kratos/api/system/v1"
 )
 
 type ConfigServiceService struct {

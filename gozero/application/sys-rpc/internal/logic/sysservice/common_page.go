@@ -1,6 +1,6 @@
 package sysservicelogic
 
-import "github.com/gcc798/quick.admin/application/sys-rpc/pb"
+import "github.com/gcc798/lightning/application/sys-rpc/pb"
 
 func normalizePage(pageNum, pageSize int64) (int64, int64) {
 	if pageNum < 1 {

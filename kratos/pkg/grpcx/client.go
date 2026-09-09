@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/quick.admin/kratos/pkg/registryx"
+	"github.com/gcc798/lightning/kratos/pkg/registryx"
 	kgrpc "github.com/go-kratos/kratos/v2/transport/grpc"
 	"google.golang.org/grpc"
 )

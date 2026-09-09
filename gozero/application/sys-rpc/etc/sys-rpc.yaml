@@ -3,7 +3,7 @@ ListenOn: 0.0.0.0:9002
 Mode: dev
 
 Postgres:
-  Dsn: "host=127.0.0.1 user=postgres password=post123 dbname=quick-admin port=5433 sslmode=disable TimeZone=Asia/Shanghai"
+  Dsn: "host=127.0.0.1 user=postgres password=post123 dbname=lightning port=5433 sslmode=disable TimeZone=Asia/Shanghai"
 
 CacheRedis:
   Addr: "127.0.0.1:6379"

@@ -6,9 +6,9 @@ import (
 
 	"github.com/google/wire"
 
-	"github.com/gcc798/quick.admin/kratos/application/sys-rpc/internal/conf"
-	"github.com/gcc798/quick.admin/kratos/pkg/configx"
-	"github.com/gcc798/quick.admin/kratos/pkg/registryx"
+	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/lightning/kratos/pkg/configx"
+	"github.com/gcc798/lightning/kratos/pkg/registryx"
 	"github.com/go-kratos/kratos/v2/registry"
 )
 

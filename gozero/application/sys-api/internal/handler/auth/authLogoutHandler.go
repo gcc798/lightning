@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gcc798/quick.admin/application/sys-api/internal/logic/auth"
-	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
+	"github.com/gcc798/lightning/application/sys-api/internal/logic/auth"
+	"github.com/gcc798/lightning/application/sys-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

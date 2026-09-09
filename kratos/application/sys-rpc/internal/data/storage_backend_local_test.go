@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	entpkg "github.com/gcc798/quick.admin/kratos/application/sys-rpc/ent"
+	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
 )
 
 func TestLocalStorageBackendLifecycle(t *testing.T) {

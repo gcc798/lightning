@@ -47,15 +47,6 @@ const (
 	VisibleNo  int32 = 1 // 隐藏
 )
 
-// 存储相关枚举
-const (
-	// 存储类型
-	StorageTypeLocal int32 = 0 // 本地存储
-	StorageTypeMinio int32 = 1 // MinIO
-	StorageTypeS3    int32 = 2 // AWS S3
-	StorageTypeOSS   int32 = 3 // 阿里云OSS
-)
-
 // 登录日志相关枚举
 const (
 	// 登录状态

@@ -42,12 +42,13 @@ function filterTree(nodes: ApiPermissionRecord[], keyword: string): ApiPermissio
     .filter(Boolean) as ApiPermissionRecord[];
 }
 
-function toPermissionTreeNodes(nodes: ApiPermissionRecord[]): PermissionTreeNode[] {
+function toPermissionTreeNodes(nodes: ApiPermissionRecord[], derivedKeys: Key[]): PermissionTreeNode[] {
   return nodes.map((node) => ({
     key: node.id,
     title: node.name,
     raw: node,
-    children: node.children ? toPermissionTreeNodes(node.children) : undefined,
+    disableCheckbox: derivedKeys.includes(node.id),
+    children: node.children ? toPermissionTreeNodes(node.children, derivedKeys) : undefined,
   }));
 }
 
@@ -63,12 +64,14 @@ export function ApiPermissionAssignModal({
   const [loading, setLoading] = useState(false);
   const [tree, setTree] = useState<ApiPermissionRecord[]>([]);
   const [checkedKeys, setCheckedKeys] = useState<Key[]>([]);
+  const [derivedKeys, setDerivedKeys] = useState<Key[]>([]);
   const [keyword, setKeyword] = useState('');
   const [viewMode, setViewMode] = useState<'tree' | 'flat'>('tree');
 
   useEffect(() => {
     if (!open || !targetId) {
       setCheckedKeys([]);
+      setDerivedKeys([]);
       return;
     }
 
@@ -82,7 +85,14 @@ export function ApiPermissionAssignModal({
             : apiPermissionApi.getUserPermissions(targetId),
         ]);
         setTree(permissionTree);
-        setCheckedKeys(assignedIds);
+        if (targetType === 'role') {
+          const grants = assignedIds as Awaited<ReturnType<typeof apiPermissionApi.getRolePermissions>>;
+          setDerivedKeys(grants.derivedIds);
+          setCheckedKeys([...grants.manualIds, ...grants.derivedIds]);
+        } else {
+          setDerivedKeys([]);
+          setCheckedKeys(assignedIds as SnowflakeId[]);
+        }
       } finally {
         setLoading(false);
       }
@@ -94,7 +104,7 @@ export function ApiPermissionAssignModal({
     const source = viewMode === 'tree' ? tree : flatData;
     return filterTree(source, keyword);
   }, [flatData, keyword, tree, viewMode]);
-  const treeData = useMemo(() => toPermissionTreeNodes(dataSource), [dataSource]);
+  const treeData = useMemo(() => toPermissionTreeNodes(dataSource, derivedKeys), [dataSource, derivedKeys]);
 
   const columns: ColumnsType<ApiPermissionRecord> = [
     { title: '名称', dataIndex: 'name', width: 200 },
@@ -110,7 +120,8 @@ export function ApiPermissionAssignModal({
     setLoading(true);
     try {
       const permissionIds = checkedKeys.filter(
-        (key): key is SnowflakeId => typeof key === 'string' || typeof key === 'number',
+        (key): key is SnowflakeId =>
+          (typeof key === 'string' || typeof key === 'number') && !derivedKeys.includes(key),
       );
       if (targetType === 'role') {
         await apiPermissionApi.assignRolePermissions(targetId, permissionIds);
@@ -164,7 +175,10 @@ export function ApiPermissionAssignModal({
                   {node.raw.name} <span className="table-code">{node.raw.code}</span>
                 </span>
               )}
-              onCheck={(keys) => setCheckedKeys(Array.isArray(keys) ? keys : keys.checked)}
+              onCheck={(keys) => {
+                const selected = Array.isArray(keys) ? keys : keys.checked;
+                setCheckedKeys([...new Set([...selected, ...derivedKeys])]);
+              }}
             />
           ) : (
             <Table<ApiPermissionRecord>
@@ -174,7 +188,8 @@ export function ApiPermissionAssignModal({
               rowKey="id"
               rowSelection={{
                 selectedRowKeys: checkedKeys,
-                onChange: (keys) => setCheckedKeys(keys),
+                getCheckboxProps: (record) => ({ disabled: derivedKeys.includes(record.id) }),
+                onChange: (keys) => setCheckedKeys([...new Set([...keys, ...derivedKeys])]),
               }}
               scroll={{ x: 900, y: 420 }}
             />
