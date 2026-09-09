@@ -6,6 +6,7 @@ import (
 	"runtime/debug"
 
 	"github.com/gcc798/lightning/internal/httpresponse"
+	logging "github.com/gcc798/lightning/internal/logger"
 	apperrors "github.com/gcc798/lightning/internal/utils/errors"
 	"github.com/labstack/echo/v5"
 	"go.uber.org/zap"
@@ -14,13 +15,13 @@ import (
 // Recovery 全局 Panic 恢复中间件
 // 捕获系统级错误（如数组越界、空指针等），记录堆栈，返回统一文案
 // 参数：logger 需要传入 *zap.Logger，调用方使用 logger.Get() 获取
-func Recovery(logger *zap.Logger) echo.MiddlewareFunc {
+func Recovery(logger logging.Logger) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c *echo.Context) (handlerErr error) {
 			defer func() {
 				if err := recover(); err != nil {
 					// 记录详细的 panic 信息和堆栈
-					logger.Error("系统 Panic 捕获",
+					logging.WithContext(c.Request().Context(), logger).Error("系统 Panic 捕获",
 						zap.Any("error", err),
 						zap.String("path", c.Request().URL.Path),
 						zap.String("method", c.Request().Method),

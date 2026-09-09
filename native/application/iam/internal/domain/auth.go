@@ -18,6 +18,9 @@ import (
 	"github.com/gcc798/lightning/internal/utils"
 	"github.com/gcc798/lightning/internal/utils/idgen"
 	"github.com/redis/go-redis/v9"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
@@ -86,7 +89,24 @@ func NewAuthService(
 	return s
 }
 
-func (s *authService) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
+func (s *authService) Login(ctx context.Context, req *LoginRequest) (_ *LoginResponse, loginErr error) {
+	ctx, span := otel.Tracer("github.com/gcc798/lightning/application/iam").Start(ctx, "auth.login")
+	span.SetAttributes(
+		attribute.String("auth.client.id", req.ClientID),
+		attribute.String("auth.grant.type", req.GrantType),
+	)
+	defer func() {
+		if loginErr != nil {
+			span.RecordError(loginErr)
+			span.SetStatus(codes.Error, loginErr.Error())
+			logging.WithContext(ctx, s.logger).Warn("login failed",
+				zap.String("grant_type", req.GrantType),
+				zap.Error(loginErr),
+			)
+		}
+		span.End()
+	}()
+
 	client, err := s.clients.AuthenticateClientID(ctx, req.ClientID, req.GrantType)
 	if err != nil {
 		s.recordLogin(ctx, req, resolveLoginAccount(req), req.ClientID, 1, err.Error())
@@ -117,6 +137,11 @@ func (s *authService) Login(ctx context.Context, req *LoginRequest) (*LoginRespo
 		s.logger.Warn("update login information failed", zap.Error(err))
 	}
 	s.recordLogin(ctx, req, user.UserName, client.ClientId, 0, "登录成功")
+	span.SetAttributes(attribute.Int64("user.id", user.ID))
+	logging.WithContext(ctx, s.logger).Info("login succeeded",
+		zap.Int64("user_id", user.ID),
+		zap.String("grant_type", req.GrantType),
+	)
 	userInfo := newLoginUserInfo(user)
 	return &LoginResponse{
 		AccessToken:      accessToken,

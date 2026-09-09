@@ -18,7 +18,7 @@ type SchedulerModule struct {
 	mu      sync.Mutex
 	cont    Container
 	source  runtimeconfig.Source
-	jobs    map[string]func()
+	jobs    map[string]func(context.Context)
 	digest  [sha256.Size]byte
 	config  runtimeconfig.SchedulerConfig
 	active  *pkgscheduler.Scheduler
@@ -27,8 +27,8 @@ type SchedulerModule struct {
 	started bool
 }
 
-func NewSchedulerModule(jobs map[string]func()) *SchedulerModule {
-	copyJobs := make(map[string]func(), len(jobs))
+func NewSchedulerModule(jobs map[string]func(context.Context)) *SchedulerModule {
+	copyJobs := make(map[string]func(context.Context), len(jobs))
 	for name, job := range jobs {
 		copyJobs[name] = job
 	}

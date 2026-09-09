@@ -14,6 +14,7 @@ import (
 	_ "github.com/gcc798/lightning/internal/openapi"
 	"github.com/gcc798/lightning/internal/registry"
 	httpSwagger "github.com/swaggo/http-swagger/v2"
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 
 type gateway struct {
@@ -65,6 +66,7 @@ func (g *gateway) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 	proxy := httputil.NewSingleHostReverseProxy(target)
+	proxy.Transport = otelhttp.NewTransport(http.DefaultTransport)
 	proxy.ErrorHandler = func(w http.ResponseWriter, _ *http.Request, _ error) {
 		writeError(w, http.StatusBadGateway, "服务调用失败")
 	}

@@ -2,8 +2,7 @@ package transport
 
 import (
 	"context"
-	"fmt"
-	"os"
+	"errors"
 	"strconv"
 
 	"github.com/gcc798/lightning/internal/config"
@@ -19,8 +18,7 @@ type RegisteredGRPC struct {
 
 func RegisterService(ctx context.Context, reg registry.Registry, name, id string, endpoints map[string]string) (registry.ServiceInstance, error) {
 	if id == "" {
-		host, _ := os.Hostname()
-		id = fmt.Sprintf("%s-%s", name, host)
+		return registry.ServiceInstance{}, errors.New("service instance ID is required")
 	}
 	if endpoints == nil {
 		endpoints = map[string]string{}

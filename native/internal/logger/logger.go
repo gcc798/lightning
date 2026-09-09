@@ -1,12 +1,14 @@
 package logger
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
 	"time"
 
 	configx "github.com/gcc798/lightning/internal/config"
+	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/yaml.v3"
@@ -51,6 +53,15 @@ type ConsoleConfig struct {
 
 type zapLogger struct {
 	logger *zap.Logger
+}
+
+// WithContext attaches the active OpenTelemetry identifiers to a log entry.
+func WithContext(ctx context.Context, log Logger) Logger {
+	span := trace.SpanContextFromContext(ctx)
+	if !span.IsValid() {
+		return log
+	}
+	return log.With(zap.String("trace_id", span.TraceID().String()), zap.String("span_id", span.SpanID().String()))
 }
 
 // LoadConfig 从配置文件加载日志配置

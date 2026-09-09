@@ -1,6 +1,6 @@
 # lightning native
 
-`native` 是 lightning 的原生 Go 后端，也是三套后端实现的业务与 HTTP 契约基线。
+`native` 是 lightning 不依赖完整微服务框架的原生 Go 渐进式微服务实现，也是三套后端实现的业务与 HTTP 契约基线。它只保留真实微服务部署形态，不提供单体入口。
 
 ## 本地启动
 
@@ -25,7 +25,7 @@ cd native
 go run ./application/scheduler
 ```
 
-生产环境只提供 `gateway + iam + sys + resource` 微服务部署；Scheduler 默认运行一个副本。
+生产环境使用 `gateway + iam + sys + resource + scheduler` 五进程拓扑；Scheduler 默认运行一个副本。
 
 本地启动微服务时先启动 PostgreSQL、Redis、RustFS 与 Consul，然后分别运行以下进程。默认 HTTP 端口为 gateway `9009`、iam `9010`、sys `9011`、resource `9012`，gRPC 端口依次为 `9110`、`9111`、`9112`。
 
@@ -76,6 +76,8 @@ go run ./cmd/usermgr --operation=reset --username=admin
 登录接口为 `POST /login`，客户端 ID 为 `web-admin`，支持 `password`、`email`、`sms`、`wechat`。微信登录只接收小程序 `wxCode`，服务端通过微信接口换取 OpenID/UnionID，不接收客户端提交的 OpenID。
 
 Access Token 与 Refresh Token 都关联服务端 Redis 会话；刷新令牌单次使用并在刷新后轮换，登出会立即撤销当前会话。
+
+HTTP、gRPC、PostgreSQL、Redis 和 Scheduler Job 已接入 OpenTelemetry Trace。未配置 OTLP 地址时只生成用于 JSON 日志关联的 `trace_id`、`span_id`，不要求部署 Collector；接入方式和业务 Span 示例见 [`docs/opentelemetry.md`](docs/opentelemetry.md)。
 
 ## 质量检查
 

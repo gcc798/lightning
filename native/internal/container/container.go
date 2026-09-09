@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/XSAM/otelsql"
 	"github.com/gcc798/lightning/internal/config"
 	"github.com/gcc798/lightning/internal/database"
 	"github.com/gcc798/lightning/internal/logger"
@@ -19,8 +20,11 @@ import (
 	"github.com/gcc798/lightning/internal/platform/redislock"
 	"github.com/gcc798/lightning/internal/platform/storage"
 	"github.com/gcc798/lightning/internal/runtimeconfig"
+	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/redis/go-redis/extra/redisotel/v9"
 	goredis "github.com/redis/go-redis/v9"
 	"github.com/spf13/viper"
+	semconv "go.opentelemetry.io/otel/semconv/v1.39.0"
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -136,13 +140,18 @@ func (c *container) initDB() error {
 			Colorful:                  true,
 		},
 	)
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+	sqlDB, err := otelsql.Open("pgx", dsn, otelsql.WithAttributes(semconv.DBSystemNamePostgreSQL))
+	if err != nil {
+		return fmt.Errorf("instrument database connection: %w", err)
+	}
+	db, err := gorm.Open(postgres.New(postgres.Config{Conn: sqlDB}), &gorm.Config{
 		Logger: gormLogger,
 	})
 	if err != nil {
+		_ = sqlDB.Close()
 		return fmt.Errorf("failed to connect to database: %w", err)
 	}
-	sqlDB, err := db.DB()
+	sqlDB, err = db.DB()
 	if err != nil {
 		return fmt.Errorf("failed to get sql.DB: %w", err)
 	}
@@ -163,6 +172,9 @@ func (c *container) initDB() error {
 // initRedis 初始化Redis
 func (c *container) initRedis() error {
 	redisClient := redisclient.NewRedis(c.config.Redis.Addr, c.config.Redis.Password, c.config.Redis.DB)
+	if err := redisotel.InstrumentTracing(redisClient); err != nil {
+		return fmt.Errorf("instrument redis tracing: %w", err)
+	}
 	if _, err := redisClient.Ping(context.Background()).Result(); err != nil {
 		return fmt.Errorf("failed to connect to redis: %w", err)
 	}

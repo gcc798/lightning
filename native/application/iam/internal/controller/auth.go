@@ -75,7 +75,6 @@ func (h *authController) Login(c *echo.Context) {
 	req.UserAgent = c.Request().UserAgent()
 	result, err := h.service.Login(c.Request().Context(), &req)
 	if err != nil {
-		h.logger.Warn("login failed", zap.String("grantType", req.GrantType), zap.Error(err))
 		response.FailCode(c, response.CodeUnauthorized, err.Error())
 		return
 	}

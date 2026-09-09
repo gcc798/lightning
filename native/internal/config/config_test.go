@@ -42,6 +42,13 @@ func TestDevelopmentConfigStartsWithoutRequiredEnvironmentOverrides(t *testing.T
 	if cfg.AppDir != appDir {
 		t.Fatalf("AppDir = %q, want %q", cfg.AppDir, appDir)
 	}
+	host, err := os.Hostname()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := string(ServiceIAM) + "-" + host; cfg.Service.ID != want {
+		t.Fatalf("Service.ID = %q, want %q", cfg.Service.ID, want)
+	}
 }
 
 func TestServiceConfigsContainOnlyOwnedSections(t *testing.T) {
@@ -124,6 +131,7 @@ websocket: { enabled: true, timeoutEnabled: true, readTimeoutSeconds: 60, writeT
 
 	t.Setenv(AppEnvVar, "dev")
 	t.Setenv("LIGHTNING_SERVER_PORT", "8080")
+	t.Setenv("LIGHTNING_SERVICE_ID", "iam-explicit")
 	t.Setenv("LIGHTNING_DATABASE_DSN", "environment-dsn")
 	t.Setenv("LIGHTNING_REDIS_ADDR", "environment-redis:6379")
 	t.Setenv("LIGHTNING_JWT_SECRET", "environment-secret-with-at-least-32-characters")
@@ -134,6 +142,9 @@ websocket: { enabled: true, timeoutEnabled: true, readTimeoutSeconds: 60, writeT
 	}
 	if cfg.Server.Port != 8080 {
 		t.Fatalf("Server.Port = %d, want 8080", cfg.Server.Port)
+	}
+	if cfg.Service.ID != "iam-explicit" {
+		t.Fatalf("Service.ID = %q, want explicit environment value", cfg.Service.ID)
 	}
 	if cfg.Database.DSN != "environment-dsn" {
 		t.Fatalf("Database.DSN = %q", cfg.Database.DSN)

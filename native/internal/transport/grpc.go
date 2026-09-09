@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/gcc798/lightning/internal/registry"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/health"
@@ -23,7 +24,7 @@ func NewGRPCServer(address string) (*GRPCServer, error) {
 	if err != nil {
 		return nil, fmt.Errorf("listen for grpc: %w", err)
 	}
-	server := grpc.NewServer()
+	server := grpc.NewServer(grpc.StatsHandler(otelgrpc.NewServerHandler()))
 	grpc_health_v1.RegisterHealthServer(server, health.NewServer())
 	return &GRPCServer{server: server, listener: listener}, nil
 }
@@ -62,7 +63,10 @@ func (p *ClientPool) Conn(ctx context.Context, service string) (*grpc.ClientConn
 	if conn := p.conns[address]; conn != nil {
 		return conn, nil
 	}
-	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(address,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithStatsHandler(otelgrpc.NewClientHandler()),
+	)
 	if err != nil {
 		return nil, fmt.Errorf("connect to %s at %s: %w", service, address, err)
 	}

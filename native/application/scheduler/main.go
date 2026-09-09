@@ -16,6 +16,7 @@ import (
 	logging "github.com/gcc798/lightning/internal/logger"
 	"github.com/gcc798/lightning/internal/modules"
 	"github.com/gcc798/lightning/internal/registry"
+	"github.com/gcc798/lightning/internal/telemetry"
 	"github.com/gcc798/lightning/internal/transport"
 	"go.uber.org/zap"
 )
@@ -39,6 +40,17 @@ func main() {
 		exitCode = 1
 		return
 	}
+	shutdownTelemetry, err := telemetry.Init(context.Background(), string(config.ServiceScheduler), cfg.Service.ID, config.CurrentEnv())
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		exitCode = 1
+		return
+	}
+	defer func() {
+		shutdown, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		_ = shutdownTelemetry(shutdown)
+	}()
 	cont, err := container.New(cfg, v, log)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)

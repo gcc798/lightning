@@ -8,6 +8,10 @@ import (
 	logging "github.com/gcc798/lightning/internal/logger"
 
 	"github.com/robfig/cron/v3"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 )
 
@@ -35,7 +39,7 @@ func New(logger logging.Logger) *Scheduler {
 }
 
 // AddJob 添加命名定时任务。
-func (s *Scheduler) AddJob(spec string, name string, job func()) error {
+func (s *Scheduler) AddJob(spec string, name string, job func(context.Context)) error {
 	s.jobsMux.Lock()
 	defer s.jobsMux.Unlock()
 
@@ -46,13 +50,20 @@ func (s *Scheduler) AddJob(spec string, name string, job func()) error {
 
 	// 添加任务到cron
 	entryID, err := s.cron.AddFunc(spec, func() {
-		s.logger.Debug("running scheduled job", zap.String("job", name))
+		ctx, span := otel.Tracer("github.com/gcc798/lightning/internal/platform/scheduler").Start(
+			s.ctx, "scheduler.job", trace.WithAttributes(attribute.String("job.name", name)),
+		)
+		defer span.End()
+		jobLogger := logging.WithContext(ctx, s.logger)
+		jobLogger.Debug("running scheduled job", zap.String("job", name))
 		defer func() {
 			if r := recover(); r != nil {
-				s.logger.Error("job panic", zap.String("job", name), zap.Any("panic", r))
+				span.RecordError(fmt.Errorf("job panic: %v", r))
+				span.SetStatus(codes.Error, "job panic")
+				jobLogger.Error("job panic", zap.String("job", name), zap.Any("panic", r))
 			}
 		}()
-		job()
+		job(ctx)
 	})
 
 	if err != nil {
@@ -97,7 +108,7 @@ func (s *Scheduler) RemoveJob(name string) error {
 }
 
 // UpdateJob 更新指定任务的 cron 表达式和执行函数。
-func (s *Scheduler) UpdateJob(spec string, name string, job func()) error {
+func (s *Scheduler) UpdateJob(spec string, name string, job func(context.Context)) error {
 	// 先移除旧任务
 	if err := s.RemoveJob(name); err != nil {
 		// 如果任务不存在，直接添加新任务

@@ -53,7 +53,7 @@ IAM 提供认证授权 HTTP/gRPC 接口，拥有 IAM 数据、Redis 会话、JWT
 | --- | --- | --- |
 | `server.port` | `LIGHTNING_SERVER_PORT` | IAM HTTP 监听端口。 |
 | `grpc.port` | `LIGHTNING_GRPC_PORT` | IAM gRPC 监听端口。 |
-| `service.id` | `LIGHTNING_SERVICE_ID` | 注册中心实例 ID；可显式留空，由程序按服务名、主机名和 HTTP 端口生成。 |
+| `service.id` | `LIGHTNING_SERVICE_ID` | 注册中心实例 ID；可显式留空，由配置加载器按服务名和主机名生成。 |
 | `service.advertiseHost` | `LIGHTNING_SERVICE_ADVERTISE_HOST` | 注册给其他进程访问的主机名或 IP，不是监听地址；Docker 镜像未显式注入时使用当前容器 IP。 |
 | `registry.driver` | `LIGHTNING_REGISTRY_DRIVER` | 注册自身并发现 SYS。 |
 | `registry.address` | `LIGHTNING_REGISTRY_ADDRESS` | 注册中心地址。 |
@@ -173,3 +173,19 @@ environment:
 ```
 
 环境变量只覆盖当前进程使用的配置。不要向 Gateway 注入数据库变量，也不要向 Scheduler 注入 HTTP/gRPC 端口；未归属该进程的变量不会形成有效的服务配置。
+
+## OpenTelemetry 标准变量
+
+Gateway、IAM、SYS、Resource、Scheduler 均初始化 OpenTelemetry Trace。这部分使用 OpenTelemetry SDK 标准环境变量，不属于 `LIGHTNING_*` YAML 配置：
+
+| 环境变量 | 说明 |
+| --- | --- |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | Collector 通用 OTLP 地址；不设置时不创建 exporter。 |
+| `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` | 仅 Trace 使用的 OTLP 地址，优先级高于通用地址。 |
+| `OTEL_EXPORTER_OTLP_PROTOCOL` | OTLP 协议；当前 exporter 使用 gRPC。 |
+| `OTEL_EXPORTER_OTLP_HEADERS` | Collector 要求认证时使用的请求 Header。 |
+| `OTEL_TRACES_SAMPLER` | Trace 采样器，例如 `parentbased_traceidratio`。 |
+| `OTEL_TRACES_SAMPLER_ARG` | 比例采样参数，例如 `0.1`。 |
+| `OTEL_TRACES_EXPORTER` | 设置为 `none` 时强制关闭 Trace 导出。 |
+
+服务名、实例 ID 和 `dev`/`prod` 环境由各进程根据已有服务配置写入 OTel Resource，不通过 `OTEL_SERVICE_NAME` 重复配置。完整插桩边界和业务 Span 写法见 [`opentelemetry.md`](opentelemetry.md)。

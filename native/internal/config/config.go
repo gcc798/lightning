@@ -133,6 +133,14 @@ func Load(configDir string, service Service) (*Config, *viper.Viper, error) {
 	if err := v.Unmarshal(&cfg); err != nil {
 		return nil, nil, fmt.Errorf("decode config: %w", err)
 	}
+	cfg.Service.ID = strings.TrimSpace(cfg.Service.ID)
+	if service != ServiceUserManager && cfg.Service.ID == "" {
+		host, err := os.Hostname()
+		if err != nil {
+			return nil, nil, fmt.Errorf("resolve service instance ID: %w", err)
+		}
+		cfg.Service.ID = string(service) + "-" + host
+	}
 	cfg.AppDir = filepath.Dir(foundPath)
 	if err := cfg.Validate(profile, service); err != nil {
 		return nil, nil, err

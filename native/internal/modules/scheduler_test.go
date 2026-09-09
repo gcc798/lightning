@@ -15,7 +15,7 @@ func TestSchedulerModuleRunsAndStopsRegisteredJob(t *testing.T) {
 	}}
 	cont := &moduleTestContainer{modules: make(map[string]Module)}
 	var runs atomic.Int32
-	schedulerModule := NewSchedulerModule(map[string]func(){"tick": func() { runs.Add(1) }})
+	schedulerModule := NewSchedulerModule(map[string]func(context.Context){"tick": func(context.Context) { runs.Add(1) }})
 	schedulerModule.source = source
 	cont.modules[SchedulerName] = schedulerModule
 	ctx := context.Background()

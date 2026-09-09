@@ -22,24 +22,24 @@ func NewDataCleanupJob(system sysv1.API, resource resourcev1.API, logger logging
 }
 
 // Run 执行业务任务。
-func (j *DataCleanupJob) Run() {
-	j.logger.Info("starting data cleanup")
+func (j *DataCleanupJob) Run(ctx context.Context) {
+	log := logging.WithContext(ctx, j.logger)
+	log.Info("starting data cleanup")
 
-	ctx := context.Background()
 	logs, err := j.system.CleanLogs(ctx, 90)
 	if err != nil {
-		j.logger.Error("failed to cleanup system logs", zap.Error(err))
+		log.Error("failed to cleanup system logs", zap.Error(err))
 	} else {
-		j.logger.Info("cleaned up system logs", zap.Int64("loginLogs", logs.LoginLogs), zap.Int64("operationLogs", logs.OperationLogs))
+		log.Info("cleaned up system logs", zap.Int64("loginLogs", logs.LoginLogs), zap.Int64("operationLogs", logs.OperationLogs))
 	}
 	attachments, err := j.resource.CleanExpired(ctx)
 	if err != nil {
-		j.logger.Error("failed to cleanup expired attachments", zap.Error(err))
+		log.Error("failed to cleanup expired attachments", zap.Error(err))
 	} else {
-		j.logger.Info("cleaned up expired attachments", zap.Int64("cleaned", attachments.Cleaned), zap.Int64("failed", attachments.Failed))
+		log.Info("cleaned up expired attachments", zap.Int64("cleaned", attachments.Cleaned), zap.Int64("failed", attachments.Failed))
 	}
 
-	j.logger.Info("data cleanup completed")
+	log.Info("data cleanup completed")
 }
 
 // Schedule 返回任务调度表达式。
