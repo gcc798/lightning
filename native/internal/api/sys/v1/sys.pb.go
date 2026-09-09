@@ -21,6 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Empty 表示成功但没有业务返回值。
 type Empty struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -57,19 +58,29 @@ func (*Empty) Descriptor() ([]byte, []int) {
 	return file_api_sys_v1_sys_proto_rawDescGZIP(), []int{0}
 }
 
+// RecordLoginRequest 是登录日志写入请求。
 type RecordLoginRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Id                 int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserName           string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	IpAddress          string                 `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	Browser            string                 `protobuf:"bytes,4,opt,name=browser,proto3" json:"browser,omitempty"`
-	Os                 string                 `protobuf:"bytes,5,opt,name=os,proto3" json:"os,omitempty"`
-	Status             int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
-	Message            string                 `protobuf:"bytes,7,opt,name=message,proto3" json:"message,omitempty"`
-	LoginTimeUnixMilli int64                  `protobuf:"varint,8,opt,name=login_time_unix_milli,json=loginTimeUnixMilli,proto3" json:"login_time_unix_milli,omitempty"`
-	ClientId           string                 `protobuf:"bytes,9,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id 是登录日志的全局唯一 ID。
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// user_name 是登录用户名。
+	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// ip_address 是登录来源 IP 地址。
+	IpAddress string `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
+	// browser 是客户端浏览器信息。
+	Browser string `protobuf:"bytes,4,opt,name=browser,proto3" json:"browser,omitempty"`
+	// os 是客户端操作系统信息。
+	Os string `protobuf:"bytes,5,opt,name=os,proto3" json:"os,omitempty"`
+	// status 是登录结果状态，0 表示成功。
+	Status int32 `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	// message 是登录结果说明或失败原因。
+	Message string `protobuf:"bytes,7,opt,name=message,proto3" json:"message,omitempty"`
+	// login_time_unix_milli 是登录时间的 Unix 毫秒时间戳。
+	LoginTimeUnixMilli int64 `protobuf:"varint,8,opt,name=login_time_unix_milli,json=loginTimeUnixMilli,proto3" json:"login_time_unix_milli,omitempty"`
+	// client_id 是登录客户端 ID。
+	ClientId      string `protobuf:"bytes,9,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RecordLoginRequest) Reset() {
@@ -165,25 +176,41 @@ func (x *RecordLoginRequest) GetClientId() string {
 	return ""
 }
 
+// OperationLog 表示一条待批量写入的操作日志。
 type OperationLog struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	Id                     int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Title                  string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	BusinessType           string                 `protobuf:"bytes,3,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`
-	Method                 string                 `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
-	RequestMethod          string                 `protobuf:"bytes,5,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
-	DeviceType             string                 `protobuf:"bytes,6,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
-	OperatorName           string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	Url                    string                 `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
-	IpAddress              string                 `protobuf:"bytes,9,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	Parameters             string                 `protobuf:"bytes,10,opt,name=parameters,proto3" json:"parameters,omitempty"`
-	Status                 string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
-	ErrorMessage           string                 `protobuf:"bytes,12,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	OperationTimeUnixMilli int64                  `protobuf:"varint,13,opt,name=operation_time_unix_milli,json=operationTimeUnixMilli,proto3" json:"operation_time_unix_milli,omitempty"`
-	CostMillis             int64                  `protobuf:"varint,14,opt,name=cost_millis,json=costMillis,proto3" json:"cost_millis,omitempty"`
-	UserAgent              string                 `protobuf:"bytes,15,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// id 是操作日志的全局唯一 ID。
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// title 是业务模块标题。
+	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	// business_type 是业务操作类型。
+	BusinessType string `protobuf:"bytes,3,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`
+	// method 是服务端处理方法名。
+	Method string `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
+	// request_method 是 HTTP 请求方法。
+	RequestMethod string `protobuf:"bytes,5,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	// device_type 是客户端设备类型。
+	DeviceType string `protobuf:"bytes,6,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
+	// operator_name 是操作用户名。
+	OperatorName string `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	// url 是被调用的 HTTP URL。
+	Url string `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
+	// ip_address 是操作来源 IP 地址。
+	IpAddress string `protobuf:"bytes,9,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
+	// parameters 是请求参数的序列化内容。
+	Parameters string `protobuf:"bytes,10,opt,name=parameters,proto3" json:"parameters,omitempty"`
+	// status 是操作结果状态。
+	Status string `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	// error_message 是失败时的错误信息。
+	ErrorMessage string `protobuf:"bytes,12,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	// operation_time_unix_milli 是操作时间的 Unix 毫秒时间戳。
+	OperationTimeUnixMilli int64 `protobuf:"varint,13,opt,name=operation_time_unix_milli,json=operationTimeUnixMilli,proto3" json:"operation_time_unix_milli,omitempty"`
+	// cost_millis 是请求耗时，单位为毫秒。
+	CostMillis int64 `protobuf:"varint,14,opt,name=cost_millis,json=costMillis,proto3" json:"cost_millis,omitempty"`
+	// user_agent 是客户端 User-Agent。
+	UserAgent     string `protobuf:"bytes,15,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OperationLog) Reset() {
@@ -321,9 +348,11 @@ func (x *OperationLog) GetUserAgent() string {
 	return ""
 }
 
+// RecordOperationsRequest 是操作日志批量写入请求。
 type RecordOperationsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Logs          []*OperationLog        `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// logs 是待写入的操作日志列表。
+	Logs          []*OperationLog `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -365,9 +394,11 @@ func (x *RecordOperationsRequest) GetLogs() []*OperationLog {
 	return nil
 }
 
+// CleanLogsRequest 是日志清理请求。
 type CleanLogsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Days          int32                  `protobuf:"varint,1,opt,name=days,proto3" json:"days,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// days 表示保留最近多少天的日志，必须为正数。
+	Days          int32 `protobuf:"varint,1,opt,name=days,proto3" json:"days,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -409,10 +440,13 @@ func (x *CleanLogsRequest) GetDays() int32 {
 	return 0
 }
 
+// CleanLogsResponse 是日志清理结果。
 type CleanLogsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	LoginLogs     int64                  `protobuf:"varint,1,opt,name=login_logs,json=loginLogs,proto3" json:"login_logs,omitempty"`
-	OperationLogs int64                  `protobuf:"varint,2,opt,name=operation_logs,json=operationLogs,proto3" json:"operation_logs,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// login_logs 是清理的登录日志数量。
+	LoginLogs int64 `protobuf:"varint,1,opt,name=login_logs,json=loginLogs,proto3" json:"login_logs,omitempty"`
+	// operation_logs 是清理的操作日志数量。
+	OperationLogs int64 `protobuf:"varint,2,opt,name=operation_logs,json=operationLogs,proto3" json:"operation_logs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

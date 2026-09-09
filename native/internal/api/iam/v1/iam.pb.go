@@ -21,9 +21,11 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ValidateAccessTokenRequest 是访问令牌校验请求。
 type ValidateAccessTokenRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// token 是待校验的 JWT 访问令牌。
+	Token         string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -65,12 +67,17 @@ func (x *ValidateAccessTokenRequest) GetToken() string {
 	return ""
 }
 
+// ValidateAccessTokenResponse 是访问令牌校验成功后的用户身份信息。
 type ValidateAccessTokenResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName      string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	ClientId      string                 `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	DeviceType    string                 `protobuf:"bytes,4,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// user_id 是用户的全局唯一 ID。
+	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// user_name 是用户登录名。
+	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	// client_id 是签发令牌的客户端 ID。
+	ClientId string `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	// device_type 是用户登录设备类型。
+	DeviceType    string `protobuf:"bytes,4,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -133,11 +140,15 @@ func (x *ValidateAccessTokenResponse) GetDeviceType() string {
 	return ""
 }
 
+// CheckPermissionRequest 是权限校验请求。
 type CheckPermissionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Resource      string                 `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	Action        string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// user_id 是待校验权限的用户 ID。
+	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// resource 是权限资源标识，例如 user 或 menu。
+	Resource string `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	// action 是资源动作标识，例如 read 或 write。
+	Action        string `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -193,9 +204,11 @@ func (x *CheckPermissionRequest) GetAction() string {
 	return ""
 }
 
+// CheckPermissionResponse 是权限校验结果。
 type CheckPermissionResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Allowed       bool                   `protobuf:"varint,1,opt,name=allowed,proto3" json:"allowed,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// allowed 表示用户是否拥有请求的权限。
+	Allowed       bool `protobuf:"varint,1,opt,name=allowed,proto3" json:"allowed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

@@ -21,6 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// CleanExpiredRequest 是过期资源清理请求；当前不需要请求参数。
 type CleanExpiredRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -57,10 +58,13 @@ func (*CleanExpiredRequest) Descriptor() ([]byte, []int) {
 	return file_api_resource_v1_resource_proto_rawDescGZIP(), []int{0}
 }
 
+// CleanExpiredResponse 是过期资源清理结果。
 type CleanExpiredResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Cleaned       int64                  `protobuf:"varint,1,opt,name=cleaned,proto3" json:"cleaned,omitempty"`
-	Failed        int64                  `protobuf:"varint,2,opt,name=failed,proto3" json:"failed,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// cleaned 是成功清理的资源数量。
+	Cleaned int64 `protobuf:"varint,1,opt,name=cleaned,proto3" json:"cleaned,omitempty"`
+	// failed 是清理失败的资源数量。
+	Failed        int64 `protobuf:"varint,2,opt,name=failed,proto3" json:"failed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

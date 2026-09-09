@@ -27,9 +27,14 @@ const (
 // SystemServiceClient is the client API for SystemService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// SystemService 提供系统配置、登录日志和操作日志的内部 gRPC 能力。
 type SystemServiceClient interface {
+	// RecordLogin 写入一条登录日志。
 	RecordLogin(ctx context.Context, in *RecordLoginRequest, opts ...grpc.CallOption) (*Empty, error)
+	// RecordOperations 批量写入操作日志。
 	RecordOperations(ctx context.Context, in *RecordOperationsRequest, opts ...grpc.CallOption) (*Empty, error)
+	// CleanLogs 清理指定天数以前的登录日志和操作日志。
 	CleanLogs(ctx context.Context, in *CleanLogsRequest, opts ...grpc.CallOption) (*CleanLogsResponse, error)
 }
 
@@ -74,9 +79,14 @@ func (c *systemServiceClient) CleanLogs(ctx context.Context, in *CleanLogsReques
 // SystemServiceServer is the server API for SystemService service.
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility.
+//
+// SystemService 提供系统配置、登录日志和操作日志的内部 gRPC 能力。
 type SystemServiceServer interface {
+	// RecordLogin 写入一条登录日志。
 	RecordLogin(context.Context, *RecordLoginRequest) (*Empty, error)
+	// RecordOperations 批量写入操作日志。
 	RecordOperations(context.Context, *RecordOperationsRequest) (*Empty, error)
+	// CleanLogs 清理指定天数以前的登录日志和操作日志。
 	CleanLogs(context.Context, *CleanLogsRequest) (*CleanLogsResponse, error)
 	mustEmbedUnimplementedSystemServiceServer()
 }

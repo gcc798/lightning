@@ -25,7 +25,10 @@ const (
 // ResourceServiceClient is the client API for ResourceService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// ResourceService 提供资源领域的内部 gRPC 能力。
 type ResourceServiceClient interface {
+	// CleanExpired 清理已过期的资源记录并返回处理统计。
 	CleanExpired(ctx context.Context, in *CleanExpiredRequest, opts ...grpc.CallOption) (*CleanExpiredResponse, error)
 }
 
@@ -50,7 +53,10 @@ func (c *resourceServiceClient) CleanExpired(ctx context.Context, in *CleanExpir
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations must embed UnimplementedResourceServiceServer
 // for forward compatibility.
+//
+// ResourceService 提供资源领域的内部 gRPC 能力。
 type ResourceServiceServer interface {
+	// CleanExpired 清理已过期的资源记录并返回处理统计。
 	CleanExpired(context.Context, *CleanExpiredRequest) (*CleanExpiredResponse, error)
 	mustEmbedUnimplementedResourceServiceServer()
 }

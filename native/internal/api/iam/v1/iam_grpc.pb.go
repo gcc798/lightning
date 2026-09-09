@@ -26,8 +26,12 @@ const (
 // IAMServiceClient is the client API for IAMService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// IAMService 提供身份认证和权限校验的内部 gRPC 能力。
 type IAMServiceClient interface {
+	// ValidateAccessToken 校验访问令牌并返回用户身份信息。
 	ValidateAccessToken(ctx context.Context, in *ValidateAccessTokenRequest, opts ...grpc.CallOption) (*ValidateAccessTokenResponse, error)
+	// CheckPermission 校验用户是否拥有指定资源和动作的权限。
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 }
 
@@ -62,8 +66,12 @@ func (c *iAMServiceClient) CheckPermission(ctx context.Context, in *CheckPermiss
 // IAMServiceServer is the server API for IAMService service.
 // All implementations must embed UnimplementedIAMServiceServer
 // for forward compatibility.
+//
+// IAMService 提供身份认证和权限校验的内部 gRPC 能力。
 type IAMServiceServer interface {
+	// ValidateAccessToken 校验访问令牌并返回用户身份信息。
 	ValidateAccessToken(context.Context, *ValidateAccessTokenRequest) (*ValidateAccessTokenResponse, error)
+	// CheckPermission 校验用户是否拥有指定资源和动作的权限。
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	mustEmbedUnimplementedIAMServiceServer()
 }

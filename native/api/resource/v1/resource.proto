@@ -4,13 +4,19 @@ package lightning.resource.v1;
 
 option go_package = "github.com/gcc798/lightning/internal/api/resource/v1;resourcev1";
 
+// ResourceService 提供资源领域的内部 gRPC 能力。
 service ResourceService {
+  // CleanExpired 清理已过期的资源记录并返回处理统计。
   rpc CleanExpired(CleanExpiredRequest) returns (CleanExpiredResponse);
 }
 
+// CleanExpiredRequest 是过期资源清理请求；当前不需要请求参数。
 message CleanExpiredRequest {}
 
+// CleanExpiredResponse 是过期资源清理结果。
 message CleanExpiredResponse {
+  // cleaned 是成功清理的资源数量。
   int64 cleaned = 1;
+  // failed 是清理失败的资源数量。
   int64 failed = 2;
 }

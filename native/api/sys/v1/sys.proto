@@ -4,53 +4,91 @@ package lightning.sys.v1;
 
 option go_package = "github.com/gcc798/lightning/internal/api/sys/v1;sysv1";
 
+// SystemService 提供系统配置、登录日志和操作日志的内部 gRPC 能力。
 service SystemService {
+  // RecordLogin 写入一条登录日志。
   rpc RecordLogin(RecordLoginRequest) returns (Empty);
+  // RecordOperations 批量写入操作日志。
   rpc RecordOperations(RecordOperationsRequest) returns (Empty);
+  // CleanLogs 清理指定天数以前的登录日志和操作日志。
   rpc CleanLogs(CleanLogsRequest) returns (CleanLogsResponse);
 }
 
+// Empty 表示成功但没有业务返回值。
 message Empty {}
 
+// RecordLoginRequest 是登录日志写入请求。
 message RecordLoginRequest {
+  // id 是登录日志的全局唯一 ID。
   int64 id = 1;
+  // user_name 是登录用户名。
   string user_name = 2;
+  // ip_address 是登录来源 IP 地址。
   string ip_address = 3;
+  // browser 是客户端浏览器信息。
   string browser = 4;
+  // os 是客户端操作系统信息。
   string os = 5;
+  // status 是登录结果状态，0 表示成功。
   int32 status = 6;
+  // message 是登录结果说明或失败原因。
   string message = 7;
+  // login_time_unix_milli 是登录时间的 Unix 毫秒时间戳。
   int64 login_time_unix_milli = 8;
+  // client_id 是登录客户端 ID。
   string client_id = 9;
 }
 
+// OperationLog 表示一条待批量写入的操作日志。
 message OperationLog {
+  // id 是操作日志的全局唯一 ID。
   int64 id = 1;
+  // title 是业务模块标题。
   string title = 2;
+  // business_type 是业务操作类型。
   string business_type = 3;
+  // method 是服务端处理方法名。
   string method = 4;
+  // request_method 是 HTTP 请求方法。
   string request_method = 5;
+  // device_type 是客户端设备类型。
   string device_type = 6;
+  // operator_name 是操作用户名。
   string operator_name = 7;
+  // url 是被调用的 HTTP URL。
   string url = 8;
+  // ip_address 是操作来源 IP 地址。
   string ip_address = 9;
+  // parameters 是请求参数的序列化内容。
   string parameters = 10;
+  // status 是操作结果状态。
   string status = 11;
+  // error_message 是失败时的错误信息。
   string error_message = 12;
+  // operation_time_unix_milli 是操作时间的 Unix 毫秒时间戳。
   int64 operation_time_unix_milli = 13;
+  // cost_millis 是请求耗时，单位为毫秒。
   int64 cost_millis = 14;
+  // user_agent 是客户端 User-Agent。
   string user_agent = 15;
 }
 
+// RecordOperationsRequest 是操作日志批量写入请求。
 message RecordOperationsRequest {
+  // logs 是待写入的操作日志列表。
   repeated OperationLog logs = 1;
 }
 
+// CleanLogsRequest 是日志清理请求。
 message CleanLogsRequest {
+  // days 表示保留最近多少天的日志，必须为正数。
   int32 days = 1;
 }
 
+// CleanLogsResponse 是日志清理结果。
 message CleanLogsResponse {
+  // login_logs 是清理的登录日志数量。
   int64 login_logs = 1;
+  // operation_logs 是清理的操作日志数量。
   int64 operation_logs = 2;
 }

@@ -4,28 +4,44 @@ package lightning.iam.v1;
 
 option go_package = "github.com/gcc798/lightning/internal/api/iam/v1;iamv1";
 
+// IAMService 提供身份认证和权限校验的内部 gRPC 能力。
 service IAMService {
+  // ValidateAccessToken 校验访问令牌并返回用户身份信息。
   rpc ValidateAccessToken(ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
+  // CheckPermission 校验用户是否拥有指定资源和动作的权限。
   rpc CheckPermission(CheckPermissionRequest) returns (CheckPermissionResponse);
 }
 
+// ValidateAccessTokenRequest 是访问令牌校验请求。
 message ValidateAccessTokenRequest {
+  // token 是待校验的 JWT 访问令牌。
   string token = 1;
 }
 
+// ValidateAccessTokenResponse 是访问令牌校验成功后的用户身份信息。
 message ValidateAccessTokenResponse {
+  // user_id 是用户的全局唯一 ID。
   int64 user_id = 1;
+  // user_name 是用户登录名。
   string user_name = 2;
+  // client_id 是签发令牌的客户端 ID。
   string client_id = 3;
+  // device_type 是用户登录设备类型。
   string device_type = 4;
 }
 
+// CheckPermissionRequest 是权限校验请求。
 message CheckPermissionRequest {
+  // user_id 是待校验权限的用户 ID。
   int64 user_id = 1;
+  // resource 是权限资源标识，例如 user 或 menu。
   string resource = 2;
+  // action 是资源动作标识，例如 read 或 write。
   string action = 3;
 }
 
+// CheckPermissionResponse 是权限校验结果。
 message CheckPermissionResponse {
+  // allowed 表示用户是否拥有请求的权限。
   bool allowed = 1;
 }
