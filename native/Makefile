@@ -91,8 +91,7 @@ vet:
 	@go vet ./...
 
 docker-build: init-config
-	@for target in gateway iam sys resource; do docker build -f Dockerfile.service --build-arg TARGET=$$target -t lightning-native-$$target:verify . || exit 1; done
-	@docker build -f Dockerfile.scheduler -t lightning-native-scheduler:verify .
+	@for target in gateway iam sys resource scheduler; do docker build --build-arg TARGET=$$target -t lightning-native-$$target:verify . || exit 1; done
 
 verify: test vet test-race proto-check swagger-check
 

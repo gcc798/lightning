@@ -10,7 +10,7 @@ services:
   gateway:
     build:
       context: .
-      dockerfile: Dockerfile.service
+      dockerfile: Dockerfile
       args: { TARGET: gateway }
     ports: ["9009:9009"]
     environment:
@@ -31,7 +31,7 @@ services:
   iam:
     build:
       context: .
-      dockerfile: Dockerfile.service
+      dockerfile: Dockerfile
       args: { TARGET: iam }
     environment:
       <<: [*database-environment, *registry-environment]
@@ -55,7 +55,7 @@ services:
   sys:
     build:
       context: .
-      dockerfile: Dockerfile.service
+      dockerfile: Dockerfile
       args: { TARGET: sys }
     environment:
       <<: [*database-environment, *registry-environment]
@@ -78,7 +78,7 @@ services:
   resource:
     build:
       context: .
-      dockerfile: Dockerfile.service
+      dockerfile: Dockerfile
       args: { TARGET: resource }
     environment:
       <<: [*database-environment, *registry-environment]
@@ -105,7 +105,8 @@ services:
   scheduler:
     build:
       context: .
-      dockerfile: Dockerfile.scheduler
+      dockerfile: Dockerfile
+      args: { TARGET: scheduler }
     environment:
       <<: [*database-environment, *registry-environment]
     depends_on:

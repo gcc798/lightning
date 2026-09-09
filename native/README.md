@@ -41,6 +41,8 @@ go run ./application/scheduler
 
 `LIGHTNING_APP_ENV` 必须显式设置为 `dev` 或 `prod`，用于在具体服务目录中选择 `conf.dev.yaml` 或 `conf.prod.yaml`。程序不会读取 `*.example.yaml`。配置没有代码默认值；每个服务使用的键必须在 YAML 或对应的 `LIGHTNING_*` 环境变量中显式出现，环境变量优先于 YAML。
 
+各服务支持的环境变量、对应 YAML 键和约束见 [`docs/configuration.md`](docs/configuration.md)。日志配置只从 `zaplogger.<env>.yaml` 读取，不支持字段级环境变量覆盖。
+
 Git 只管理每个服务的 `conf.example.yaml` 和 `zaplogger.example.yaml`。`make init-config` 会在文件不存在时把模板分别复制为 `*.dev.yaml` 和 `*.prod.yaml`，不会覆盖已有配置；这些实际运行配置已被 Git 忽略。模板只声明该进程实际使用的配置段，例如 Gateway 只配置接入与注册中心，Resource 配置数据库和对象存储，Scheduler 配置数据库和注册中心。创建后应按环境修改地址和凭据；生产敏感值也可以通过对应的 `LIGHTNING_*` 环境变量注入。
 
 IAM、SYS、Resource 的 `service.id` 是注册中心中的实例唯一标识；留空时程序按“服务名 + 主机名 + HTTP 端口”自动生成，只有需要固定实例 ID 时才填写。`service.advertiseHost` 是写入注册中心、供 Gateway 和其他服务访问该实例的地址；本机开发使用 `127.0.0.1`，Docker Compose 使用服务名 `iam`、`sys`、`resource`，Kubernetes 使用可被其他 Pod 解析的 Service DNS 或 Pod 地址。它不是监听地址，HTTP/gRPC 仍由 `server.port` 和 `grpc.port` 监听。
@@ -92,6 +94,12 @@ make ci     # verify + Docker build
 make init-config
 export LIGHTNING_JWT_SECRET='replace-with-at-least-32-random-characters'
 docker compose up -d --build
+```
+
+所有进程使用根目录唯一的 `Dockerfile`，通过 `TARGET=gateway|iam|sys|resource|scheduler` 选择构建入口。例如：
+
+```bash
+docker build --build-arg TARGET=scheduler -t lightning-native-scheduler .
 ```
 
 Compose 默认启动 Consul、gateway、iam、sys、resource、scheduler、PostgreSQL、Redis 和 RustFS，即完整微服务形态。Consul UI/API 位于 `8500`，所有前端 HTTP 请求统一进入 gateway 的 `9009`。

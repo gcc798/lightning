@@ -11,7 +11,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/service
 FROM alpine:3.22
 
 ARG TARGET
-
 RUN apk add --no-cache ca-certificates tzdata wget curl \
     && addgroup -S lightning \
     && adduser -S -G lightning lightning
