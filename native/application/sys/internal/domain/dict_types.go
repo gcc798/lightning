@@ -1,6 +1,6 @@
 package sys
 
-import "github.com/gcc798/lightning/internal/utils/pagination"
+import "github.com/gcc798/microservice-kit/internal/utils/pagination"
 
 // CreateDictRequest 创建字典请求
 type CreateDictRequest struct {

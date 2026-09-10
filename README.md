@@ -1,6 +1,6 @@
-# Lightning
+# microservice-kit
 
-Lightning 是一个渐进式微服务后台脚手架 Monorepo。同一套业务能力提供三种 Go 后端实现，并由一个 React 前端通过统一 HTTP 契约接入。
+`microservice-kit` 是一个渐进式微服务后台脚手架 Monorepo。同一套业务能力提供三种 Go 后端实现，并由一个 React 前端通过统一 HTTP 契约接入。
 
 项目以 `native` 作为主要演进方向、业务语义和接口行为基线。它不依赖完整开源微服务框架，但具备独立进程、服务注册发现、Gateway、gRPC、领域迁移、容器与 Kubernetes 部署以及 OpenTelemetry 链路追踪能力。`kratos` 和 `gozero` 是跟进实现，开发进度可能阶段性落后于 `native`，但最终必须提供一致的业务语义和外部 HTTP 契约，而不是形成三套不同的接口。
 
@@ -9,7 +9,7 @@ Lightning 是一个渐进式微服务后台脚手架 Monorepo。同一套业务�
 ## 工程组成
 
 ```text
-lightning/
+microservice-kit/
 ├── native/      # 原生 Go 渐进式微服务实现，业务与 HTTP 契约基线
 ├── kratos/      # Kratos 框架实现
 ├── gozero/      # go-zero 框架实现
@@ -21,7 +21,7 @@ lightning/
 
 ### native
 
-`native` 是当前主要演进的渐进式微服务实现，Go Module 为 `github.com/gcc798/lightning`，使用 Go 1.26.5。
+`native` 是当前主要演进的渐进式微服务实现，Go Module 为 `github.com/gcc798/microservice-kit`，使用 Go 1.26.5。
 
 它只保留微服务部署形态，`application/` 下一级目录对应一个真实进程。当前包含：
 
@@ -69,7 +69,7 @@ lightning/
 ```bash
 cd native
 make init-config
-export LIGHTNING_APP_ENV=dev
+export MS_K_APP_ENV=dev
 ```
 
 根据需要修改各服务的 `conf.dev.yaml`，然后分别启动服务：
@@ -86,7 +86,7 @@ go run ./application/scheduler
 
 ```bash
 cd native
-export LIGHTNING_JWT_SECRET='replace-with-at-least-32-random-characters'
+export MS_K_JWT_SECRET='replace-with-at-least-32-random-characters'
 docker compose up --build
 ```
 

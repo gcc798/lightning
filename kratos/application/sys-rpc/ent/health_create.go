@@ -8,7 +8,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/health"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/health"
 )
 
 // HealthCreate is the builder for creating a Health entity.

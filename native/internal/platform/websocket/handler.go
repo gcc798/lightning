@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	logging "github.com/gcc798/lightning/internal/logger"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo/v5"
 	"go.uber.org/zap"

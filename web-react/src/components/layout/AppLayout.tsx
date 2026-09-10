@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useState, type PointerEvent as ReactPointerEvent } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import type { ItemType } from 'antd/es/menu/interface';
-import { Avatar, Button, Dropdown, Layout, Menu, Space } from 'antd';
+} from '@/utils/icons';
+import { Avatar, Button, Content, Dropdown, Header, Layout, Menu, Sider, Space, type MenuItem } from '@/components/ui';
 import type { MenuRecord } from '@/types/menu';
+import { PageLoading } from '@/components/common/PageLoading';
 import { ThemeSwitcher } from '@/components/common/ThemeSwitcher';
 import { usePermissionStore } from '@/store/permission';
 import { useAppStore } from '@/store/app';
@@ -16,8 +16,6 @@ import { useAuthStore } from '@/store/auth';
 import { getMenuIconNode } from '@/utils/icons';
 import { findFirstNavigablePath, isMenuHidden, joinMenuPath } from '@/utils/menu';
 import { isNumericValue } from '@/utils/number';
-
-const { Header, Sider, Content } = Layout;
 
 function findOpenKeys(pathname: string) {
   const parts = pathname.split('/').filter(Boolean);
@@ -59,7 +57,7 @@ function buildMenuItems(
   menuTree: MenuRecord[],
   navigate: (path: string) => void,
   parentPath = '',
-): ItemType[] {
+): MenuItem[] {
   return menuTree
     .filter((menu) => !isMenuHidden(menu) && !isNumericValue(menu.menuType, 2))
     .map((menu) => {
@@ -85,7 +83,7 @@ function buildMenuItems(
             }
           },
           children: childItems,
-        } satisfies ItemType;
+        } satisfies MenuItem;
       }
 
       return {
@@ -93,7 +91,7 @@ function buildMenuItems(
         icon,
         label: menu.menuName,
         onClick: () => navigate(targetPath),
-      } satisfies ItemType;
+      } satisfies MenuItem;
     });
 }
 
@@ -116,44 +114,13 @@ export function AppLayout() {
     [location.pathname, menuTree],
   );
   const [openKeys, setOpenKeys] = useState<string[]>(currentOpenKeys);
-  const [isPointerPressing, setIsPointerPressing] = useState(false);
 
   useEffect(() => {
     setOpenKeys(currentOpenKeys);
   }, [currentOpenKeys]);
 
-  useEffect(() => {
-    if (!isPointerPressing) {
-      return undefined;
-    }
-
-    const resetPointerState = () => setIsPointerPressing(false);
-
-    window.addEventListener('pointerup', resetPointerState);
-    window.addEventListener('blur', resetPointerState);
-
-    return () => {
-      window.removeEventListener('pointerup', resetPointerState);
-      window.removeEventListener('blur', resetPointerState);
-    };
-  }, [isPointerPressing]);
-
-  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-    // 用 CSS 变量驱动鼠标追踪光效，避免每次移动都触发 React 重渲染。
-    event.currentTarget.style.setProperty('--pointer-x', `${x}%`);
-    event.currentTarget.style.setProperty('--pointer-y', `${y}%`);
-  };
-
   return (
-    <div
-      className={`app-shell-wrap${isPointerPressing ? ' is-pressing' : ''}`}
-      onPointerDown={() => setIsPointerPressing(true)}
-      onPointerMove={handlePointerMove}
-    >
+    <div className="app-shell-wrap">
       <Layout className="app-shell">
         <Sider
           breakpoint="lg"
@@ -244,9 +211,11 @@ export function AppLayout() {
           </Header>
 
           <Content className="app-content">
-            <div className="app-view" key={location.pathname}>
-              <Outlet />
-            </div>
+            <Suspense fallback={<PageLoading />}>
+              <div className="app-view" key={location.pathname}>
+                <Outlet />
+              </div>
+            </Suspense>
           </Content>
         </Layout>
       </Layout>

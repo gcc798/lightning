@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/gcc798/lightning/internal/platform/captcha"
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	"github.com/gcc798/microservice-kit/internal/platform/captcha"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 )
 
 type CaptchaModule struct {

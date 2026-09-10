@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { App, Button, Space } from 'antd';
-import { BulbOutlined, CopyOutlined } from '@ant-design/icons';
+import { App, Button, Space } from '@/components/ui';
+import { BulbOutlined, CopyOutlined } from '@/utils/icons';
 import { BasicModal } from './BasicModal';
 import { MonacoEditor } from './MonacoEditor';
 

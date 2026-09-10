@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/gcc798/lightning/application/sys-rpc/pkg/storage"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/pkg/storage"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
@@ -102,7 +102,7 @@ func (m *StorageManager) createStorage(storageType, configJSON string) (storage.
 			Endpoint:  getString(cfg, "endpoint", "localhost:9000"),
 			AccessKey: getString(cfg, "accessKey", ""),
 			SecretKey: getString(cfg, "secretKey", ""),
-			Bucket:    getString(cfg, "bucket", "lightning"),
+			Bucket:    getString(cfg, "bucket", "microservice-kit"),
 			Region:    getString(cfg, "region", "us-east-1"),
 			UseSSL:    getBool(cfg, "useSSL", false),
 		})

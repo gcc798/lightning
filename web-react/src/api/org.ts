@@ -3,7 +3,7 @@ import type { PageData, PageQuery, SnowflakeId } from '@/types/api';
 import type { OrgRecord } from '@/types/system';
 
 export const orgApi = {
-  tree: () => request.get<OrgRecord[]>('/api/v1/org/tree'),
+  tree: () => request.get<OrgRecord[] | null>('/api/v1/org/tree').then((data) => data ?? []),
   page: (data: PageQuery & { orgName?: string; status?: number }) =>
     request.post<PageData<OrgRecord>>('/api/v1/org/page', data),
   detail: (id: SnowflakeId) => request.get<OrgRecord>(`/api/v1/org/${id}`),

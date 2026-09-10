@@ -11,7 +11,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/gcc798/lightning/application/sys-rpc/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/internal/svc"
 	gzsqlx "github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 

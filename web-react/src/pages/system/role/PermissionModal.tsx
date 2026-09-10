@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Key } from 'react';
-import { App, Space, Spin, Tag, Tree } from 'antd';
+import { App, Space, Spin, Tag, Tree } from '@/components/ui';
 import type { SnowflakeId } from '@/types/api';
 import { BasicModal } from '@/components/common/BasicModal';
 import { menuApi } from '@/api/menu';

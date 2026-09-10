@@ -5,11 +5,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/utils"
-	apperrors "github.com/gcc798/lightning/internal/utils/errors"
-	"github.com/gcc798/lightning/internal/utils/pagination"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/utils"
+	apperrors "github.com/gcc798/microservice-kit/internal/utils/errors"
+	"github.com/gcc798/microservice-kit/internal/utils/pagination"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

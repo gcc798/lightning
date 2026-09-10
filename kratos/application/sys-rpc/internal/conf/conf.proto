@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package kratos.conf.sysrpc;
 
-option go_package = "github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf;conf";
+option go_package = "github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/conf;conf";
 
 message Bootstrap {
   Server server = 1;

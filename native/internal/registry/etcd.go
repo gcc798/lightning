@@ -27,7 +27,7 @@ type etcdLease struct {
 
 func NewEtcd(address, prefix string) *Etcd {
 	if prefix == "" {
-		prefix = "/lightning/services"
+		prefix = "/microservice-kit/services"
 	}
 	return &Etcd{
 		address: strings.TrimRight(address, "/"),

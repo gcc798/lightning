@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/role"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/role"
 )
 
 // Role is the model entity for the Role schema.

@@ -1,6 +1,6 @@
 package response
 
-import "github.com/gcc798/lightning/application/iam/internal/domain"
+import "github.com/gcc798/microservice-kit/application/iam/internal/domain"
 
 type LoginResponse = iam.LoginResponse
 type RefreshTokenRequest = iam.RefreshTokenRequest

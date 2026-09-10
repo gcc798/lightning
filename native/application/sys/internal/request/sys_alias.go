@@ -1,6 +1,6 @@
 package request
 
-import "github.com/gcc798/lightning/application/sys/internal/domain"
+import "github.com/gcc798/microservice-kit/application/sys/internal/domain"
 
 type CreateConfigRequest = sys.CreateConfigRequest
 type UpdateConfigRequest = sys.UpdateConfigRequest

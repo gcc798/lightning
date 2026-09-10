@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/user"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/user"
 )
 
 // User is the model entity for the User schema.

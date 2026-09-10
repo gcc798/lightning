@@ -9,9 +9,9 @@ import (
 	"time"
 
 	entsql "entgo.io/ent/dialect/sql"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf"
-	"github.com/gcc798/lightning/kratos/pkg/configx"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/pkg/configx"
 	"github.com/redis/go-redis/v9"
 )
 

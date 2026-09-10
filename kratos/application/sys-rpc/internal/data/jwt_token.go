@@ -23,7 +23,7 @@ type JWTClaims struct {
 
 func NewJWTManager(secret string, expireSeconds int64, issuer string) *JWTManager {
 	if strings.TrimSpace(secret) == "" {
-		secret = "lightning-kratos-secret"
+		secret = "microservice-kit-kratos-secret"
 	}
 	if strings.TrimSpace(issuer) == "" {
 		issuer = "NTZ-go"

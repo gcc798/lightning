@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	configx "github.com/gcc798/lightning/internal/config"
+	configx "github.com/gcc798/microservice-kit/internal/config"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

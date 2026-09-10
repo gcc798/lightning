@@ -8,7 +8,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/casbinrule"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/casbinrule"
 )
 
 // CasbinRule is the model entity for the CasbinRule schema.

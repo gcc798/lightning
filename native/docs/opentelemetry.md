@@ -19,7 +19,7 @@ Native 使用 OpenTelemetry 生成和传播 Trace。应用未配置 OTLP 接收�
 只有框架 Span 无法表达、且排障确实关心的业务阶段才手工创建 Span。登录流程 `application/iam/internal/domain/auth.go` 中的 `auth.login` 是参考实现：
 
 ```go
-ctx, span := otel.Tracer("github.com/gcc798/lightning/application/iam").Start(ctx, "auth.login")
+ctx, span := otel.Tracer("github.com/gcc798/microservice-kit/application/iam").Start(ctx, "auth.login")
 defer span.End()
 ```
 

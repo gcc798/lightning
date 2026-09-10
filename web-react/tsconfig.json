@@ -12,6 +12,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig-app.tsbuildinfo",
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",

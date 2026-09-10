@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Popconfirm, Space, Tag } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Popconfirm, Tag } from '@/components/ui';
+import { DeleteOutlined, PlusOutlined } from '@/utils/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { JsonViewerModal } from '@/components/common/JsonViewerModal';
 import { TableAction } from '@/components/common/TableAction';
@@ -118,36 +118,32 @@ export default function ConfigPage() {
         rowKey="id"
         searchSchemas={searchSchemas}
         scroll={{ x: 1300 }}
-        toolbar={
-          <Space>
-            <Button
-              icon={<PlusOutlined />}
-              type="primary"
-              onClick={() => {
-                setCurrentConfigId(undefined);
-                setModalOpen(true);
-              }}
-            >
-              新增
+        bulkActions={(
+          <Popconfirm
+            title="确定批量删除选中的配置吗？"
+            onConfirm={async () => {
+              const rows = tableRef.current?.getSelectedRows() ?? [];
+              await configApi.batchDelete(rows.map((row) => row.id));
+              message.success('批量删除成功');
+              tableRef.current?.reload();
+            }}
+          >
+            <Button danger icon={<DeleteOutlined />}>
+              删除所选
             </Button>
-            <Popconfirm
-              title="确定批量删除选中的配置吗？"
-              onConfirm={async () => {
-                const rows = tableRef.current?.getSelectedRows() ?? [];
-                if (!rows.length) {
-                  message.warning('请先选择配置');
-                  return;
-                }
-                await configApi.batchDelete(rows.map((row) => row.id));
-                message.success('批量删除成功');
-                tableRef.current?.reload();
-              }}
-            >
-              <Button danger icon={<DeleteOutlined />}>
-                批量删除
-              </Button>
-            </Popconfirm>
-          </Space>
+          </Popconfirm>
+        )}
+        toolbar={
+          <Button
+            icon={<PlusOutlined />}
+            type="primary"
+            onClick={() => {
+              setCurrentConfigId(undefined);
+              setModalOpen(true);
+            }}
+          >
+            新增
+          </Button>
         }
       />
 

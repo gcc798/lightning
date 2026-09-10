@@ -528,7 +528,7 @@ const file_application_sys_api_internal_conf_conf_proto_rawDesc = "" +
 	"\x05Redis\x12\x12\n" +
 	"\x04addr\x18\x01 \x01(\tR\x04addr\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x0e\n" +
-	"\x02db\x18\x03 \x01(\x03R\x02dbBKZIgithub.com/gcc798/lightning/kratos/application/sys-api/internal/conf;confb\x06proto3"
+	"\x02db\x18\x03 \x01(\x03R\x02dbBRZPgithub.com/gcc798/microservice-kit/kratos/application/sys-api/internal/conf;confb\x06proto3"
 
 var (
 	file_application_sys_api_internal_conf_conf_proto_rawDescOnce sync.Once

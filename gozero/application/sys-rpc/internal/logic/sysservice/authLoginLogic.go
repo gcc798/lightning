@@ -6,8 +6,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/gcc798/lightning/application/sys-rpc/internal/svc"
-	"github.com/gcc798/lightning/application/sys-rpc/pb"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/pb"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 

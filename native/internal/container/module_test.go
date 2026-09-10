@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gcc798/lightning/internal/modules"
+	"github.com/gcc798/microservice-kit/internal/modules"
 )
 
 type fakeModule struct {

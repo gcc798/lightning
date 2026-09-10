@@ -1,4 +1,4 @@
-import { Select, Space, Typography } from 'antd';
+import { Select, Space, Typography } from '@/components/ui';
 import { getMenuIconNode, iconOptions } from '@/utils/icons';
 
 interface IconPickerProps {

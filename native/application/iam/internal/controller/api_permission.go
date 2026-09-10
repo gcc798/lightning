@@ -3,10 +3,10 @@ package controller
 import (
 	"strconv"
 
-	iam "github.com/gcc798/lightning/application/iam/internal/domain"
-	"github.com/gcc798/lightning/application/iam/internal/request"
-	"github.com/gcc798/lightning/application/iam/internal/response"
-	"github.com/gcc798/lightning/internal/container"
+	iam "github.com/gcc798/microservice-kit/application/iam/internal/domain"
+	"github.com/gcc798/microservice-kit/application/iam/internal/request"
+	"github.com/gcc798/microservice-kit/application/iam/internal/response"
+	"github.com/gcc798/microservice-kit/internal/container"
 	"github.com/labstack/echo/v5"
 )
 

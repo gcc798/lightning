@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Card, Input, Radio, Space, Table, Tag } from 'antd';
-import { DeleteOutlined, DownOutlined, PlusOutlined, UpOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Card, Input, Radio, Space, Table, Tag } from '@/components/ui';
+import { DeleteOutlined, DownOutlined, PlusOutlined, UpOutlined } from '@/utils/icons';
 import { apiPermissionApi } from '@/api/apiPermission';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';

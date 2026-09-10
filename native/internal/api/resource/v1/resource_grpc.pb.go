@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ResourceService_CleanExpired_FullMethodName = "/lightning.resource.v1.ResourceService/CleanExpired"
+	ResourceService_CleanExpired_FullMethodName = "/microservice_kit.resource.v1.ResourceService/CleanExpired"
 )
 
 // ResourceServiceClient is the client API for ResourceService service.
@@ -114,7 +114,7 @@ func _ResourceService_CleanExpired_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ResourceService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lightning.resource.v1.ResourceService",
+	ServiceName: "microservice_kit.resource.v1.ResourceService",
 	HandlerType: (*ResourceServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -43,9 +43,9 @@ func TestInProcessWatcherCanStopAfterRegistryClose(t *testing.T) {
 }
 
 func TestConsulRegistryIntegration(t *testing.T) {
-	address := os.Getenv("LIGHTNING_TEST_CONSUL_ADDRESS")
+	address := os.Getenv("MS_K_TEST_CONSUL_ADDRESS")
 	if address == "" {
-		t.Skip("LIGHTNING_TEST_CONSUL_ADDRESS is not set")
+		t.Skip("MS_K_TEST_CONSUL_ADDRESS is not set")
 	}
 	reg := NewConsul(address)
 	defer reg.Close()
@@ -53,11 +53,11 @@ func TestConsulRegistryIntegration(t *testing.T) {
 }
 
 func TestEtcdRegistryIntegration(t *testing.T) {
-	address := os.Getenv("LIGHTNING_TEST_ETCD_ADDRESS")
+	address := os.Getenv("MS_K_TEST_ETCD_ADDRESS")
 	if address == "" {
-		t.Skip("LIGHTNING_TEST_ETCD_ADDRESS is not set")
+		t.Skip("MS_K_TEST_ETCD_ADDRESS is not set")
 	}
-	reg := NewEtcd(address, "/lightning/integration-test")
+	reg := NewEtcd(address, "/microservice-kit/integration-test")
 	defer reg.Close()
 	testRegistryLifecycle(t, reg)
 
@@ -72,6 +72,47 @@ func TestEtcdRegistryIntegration(t *testing.T) {
 	instances, err := reg.Resolve(ctx, instance.Name)
 	if err != nil || !containsInstance(instances, instance.ID) {
 		t.Fatalf("lease was not kept alive: instances=%v err=%v", instances, err)
+	}
+}
+
+func TestNacosRegistryIntegration(t *testing.T) {
+	address := os.Getenv("MS_K_TEST_NACOS_ADDRESS")
+	if address == "" {
+		t.Skip("MS_K_TEST_NACOS_ADDRESS is not set")
+	}
+	reg, err := NewNacos(Options{Address: address})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer reg.Close()
+	testRegistryLifecycle(t, reg)
+}
+
+func TestInstanceMetadataRoundTrip(t *testing.T) {
+	want := ServiceInstance{
+		ID: "iam-1", Endpoints: map[string]string{EndpointHTTP: "http://127.0.0.1:9010", EndpointGRPC: "127.0.0.1:9110"},
+		Routes: []HTTPRoute{{Method: "GET", Path: "/api/v1/user/:id"}, {Method: "POST", Path: "/api/v1/user/page"}},
+	}
+	metadata, err := encodeMetadata(want)
+	if err != nil {
+		t.Fatal(err)
+	}
+	id, endpoints, routes, err := decodeMetadata(metadata)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id != want.ID || endpoints[EndpointHTTP] != want.Endpoints[EndpointHTTP] || len(routes) != len(want.Routes) || routes[0] != want.Routes[0] {
+		t.Fatalf("metadata round trip = id %q endpoints %v routes %v", id, endpoints, routes)
+	}
+}
+
+func TestParseNacosServers(t *testing.T) {
+	servers, err := parseNacosServers("http://nacos-1:8848/nacos,https://nacos-2:9443/custom")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(servers) != 2 || servers[0].IpAddr != "nacos-1" || servers[0].ContextPath != "/nacos" || servers[1].Scheme != "https" || servers[1].Port != 9443 {
+		t.Fatalf("servers = %+v", servers)
 	}
 }
 

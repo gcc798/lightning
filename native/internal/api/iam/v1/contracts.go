@@ -3,8 +3,8 @@ package iamv1
 import (
 	"context"
 
-	"github.com/gcc798/lightning/internal/platform/jwt"
-	"github.com/gcc798/lightning/internal/transport"
+	"github.com/gcc798/microservice-kit/internal/platform/jwt"
+	"github.com/gcc798/microservice-kit/internal/transport"
 )
 
 const ServiceName = "iam"

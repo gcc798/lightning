@@ -12,20 +12,20 @@ import (
 	"syscall"
 	"time"
 
-	iamv1 "github.com/gcc798/lightning/internal/api/iam/v1"
-	"github.com/gcc798/lightning/internal/config"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/registry"
-	"github.com/gcc798/lightning/internal/telemetry"
-	"github.com/gcc798/lightning/internal/transport"
+	iamv1 "github.com/gcc798/microservice-kit/internal/api/iam/v1"
+	"github.com/gcc798/microservice-kit/internal/config"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/registry"
+	"github.com/gcc798/microservice-kit/internal/telemetry"
+	"github.com/gcc798/microservice-kit/internal/transport"
 	"github.com/google/uuid"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.uber.org/zap"
 )
 
-// @title Lightning API
+// @title microservice-kit API
 // @version 1.0
-// @description Lightning RESTful API
+// @description microservice-kit RESTful API
 // @host localhost:9009
 // @BasePath /
 // @securityDefinitions.apikey Bearer
@@ -64,7 +64,10 @@ func main() {
 		defer cancel()
 		_ = shutdownTelemetry(shutdown)
 	}()
-	reg, err := registry.New(cfg.Registry.Driver, cfg.Registry.Address, cfg.Registry.Prefix)
+	reg, err := registry.New(registry.Options{
+		Driver: cfg.Registry.Driver, Address: cfg.Registry.Address, Prefix: cfg.Registry.Prefix,
+		Namespace: cfg.Registry.Namespace, Group: cfg.Registry.Group, Username: cfg.Registry.Username, Password: cfg.Registry.Password,
+	})
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		exitCode = 1
@@ -74,7 +77,25 @@ func main() {
 	pool := transport.NewClientPool(reg)
 	defer pool.Close()
 	security := iamv1.NewCached(iamv1.NewRemote(pool), 5*time.Second)
-	handler := withGatewayMiddleware(&gateway{registry: reg, selector: registry.NewSelector(), security: security}, cfg, log)
+	proxyGateway := &gateway{registry: reg, selector: registry.NewSelector(), security: security}
+	if err := proxyGateway.refreshRoutes(ctx); err != nil {
+		log.Warn("initial gateway route discovery failed", zap.Error(err))
+	}
+	go func() {
+		ticker := time.NewTicker(5 * time.Second)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ticker.C:
+				if err := proxyGateway.refreshRoutes(ctx); err != nil {
+					log.Warn("gateway route refresh failed", zap.Error(err))
+				}
+			case <-ctx.Done():
+				return
+			}
+		}
+	}()
+	handler := withGatewayMiddleware(proxyGateway, cfg, log)
 	handler = otelhttp.NewHandler(handler, "gateway HTTP", otelhttp.WithFilter(func(request *http.Request) bool {
 		return telemetry.TraceHTTPPath(request.URL.Path)
 	}))

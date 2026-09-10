@@ -1,4 +1,4 @@
-import type { ItemType } from 'antd/es/menu/interface';
+import type { MenuItem } from '@/components/ui';
 import type { MenuRecord, MenuRouteRecord } from '@/types/menu';
 import { getMenuIconNode } from './icons';
 import { isNumericValue, toNumberValue, toOptionalNumber } from './number';
@@ -136,7 +136,7 @@ export function flattenLeafMenus(
 export function buildSidebarMenus(
   menuTree: MenuRecord[],
   parentPath = '',
-): ItemType[] {
+): MenuItem[] {
   return menuTree
     .filter((menu) => !isMenuHidden(menu) && !isNumericValue(menu.menuType, 2))
     .map((menu) => {
@@ -149,13 +149,13 @@ export function buildSidebarMenus(
           icon,
           label: menu.menuName,
           children: buildSidebarMenus(menu.children, fullPath),
-        } satisfies ItemType;
+        } satisfies MenuItem;
       }
 
       return {
         key: fullPath,
         icon,
         label: menu.menuName,
-      } satisfies ItemType;
+      } satisfies MenuItem;
     });
 }

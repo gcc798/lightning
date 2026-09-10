@@ -3,9 +3,9 @@ package controller
 import (
 	"context"
 
-	iam "github.com/gcc798/lightning/application/iam/internal/domain"
-	"github.com/gcc798/lightning/application/iam/internal/response"
-	"github.com/gcc798/lightning/internal/platform/captcha"
+	iam "github.com/gcc798/microservice-kit/application/iam/internal/domain"
+	"github.com/gcc798/microservice-kit/application/iam/internal/response"
+	"github.com/gcc798/microservice-kit/internal/platform/captcha"
 
 	"github.com/labstack/echo/v5"
 )

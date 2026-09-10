@@ -7,7 +7,7 @@ SYS_RPC_DIR := $(APPLICATION_DIR)/sys-rpc
 BIN_DIR := $(ROOT_DIR)/bin
 STYLE ?= goZero
 
-PG_URL ?= postgres://postgres:post123@127.0.0.1:5433/lightning?sslmode=disable
+PG_URL ?= postgres://postgres:post123@127.0.0.1:5433/microservice_kit?sslmode=disable
 PG_SCHEMA ?= public
 PG_TABLES ?= s_*
 
@@ -41,9 +41,9 @@ gen-sys-rpc: ## Generate sys-rpc service code from sys.proto
 	@goctl rpc protoc \
 		-I=$(SYS_RPC_DIR) \
 		--go_out=$(SYS_RPC_DIR)/pb \
-		--go_opt=module=github.com/gcc798/lightning/application/sys-rpc/pb \
+		--go_opt=module=github.com/gcc798/microservice-kit/application/sys-rpc/pb \
 		--go-grpc_out=$(SYS_RPC_DIR)/pb \
-		--go-grpc_opt=module=github.com/gcc798/lightning/application/sys-rpc/pb \
+		--go-grpc_opt=module=github.com/gcc798/microservice-kit/application/sys-rpc/pb \
 		--zrpc_out=$(SYS_RPC_DIR) \
 		--style=$(STYLE) \
 		-m \

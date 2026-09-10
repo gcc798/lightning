@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gcc798/lightning/internal/platform/jwt"
+	"github.com/gcc798/microservice-kit/internal/platform/jwt"
 )
 
 type cacheEntry[T any] struct {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { App, Button, Form } from 'antd';
+import { App, Button, Form } from '@/components/ui';
 import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { ConfigRecord } from '@/types/system';
@@ -63,11 +63,11 @@ export function ConfigModal({
         },
         rules: [
           {
-            validator: async (_, value) => {
+            validator: async (_: unknown, value: unknown) => {
               if (!value) {
                 return;
               }
-              JSON.parse(value);
+              JSON.parse(String(value));
             },
             message: '请输入合法的 JSON',
           },

@@ -1,6 +1,6 @@
 package sys
 
-import "github.com/gcc798/lightning/internal/utils/pagination"
+import "github.com/gcc798/microservice-kit/internal/utils/pagination"
 
 // CreateOperLogRequest 创建操作日志请求
 type CreateOperLogRequest struct {

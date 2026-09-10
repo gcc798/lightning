@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Card, Space, Table, Tag } from 'antd';
-import { DeleteOutlined, DownOutlined, EyeOutlined, PlusOutlined, UpOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Card, Space, Table, Tag } from '@/components/ui';
+import { DeleteOutlined, DownOutlined, EyeOutlined, PlusOutlined, UpOutlined } from '@/utils/icons';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
 import type { SnowflakeId } from '@/types/api';
@@ -160,7 +160,7 @@ export default function MenuPage() {
     <>
       <Card className="page-card" variant="borderless">
         <div className="page-toolbar">
-          <Space>
+          <Space wrap>
             <PermissionGate permission="menu.create">
               <Button
                 icon={<PlusOutlined />}

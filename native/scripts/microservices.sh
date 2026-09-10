@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 
 case "${1:-}" in
 	start)
-		: "${LIGHTNING_JWT_SECRET:?set LIGHTNING_JWT_SECRET to at least 32 characters}"
+		: "${MS_K_JWT_SECRET:?set MS_K_JWT_SECRET to at least 32 characters}"
 		make init-config
 		# Let each domain owner finish its migration before replicas start.
 		docker compose up -d --build --wait --wait-timeout 300
@@ -18,10 +18,10 @@ case "${1:-}" in
 		docker compose ps
 		;;
 	stop)
-		LIGHTNING_JWT_SECRET="${LIGHTNING_JWT_SECRET:-unused-compose-placeholder-secret}" docker compose stop
+		MS_K_JWT_SECRET="${MS_K_JWT_SECRET:-unused-compose-placeholder-secret}" docker compose stop
 		;;
 	destroy)
-		LIGHTNING_JWT_SECRET="${LIGHTNING_JWT_SECRET:-unused-compose-placeholder-secret}" docker compose down --volumes --remove-orphans
+		MS_K_JWT_SECRET="${MS_K_JWT_SECRET:-unused-compose-placeholder-secret}" docker compose down --volumes --remove-orphans
 		;;
 	*)
 		echo "usage: $0 {start|stop|destroy}" >&2

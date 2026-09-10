@@ -30,7 +30,7 @@ func TestValidateTokenRejectsWrongAlgorithmAndIssuer(t *testing.T) {
 
 	wrongAlgorithm := jwtlib.NewWithClaims(jwtlib.SigningMethodHS384, Claims{
 		RegisteredClaims: jwtlib.RegisteredClaims{
-			Issuer:    "lightning",
+			Issuer:    "microservice-kit",
 			ExpiresAt: jwtlib.NewNumericDate(time.Now().Add(time.Minute)),
 		},
 	})

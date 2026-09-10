@@ -3,7 +3,7 @@ package iam
 import (
 	"context"
 
-	"github.com/gcc798/lightning/internal/platform/captcha"
+	"github.com/gcc798/microservice-kit/internal/platform/captcha"
 )
 
 // CaptchaService 验证码服务接口

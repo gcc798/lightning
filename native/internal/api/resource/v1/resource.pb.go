@@ -117,13 +117,13 @@ var File_api_resource_v1_resource_proto protoreflect.FileDescriptor
 
 const file_api_resource_v1_resource_proto_rawDesc = "" +
 	"\n" +
-	"\x1eapi/resource/v1/resource.proto\x12\x15lightning.resource.v1\"\x15\n" +
+	"\x1eapi/resource/v1/resource.proto\x12\x1cmicroservice_kit.resource.v1\"\x15\n" +
 	"\x13CleanExpiredRequest\"H\n" +
 	"\x14CleanExpiredResponse\x12\x18\n" +
 	"\acleaned\x18\x01 \x01(\x03R\acleaned\x12\x16\n" +
-	"\x06failed\x18\x02 \x01(\x03R\x06failed2z\n" +
-	"\x0fResourceService\x12g\n" +
-	"\fCleanExpired\x12*.lightning.resource.v1.CleanExpiredRequest\x1a+.lightning.resource.v1.CleanExpiredResponseBAZ?github.com/gcc798/lightning/internal/api/resource/v1;resourcev1b\x06proto3"
+	"\x06failed\x18\x02 \x01(\x03R\x06failed2\x88\x01\n" +
+	"\x0fResourceService\x12u\n" +
+	"\fCleanExpired\x121.microservice_kit.resource.v1.CleanExpiredRequest\x1a2.microservice_kit.resource.v1.CleanExpiredResponseBHZFgithub.com/gcc798/microservice-kit/internal/api/resource/v1;resourcev1b\x06proto3"
 
 var (
 	file_api_resource_v1_resource_proto_rawDescOnce sync.Once
@@ -139,12 +139,12 @@ func file_api_resource_v1_resource_proto_rawDescGZIP() []byte {
 
 var file_api_resource_v1_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_api_resource_v1_resource_proto_goTypes = []any{
-	(*CleanExpiredRequest)(nil),  // 0: lightning.resource.v1.CleanExpiredRequest
-	(*CleanExpiredResponse)(nil), // 1: lightning.resource.v1.CleanExpiredResponse
+	(*CleanExpiredRequest)(nil),  // 0: microservice_kit.resource.v1.CleanExpiredRequest
+	(*CleanExpiredResponse)(nil), // 1: microservice_kit.resource.v1.CleanExpiredResponse
 }
 var file_api_resource_v1_resource_proto_depIdxs = []int32{
-	0, // 0: lightning.resource.v1.ResourceService.CleanExpired:input_type -> lightning.resource.v1.CleanExpiredRequest
-	1, // 1: lightning.resource.v1.ResourceService.CleanExpired:output_type -> lightning.resource.v1.CleanExpiredResponse
+	0, // 0: microservice_kit.resource.v1.ResourceService.CleanExpired:input_type -> microservice_kit.resource.v1.CleanExpiredRequest
+	1, // 1: microservice_kit.resource.v1.ResourceService.CleanExpired:output_type -> microservice_kit.resource.v1.CleanExpiredResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

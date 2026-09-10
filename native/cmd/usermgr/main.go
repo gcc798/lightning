@@ -1,6 +1,6 @@
-// Package main 提供 Lightning 首个管理员创建和用户密码重置工具。
+// Package main 提供 microservice-kit 首个管理员创建和用户密码重置工具。
 //
-// 密码只能通过 LIGHTNING_USERMGR_PASSWORD 环境变量传入，不接受命令行参数，
+// 密码只能通过 MS_K_USERMGR_PASSWORD 环境变量传入，不接受命令行参数，
 // 避免密码出现在 shell history 和进程列表中。
 package main
 
@@ -11,9 +11,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gcc798/lightning/internal/config"
-	"github.com/gcc798/lightning/internal/database"
-	"github.com/gcc798/lightning/internal/utils"
+	"github.com/gcc798/microservice-kit/internal/config"
+	"github.com/gcc798/microservice-kit/internal/database"
+	"github.com/gcc798/microservice-kit/internal/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -44,7 +44,7 @@ type userRole struct {
 
 func (userRole) TableName() string { return "m_user_role" }
 
-const passwordEnv = "LIGHTNING_USERMGR_PASSWORD"
+const passwordEnv = "MS_K_USERMGR_PASSWORD"
 
 type options struct {
 	operation string

@@ -1349,7 +1349,7 @@ const file_system_v1_log_proto_rawDesc = "" +
 	"\fCleanOperLog\x12\x1e.api.system.v1.CleanLogRequest\x1a\x1c.api.system.v1.LogCleanReply\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/api/v1/operLog/clean\x12r\n" +
 	"\rUpdateOperLog\x12#.api.system.v1.UpdateOperLogRequest\x1a\x1b.api.system.v1.MessageReply\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\x1a\x14/api/v1/operLog/{id}\x12c\n" +
 	"\x0eGetOperLogById\x12\x1b.api.system.v1.LogIdRequest\x1a\x16.api.system.v1.LogItem\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/operLog/{id}\x12g\n" +
-	"\rDeleteOperLog\x12\x1b.api.system.v1.LogIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/operLog/{id}B5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
+	"\rDeleteOperLog\x12\x1b.api.system.v1.LogIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/operLog/{id}B<Z:github.com/gcc798/microservice-kit/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_log_proto_rawDescOnce sync.Once

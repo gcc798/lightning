@@ -1,4 +1,4 @@
-module github.com/gcc798/lightning/kratos
+module github.com/gcc798/microservice-kit/kratos
 
 go 1.24.0
 

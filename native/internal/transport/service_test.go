@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/gcc798/lightning/internal/registry"
+	"github.com/gcc798/microservice-kit/internal/registry"
 )
 
 func TestRegisterService(t *testing.T) {

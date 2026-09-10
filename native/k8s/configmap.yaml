@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: lightning-config
+  name: microservice-kit-config
 data:
   redis-addr: redis-service:6379
-  registry-address: http://lightning-consul:8500
+  registry-address: http://microservice-kit-consul:8500
   storage-endpoint: rustfs-service:9000

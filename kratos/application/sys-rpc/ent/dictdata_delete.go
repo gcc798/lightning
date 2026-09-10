@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/dictdata"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/dictdata"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/predicate"
 )
 
 // DictDataDelete is the builder for deleting a DictData entity.

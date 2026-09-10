@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Space, Table, Tag } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Space, Table, Tag } from '@/components/ui';
+import { PlusOutlined } from '@/utils/icons';
 import type { SnowflakeId } from '@/types/api';
 import type { DictRecord } from '@/types/system';
 import { dictApi } from '@/api/dict';

@@ -3,7 +3,7 @@ package middleware
 import (
 	"context"
 
-	"github.com/gcc798/lightning/internal/httpresponse"
+	"github.com/gcc798/microservice-kit/internal/httpresponse"
 	"github.com/labstack/echo/v5"
 )
 

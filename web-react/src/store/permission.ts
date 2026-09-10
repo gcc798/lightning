@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
 import { menuApi } from '@/api/menu';
 import type { MenuRecord } from '@/types/menu';
 import { extractPermissions, normalizeMenuTree } from '@/utils/menu';
@@ -17,69 +16,49 @@ interface PermissionState {
 }
 
 export const usePermissionStore = create<PermissionState>()(
-  persist(
-    (set, get) => ({
-      menuTree: [],
-      permissions: [],
-      isMenuLoaded: false,
-      isMenuLoading: false,
-      menuLoadError: '',
-      loadMenuTree: async () => {
-        if (get().isMenuLoading) {
-          return;
-        }
+  (set, get) => ({
+    menuTree: [],
+    permissions: [],
+    isMenuLoaded: false,
+    isMenuLoading: false,
+    menuLoadError: '',
+    loadMenuTree: async () => {
+      if (get().isMenuLoading) {
+        return;
+      }
 
-        set({ isMenuLoading: true, menuLoadError: '' });
+      set({ isMenuLoading: true, menuLoadError: '' });
 
-        try {
-          const menuTree = normalizeMenuTree(await menuApi.getUserMenuTree());
-          set({
-            menuTree,
-            permissions: extractPermissions(menuTree),
-            isMenuLoaded: true,
-            isMenuLoading: false,
-            menuLoadError: '',
-          });
-        } catch (error) {
-          set({
-            menuTree: [],
-            permissions: [],
-            // 即使菜单加载失败，也要把 isMenuLoaded 置为 true，
-            // 否则路由守卫会一直停留在“正在加载菜单”的状态里死循环。
-            isMenuLoaded: true,
-            isMenuLoading: false,
-            menuLoadError:
-              error instanceof Error ? error.message : '加载菜单失败',
-          });
-        }
-      },
-      reset: () =>
+      try {
+        const menuTree = normalizeMenuTree(await menuApi.getUserMenuTree());
+        set({
+          menuTree,
+          permissions: extractPermissions(menuTree),
+          isMenuLoaded: true,
+          isMenuLoading: false,
+          menuLoadError: '',
+        });
+      } catch (error) {
         set({
           menuTree: [],
           permissions: [],
-          isMenuLoaded: false,
+          // 即使菜单加载失败，也要把 isMenuLoaded 置为 true，
+          // 否则路由守卫会一直停留在“正在加载菜单”的状态里死循环。
+          isMenuLoaded: true,
           isMenuLoading: false,
-          menuLoadError: '',
-        }),
-      hasPermission: (permission) => checkPermission(get().permissions, permission),
-    }),
-    {
-      name: 'web-react-permission',
-      storage: createJSONStorage(() => sessionStorage),
-      version: 2,
-      migrate: (persistedState) => {
-        const state = (persistedState ?? {}) as Partial<PermissionState>;
-        const menuTree = normalizeMenuTree(state.menuTree);
-
-        return {
-          ...state,
-          menuTree,
-          permissions: extractPermissions(menuTree),
-          isMenuLoaded: menuTree.length > 0 ? state.isMenuLoaded : false,
-          isMenuLoading: false,
-          menuLoadError: '',
-        } satisfies Partial<PermissionState>;
-      },
+          menuLoadError:
+            error instanceof Error ? error.message : '加载菜单失败',
+        });
+      }
     },
-  ),
+    reset: () =>
+      set({
+        menuTree: [],
+        permissions: [],
+        isMenuLoaded: false,
+        isMenuLoading: false,
+        menuLoadError: '',
+      }),
+    hasPermission: (permission) => checkPermission(get().permissions, permission),
+  }),
 );

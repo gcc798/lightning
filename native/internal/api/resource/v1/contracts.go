@@ -3,7 +3,7 @@ package resourcev1
 import (
 	"context"
 
-	"github.com/gcc798/lightning/internal/transport"
+	"github.com/gcc798/microservice-kit/internal/transport"
 )
 
 const ServiceName = "resource"

@@ -9,14 +9,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
-	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
-	"github.com/gcc798/lightning/internal/config"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/platform/captcha"
-	"github.com/gcc798/lightning/internal/platform/thirdparty/wechat"
-	"github.com/gcc798/lightning/internal/utils"
-	"github.com/gcc798/lightning/internal/utils/idgen"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
+	sysv1 "github.com/gcc798/microservice-kit/internal/api/sys/v1"
+	"github.com/gcc798/microservice-kit/internal/config"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/platform/captcha"
+	"github.com/gcc798/microservice-kit/internal/platform/thirdparty/wechat"
+	"github.com/gcc798/microservice-kit/internal/utils"
+	"github.com/gcc798/microservice-kit/internal/utils/idgen"
 	"github.com/redis/go-redis/v9"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -90,7 +90,7 @@ func NewAuthService(
 }
 
 func (s *authService) Login(ctx context.Context, req *LoginRequest) (_ *LoginResponse, loginErr error) {
-	ctx, span := otel.Tracer("github.com/gcc798/lightning/application/iam").Start(ctx, "auth.login")
+	ctx, span := otel.Tracer("github.com/gcc798/microservice-kit/application/iam").Start(ctx, "auth.login")
 	span.SetAttributes(
 		attribute.String("auth.client.id", req.ClientID),
 		attribute.String("auth.grant.type", req.GrantType),

@@ -20,8 +20,8 @@
 
 ## 编写规则
 
-1. 文件使用 `syntax = "proto3"`，包名使用 `lightning.<service>.v1`。
-2. `go_package` 必须指向 `github.com/gcc798/lightning/internal/api/<service>/v1`，并使用稳定的别名，例如 `iamv1`。
+1. 文件使用 `syntax = "proto3"`，包名使用 `microservice-kit.<service>.v1`。
+2. `go_package` 必须指向 `github.com/gcc798/microservice-kit/internal/api/<service>/v1`，并使用稳定的别名，例如 `iamv1`。
 3. 每个 `service`、每个 `rpc`、每个 `message` 以及每个 message 字段都必须紧邻写一行 `//` 注释。注释说明业务含义；有单位、状态值或约束时一并写明。
 4. 字段编号一旦发布就不能复用或改变含义。删除字段使用 `reserved` 保留编号和名称。
 5. 优先新增字段保持向后兼容；不要为了重命名、换类型或调整语义直接复用旧编号。破坏性变更应新建 `v2` 包。
@@ -56,8 +56,8 @@ make proto
 
 ```bash
 protoc -I . \
-  --go_out=. --go_opt=module=github.com/gcc798/lightning \
-  --go-grpc_out=. --go-grpc_opt=module=github.com/gcc798/lightning \
+  --go_out=. --go_opt=module=github.com/gcc798/microservice-kit \
+  --go-grpc_out=. --go-grpc_opt=module=github.com/gcc798/microservice-kit \
   api/iam/v1/iam.proto api/sys/v1/sys.proto api/resource/v1/resource.proto
 ```
 

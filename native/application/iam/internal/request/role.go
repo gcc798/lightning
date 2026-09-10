@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gcc798/lightning/internal/utils/pagination"
+	"github.com/gcc798/microservice-kit/internal/utils/pagination"
 )
 
 // Int64ID 兼容前端雪花 ID 字符串与数字两种 JSON 传参形式。

@@ -3,9 +3,9 @@ package server
 import (
 	"github.com/google/wire"
 
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/biz"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/conf"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/data"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/biz"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/data"
 )
 
 // ProviderSet is server providers.

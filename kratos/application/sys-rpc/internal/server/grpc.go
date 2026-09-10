@@ -3,9 +3,9 @@ package server
 import (
 	"time"
 
-	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/service"
+	v1 "github.com/gcc798/microservice-kit/kratos/api/system/v1"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/service"
 	kgrpc "github.com/go-kratos/kratos/v2/transport/grpc"
 )
 

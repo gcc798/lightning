@@ -1,4 +1,4 @@
-import { Button, Result } from 'antd';
+import { Button, Result } from '@/components/ui';
 import { Link } from 'react-router-dom';
 
 export default function ServerErrorPage() {

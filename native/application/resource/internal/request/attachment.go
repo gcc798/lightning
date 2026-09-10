@@ -1,6 +1,6 @@
 package request
 
-import "github.com/gcc798/lightning/internal/utils"
+import "github.com/gcc798/microservice-kit/internal/utils"
 
 // BindAttachmentToBusinessRequest 绑定附件到业务请求（步骤2：绑定业务信息）
 type BindAttachmentToBusinessRequest struct {

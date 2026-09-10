@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/gcc798/lightning/internal/utils"
+	"github.com/gcc798/microservice-kit/internal/utils"
 )
 
 // ApiPermission API 权限资源树。

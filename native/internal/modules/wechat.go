@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/gcc798/lightning/internal/platform/thirdparty/wechat"
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	"github.com/gcc798/microservice-kit/internal/platform/thirdparty/wechat"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 )
 
 type WeChatModule struct {

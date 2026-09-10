@@ -3,7 +3,7 @@ package sys
 import (
 	"encoding/json"
 
-	"github.com/gcc798/lightning/internal/utils/pagination"
+	"github.com/gcc798/microservice-kit/internal/utils/pagination"
 )
 
 // CreateConfigRequest 创建配置请求

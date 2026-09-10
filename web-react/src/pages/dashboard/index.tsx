@@ -8,8 +8,8 @@ import {
   FieldTimeOutlined,
   ThunderboltOutlined,
   UserSwitchOutlined,
-} from '@ant-design/icons';
-import { Card, Col, Progress, Row, Space, Tag, Typography } from 'antd';
+} from '@/utils/icons';
+import { Card, Col, Progress, Row, Space, Tag, Typography } from '@/components/ui';
 
 const visitSeries = [
   { time: '00:00', value: 128 },

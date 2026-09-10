@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/gcc798/lightning/application/sys-rpc/internal/svc"
-	"github.com/gcc798/lightning/application/sys-rpc/pb"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/pb"
 	"github.com/lib/pq"
 	gzsqlx "github.com/zeromicro/go-zero/core/stores/sqlx"
 )

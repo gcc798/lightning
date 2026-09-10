@@ -3,7 +3,7 @@ package resource
 import (
 	"context"
 
-	resourcev1 "github.com/gcc798/lightning/internal/api/resource/v1"
+	resourcev1 "github.com/gcc798/microservice-kit/internal/api/resource/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

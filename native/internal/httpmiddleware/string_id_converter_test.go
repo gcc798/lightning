@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gcc798/lightning/internal/httpx"
+	"github.com/gcc798/microservice-kit/internal/httpx"
 	"github.com/labstack/echo/v5"
 	"github.com/stretchr/testify/assert"
 )

@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IAMService_ValidateAccessToken_FullMethodName = "/lightning.iam.v1.IAMService/ValidateAccessToken"
-	IAMService_CheckPermission_FullMethodName     = "/lightning.iam.v1.IAMService/CheckPermission"
+	IAMService_ValidateAccessToken_FullMethodName = "/microservice_kit.iam.v1.IAMService/ValidateAccessToken"
+	IAMService_CheckPermission_FullMethodName     = "/microservice_kit.iam.v1.IAMService/CheckPermission"
 )
 
 // IAMServiceClient is the client API for IAMService service.
@@ -150,7 +150,7 @@ func _IAMService_CheckPermission_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var IAMService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lightning.iam.v1.IAMService",
+	ServiceName: "microservice_kit.iam.v1.IAMService",
 	HandlerType: (*IAMServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

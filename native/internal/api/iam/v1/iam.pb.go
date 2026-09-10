@@ -254,7 +254,7 @@ var File_api_iam_v1_iam_proto protoreflect.FileDescriptor
 
 const file_api_iam_v1_iam_proto_rawDesc = "" +
 	"\n" +
-	"\x14api/iam/v1/iam.proto\x12\x10lightning.iam.v1\"2\n" +
+	"\x14api/iam/v1/iam.proto\x12\x17microservice_kit.iam.v1\"2\n" +
 	"\x1aValidateAccessTokenRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"\x91\x01\n" +
 	"\x1bValidateAccessTokenResponse\x12\x17\n" +
@@ -268,11 +268,11 @@ const file_api_iam_v1_iam_proto_rawDesc = "" +
 	"\bresource\x18\x02 \x01(\tR\bresource\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\"3\n" +
 	"\x17CheckPermissionResponse\x12\x18\n" +
-	"\aallowed\x18\x01 \x01(\bR\aallowed2\xe8\x01\n" +
+	"\aallowed\x18\x01 \x01(\bR\aallowed2\x85\x02\n" +
 	"\n" +
-	"IAMService\x12r\n" +
-	"\x13ValidateAccessToken\x12,.lightning.iam.v1.ValidateAccessTokenRequest\x1a-.lightning.iam.v1.ValidateAccessTokenResponse\x12f\n" +
-	"\x0fCheckPermission\x12(.lightning.iam.v1.CheckPermissionRequest\x1a).lightning.iam.v1.CheckPermissionResponseB7Z5github.com/gcc798/lightning/internal/api/iam/v1;iamv1b\x06proto3"
+	"IAMService\x12\x80\x01\n" +
+	"\x13ValidateAccessToken\x123.microservice_kit.iam.v1.ValidateAccessTokenRequest\x1a4.microservice_kit.iam.v1.ValidateAccessTokenResponse\x12t\n" +
+	"\x0fCheckPermission\x12/.microservice_kit.iam.v1.CheckPermissionRequest\x1a0.microservice_kit.iam.v1.CheckPermissionResponseB>Z<github.com/gcc798/microservice-kit/internal/api/iam/v1;iamv1b\x06proto3"
 
 var (
 	file_api_iam_v1_iam_proto_rawDescOnce sync.Once
@@ -288,16 +288,16 @@ func file_api_iam_v1_iam_proto_rawDescGZIP() []byte {
 
 var file_api_iam_v1_iam_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_api_iam_v1_iam_proto_goTypes = []any{
-	(*ValidateAccessTokenRequest)(nil),  // 0: lightning.iam.v1.ValidateAccessTokenRequest
-	(*ValidateAccessTokenResponse)(nil), // 1: lightning.iam.v1.ValidateAccessTokenResponse
-	(*CheckPermissionRequest)(nil),      // 2: lightning.iam.v1.CheckPermissionRequest
-	(*CheckPermissionResponse)(nil),     // 3: lightning.iam.v1.CheckPermissionResponse
+	(*ValidateAccessTokenRequest)(nil),  // 0: microservice_kit.iam.v1.ValidateAccessTokenRequest
+	(*ValidateAccessTokenResponse)(nil), // 1: microservice_kit.iam.v1.ValidateAccessTokenResponse
+	(*CheckPermissionRequest)(nil),      // 2: microservice_kit.iam.v1.CheckPermissionRequest
+	(*CheckPermissionResponse)(nil),     // 3: microservice_kit.iam.v1.CheckPermissionResponse
 }
 var file_api_iam_v1_iam_proto_depIdxs = []int32{
-	0, // 0: lightning.iam.v1.IAMService.ValidateAccessToken:input_type -> lightning.iam.v1.ValidateAccessTokenRequest
-	2, // 1: lightning.iam.v1.IAMService.CheckPermission:input_type -> lightning.iam.v1.CheckPermissionRequest
-	1, // 2: lightning.iam.v1.IAMService.ValidateAccessToken:output_type -> lightning.iam.v1.ValidateAccessTokenResponse
-	3, // 3: lightning.iam.v1.IAMService.CheckPermission:output_type -> lightning.iam.v1.CheckPermissionResponse
+	0, // 0: microservice_kit.iam.v1.IAMService.ValidateAccessToken:input_type -> microservice_kit.iam.v1.ValidateAccessTokenRequest
+	2, // 1: microservice_kit.iam.v1.IAMService.CheckPermission:input_type -> microservice_kit.iam.v1.CheckPermissionRequest
+	1, // 2: microservice_kit.iam.v1.IAMService.ValidateAccessToken:output_type -> microservice_kit.iam.v1.ValidateAccessTokenResponse
+	3, // 3: microservice_kit.iam.v1.IAMService.CheckPermission:output_type -> microservice_kit.iam.v1.CheckPermissionResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

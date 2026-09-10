@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/conf"
 )
 
 const weChatCode2SessionURL = "https://api.weixin.qq.com/sns/jscode2session"

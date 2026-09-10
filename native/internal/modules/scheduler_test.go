@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 )
 
 func TestSchedulerModuleRunsAndStopsRegisteredJob(t *testing.T) {

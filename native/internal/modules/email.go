@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"sync"
 
-	thirdpartyemail "github.com/gcc798/lightning/internal/platform/thirdparty/email"
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	thirdpartyemail "github.com/gcc798/microservice-kit/internal/platform/thirdparty/email"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 )
 
 type EmailModule struct {

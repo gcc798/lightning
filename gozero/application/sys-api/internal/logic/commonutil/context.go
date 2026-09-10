@@ -3,7 +3,7 @@ package commonutil
 import (
 	"context"
 
-	"github.com/gcc798/lightning/common/auth"
+	"github.com/gcc798/microservice-kit/common/auth"
 )
 
 func WithUserID(ctx context.Context, userID int64) context.Context {

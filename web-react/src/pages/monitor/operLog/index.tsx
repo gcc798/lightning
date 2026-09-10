@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Descriptions, Modal, Tag } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Descriptions, Modal, Tag } from '@/components/ui';
+import { DeleteOutlined } from '@/utils/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import type { FormSchema } from '@/types/form';

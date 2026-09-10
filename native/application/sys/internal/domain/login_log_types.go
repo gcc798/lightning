@@ -1,6 +1,6 @@
 package sys
 
-import "github.com/gcc798/lightning/internal/utils/pagination"
+import "github.com/gcc798/microservice-kit/internal/utils/pagination"
 
 // CreateLoginLogRequest 创建登录日志请求
 type CreateLoginLogRequest struct {

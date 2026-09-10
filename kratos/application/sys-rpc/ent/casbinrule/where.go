@@ -4,7 +4,7 @@ package casbinrule
 
 import (
 	"entgo.io/ent/dialect/sql"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

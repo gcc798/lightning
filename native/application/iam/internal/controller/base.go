@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
-	"github.com/gcc798/lightning/internal/container"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
+	"github.com/gcc798/microservice-kit/internal/container"
 	"github.com/labstack/echo/v5"
 )
 

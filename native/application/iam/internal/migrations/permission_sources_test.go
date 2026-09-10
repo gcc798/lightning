@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain"
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
-	"github.com/gcc798/lightning/internal/database"
-	logging "github.com/gcc798/lightning/internal/logger"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
+	"github.com/gcc798/microservice-kit/internal/database"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -26,9 +26,9 @@ func (permissionTestLogger) Fatal(string, ...zap.Field)         {}
 func (l permissionTestLogger) With(...zap.Field) logging.Logger { return l }
 
 func TestManualAndDerivedPermissionSourcesAreIndependent(t *testing.T) {
-	dsn := os.Getenv("LIGHTNING_TEST_POSTGRES_DSN")
+	dsn := os.Getenv("MS_K_TEST_POSTGRES_DSN")
 	if dsn == "" {
-		t.Skip("LIGHTNING_TEST_POSTGRES_DSN is not set")
+		t.Skip("MS_K_TEST_POSTGRES_DSN is not set")
 	}
 	sqlDB, err := sql.Open("pgx", dsn)
 	if err != nil {

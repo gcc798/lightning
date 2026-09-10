@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"sync"
 
-	thirdpartysms "github.com/gcc798/lightning/internal/platform/thirdparty/sms"
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	thirdpartysms "github.com/gcc798/microservice-kit/internal/platform/thirdparty/sms"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 )
 
 type SMSModule struct {

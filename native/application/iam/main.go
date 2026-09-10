@@ -8,20 +8,20 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain"
-	"github.com/gcc798/lightning/application/iam/internal/migrations"
-	"github.com/gcc798/lightning/application/iam/internal/router"
-	iamv1 "github.com/gcc798/lightning/internal/api/iam/v1"
-	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
-	"github.com/gcc798/lightning/internal/config"
-	"github.com/gcc798/lightning/internal/container"
-	"github.com/gcc798/lightning/internal/httpserver"
-	"github.com/gcc798/lightning/internal/httpx"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/modules"
-	"github.com/gcc798/lightning/internal/registry"
-	"github.com/gcc798/lightning/internal/telemetry"
-	"github.com/gcc798/lightning/internal/transport"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain"
+	"github.com/gcc798/microservice-kit/application/iam/internal/migrations"
+	"github.com/gcc798/microservice-kit/application/iam/internal/router"
+	iamv1 "github.com/gcc798/microservice-kit/internal/api/iam/v1"
+	sysv1 "github.com/gcc798/microservice-kit/internal/api/sys/v1"
+	"github.com/gcc798/microservice-kit/internal/config"
+	"github.com/gcc798/microservice-kit/internal/container"
+	"github.com/gcc798/microservice-kit/internal/httpserver"
+	"github.com/gcc798/microservice-kit/internal/httpx"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/modules"
+	"github.com/gcc798/microservice-kit/internal/registry"
+	"github.com/gcc798/microservice-kit/internal/telemetry"
+	"github.com/gcc798/microservice-kit/internal/transport"
 	"google.golang.org/grpc"
 )
 
@@ -90,7 +90,10 @@ func main() {
 		_ = cont.StopModules(shutdown)
 	}()
 
-	reg, err := registry.New(cfg.Registry.Driver, cfg.Registry.Address, cfg.Registry.Prefix)
+	reg, err := registry.New(registry.Options{
+		Driver: cfg.Registry.Driver, Address: cfg.Registry.Address, Prefix: cfg.Registry.Prefix,
+		Namespace: cfg.Registry.Namespace, Group: cfg.Registry.Group, Username: cfg.Registry.Username, Password: cfg.Registry.Password,
+	})
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		exitCode = 1
@@ -102,7 +105,13 @@ func main() {
 	systemAPI := sysv1.NewRemote(pool)
 	tokens := iam.NewTokenManager(cont.GetJWT(), cont.GetRedis(), cont.GetLogger())
 	security := iam.NewAuthzAPI(tokens, iam.NewPermissionService(cont.GetDB(), cont.GetLogger()))
-	grpcServer, err := transport.StartRegisteredGRPC(ctx, cfg, iamv1.ServiceName, func(server *grpc.Server) {
+	httpServer, routes, err := httpserver.New(cont, systemAPI, func(r *httpx.Router) error { return router.Setup(r, cont, security, systemAPI) })
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		exitCode = 1
+		return
+	}
+	grpcServer, err := transport.StartRegisteredGRPC(ctx, reg, cfg, iamv1.ServiceName, routes, func(server *grpc.Server) {
 		iamv1.RegisterIAMServiceServer(server, iam.NewGRPCServer(security))
 	})
 	if err != nil {
@@ -115,7 +124,7 @@ func main() {
 		defer cancel()
 		_ = grpcServer.Stop(shutdown)
 	}()
-	if err := httpserver.RunHTTP(ctx, cont, security, systemAPI, func(r *httpx.Router) error { return router.Setup(r, cont, security, systemAPI) }); err != nil {
+	if err := httpServer.Run(ctx); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		exitCode = 1
 		return

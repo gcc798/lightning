@@ -8,11 +8,11 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/gcc798/lightning/internal/platform/storage"
+	"github.com/gcc798/microservice-kit/internal/platform/storage"
 	"github.com/spf13/viper"
 )
 
-const AppEnvVar = "LIGHTNING_APP_ENV"
+const AppEnvVar = "MS_K_APP_ENV"
 
 type Service string
 
@@ -32,9 +32,13 @@ type Server struct {
 }
 
 type Registry struct {
-	Driver  string `mapstructure:"driver"`
-	Address string `mapstructure:"address"`
-	Prefix  string `mapstructure:"prefix"`
+	Driver    string `mapstructure:"driver"`
+	Address   string `mapstructure:"address"`
+	Prefix    string `mapstructure:"prefix"`
+	Namespace string `mapstructure:"namespace"`
+	Group     string `mapstructure:"group"`
+	Username  string `mapstructure:"username"`
+	Password  string `mapstructure:"password"`
 }
 
 type ServiceEndpoint struct {
@@ -108,7 +112,7 @@ func Load(configDir string, service Service) (*Config, *viper.Viper, error) {
 		return nil, nil, fmt.Errorf("unknown config service %q", service)
 	}
 	v := viper.New()
-	v.SetEnvPrefix("LIGHTNING")
+	v.SetEnvPrefix("MS_K")
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	v.AutomaticEnv()
 	if err := bindEnvironment(v); err != nil {
@@ -150,7 +154,13 @@ func Load(configDir string, service Service) (*Config, *viper.Viper, error) {
 
 func requireExplicitConfiguration(v *viper.Viper, service Service) error {
 	database := []string{"database.dsn", "database.maxOpenConns", "database.maxIdleConns", "database.connMaxLifetimeMinutes", "database.slowThreshold"}
-	registry := []string{"registry.driver", "registry.address", "registry.prefix"}
+	registry := []string{"registry.driver"}
+	switch v.GetString("registry.driver") {
+	case "consul", "nacos":
+		registry = append(registry, "registry.address")
+	case "etcd":
+		registry = append(registry, "registry.address", "registry.prefix")
+	}
 	server := []string{"server.port"}
 	grpc := []string{"grpc.port", "service.id", "service.advertiseHost"}
 	auth := []string{"auth.tokenHeader", "cors.enabled"}
@@ -204,7 +214,7 @@ func bindEnvironment(v *viper.Viper) error {
 	keys := []string{
 		"server.port", "server.tlsCertFile", "server.tlsKeyFile",
 		"grpc.port",
-		"registry.driver", "registry.address", "registry.prefix",
+		"registry.driver", "registry.address", "registry.prefix", "registry.namespace", "registry.group", "registry.username", "registry.password",
 		"service.id", "service.advertiseHost",
 		"gateway.rateLimitPerMinute",
 		"database.dsn", "database.maxOpenConns", "database.maxIdleConns", "database.connMaxLifetimeMinutes", "database.slowThreshold",
@@ -226,7 +236,7 @@ func bindEnvironment(v *viper.Viper) error {
 func environmentName(key string) string {
 	runes := []rune(key)
 	var name strings.Builder
-	name.WriteString("LIGHTNING_")
+	name.WriteString("MS_K_")
 	for i, current := range runes {
 		switch {
 		case current == '.':
@@ -268,8 +278,18 @@ func (c *Config) Validate(profile string, service Service) error {
 	if (service == ServiceIAM || service == ServiceSystem || service == ServiceResource) && (c.GRPC.Port < 1 || c.GRPC.Port > 65535) {
 		return fmt.Errorf("grpc.port must be between 1 and 65535")
 	}
-	if c.Registry.Driver == "" || c.Registry.Address == "" || c.Registry.Prefix == "" {
-		return fmt.Errorf("registry driver, address and prefix are required")
+	switch c.Registry.Driver {
+	case "consul", "nacos":
+		if c.Registry.Address == "" {
+			return fmt.Errorf("registry.address is required for %s", c.Registry.Driver)
+		}
+	case "etcd":
+		if c.Registry.Address == "" || c.Registry.Prefix == "" {
+			return fmt.Errorf("registry.address and registry.prefix are required for etcd")
+		}
+	case "inprocess":
+	default:
+		return fmt.Errorf("unsupported registry driver %q", c.Registry.Driver)
 	}
 	if service == ServiceScheduler {
 		return nil

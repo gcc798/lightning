@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gcc798/lightning/internal/container"
+	"github.com/gcc798/microservice-kit/internal/container"
 	"github.com/labstack/echo/v5"
 )
 

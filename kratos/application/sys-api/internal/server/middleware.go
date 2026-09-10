@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/data"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/data"
 	kerrors "github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/middleware"
 	"github.com/go-kratos/kratos/v2/transport"

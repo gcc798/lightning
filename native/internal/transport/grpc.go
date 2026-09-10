@@ -6,7 +6,7 @@ import (
 	"net"
 	"sync"
 
-	"github.com/gcc798/lightning/internal/registry"
+	"github.com/gcc798/microservice-kit/internal/registry"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

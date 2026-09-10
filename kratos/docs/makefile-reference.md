@@ -92,7 +92,7 @@
   - 其他生成工具
 
 ### `GOCACHE`
-- 值：`/tmp/lightning-kratos-go-build`
+- 值：`/tmp/microservice-kit-kratos-go-build`
 - 作用：给当前项目单独指定 Go 编译缓存目录
 - 好处：
   - 不污染仓库

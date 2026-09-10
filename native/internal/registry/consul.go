@@ -19,7 +19,11 @@ func NewConsul(address string) *Consul {
 }
 
 func (r *Consul) Register(ctx context.Context, instance ServiceInstance) error {
-	body := map[string]any{"ID": instance.ID, "Name": instance.Name, "Meta": instance.Endpoints}
+	metadata, err := encodeMetadata(instance)
+	if err != nil {
+		return err
+	}
+	body := map[string]any{"ID": instance.ID, "Name": instance.Name, "Meta": metadata}
 	if endpoint := instance.Endpoints[EndpointHTTP]; endpoint != "" {
 		body["Check"] = map[string]any{"HTTP": strings.TrimRight(endpoint, "/") + "/health/live", "Interval": "5s", "Timeout": "2s", "DeregisterCriticalServiceAfter": "30s"}
 	}
@@ -54,7 +58,14 @@ func (r *Consul) Resolve(ctx context.Context, name string) ([]ServiceInstance, e
 	}
 	instances := make([]ServiceInstance, 0, len(rows))
 	for _, row := range rows {
-		instances = append(instances, ServiceInstance{ID: row.Service.ID, Name: name, Endpoints: row.Service.Meta})
+		id, endpoints, routes, err := decodeMetadata(row.Service.Meta)
+		if err != nil {
+			return nil, fmt.Errorf("decode consul service %s instance %s: %w", name, row.Service.ID, err)
+		}
+		if id == "" {
+			id = row.Service.ID
+		}
+		instances = append(instances, ServiceInstance{ID: id, Name: name, Endpoints: endpoints, Routes: routes})
 	}
 	return instances, nil
 }

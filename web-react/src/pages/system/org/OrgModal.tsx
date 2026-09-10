@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { App, Form } from 'antd';
+import { App, Form } from '@/components/ui';
 import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { OrgRecord } from '@/types/system';

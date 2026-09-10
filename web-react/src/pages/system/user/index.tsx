@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Popconfirm, Space, Tag } from 'antd';
-import { DeleteOutlined, EditOutlined, KeyOutlined, PlusOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Popconfirm, Tag } from '@/components/ui';
+import { DeleteOutlined, EditOutlined, KeyOutlined, PlusOutlined } from '@/utils/icons';
 import type { BasicTableRef } from '@/components/common/BasicTable';
 import { ApiPermissionAssignModal } from '@/components/common/ApiPermissionAssignModal';
 import { BasicTable } from '@/components/common/BasicTable';
@@ -152,29 +152,29 @@ export default function UserPage() {
         rowKey="id"
         searchSchemas={searchSchemas}
         scroll={{ x: 1200 }}
-        toolbar={
-          <Space>
-            <PermissionGate permission="user.create">
-              <Button
-                icon={<PlusOutlined />}
-                type="primary"
-                onClick={() => {
-                  setCurrentUserId(undefined);
-                  setCurrentUser(undefined);
-                  setModalOpen(true);
-                }}
-              >
-                新增
+        bulkActions={(
+          <PermissionGate permission="user.delete">
+            <Popconfirm title="确定批量删除选中的用户吗？" onConfirm={() => void handleBatchDelete()}>
+              <Button danger icon={<DeleteOutlined />}>
+                删除所选
               </Button>
-            </PermissionGate>
-            <PermissionGate permission="user.delete">
-              <Popconfirm title="确定批量删除选中的用户吗？" onConfirm={() => void handleBatchDelete()}>
-                <Button danger icon={<DeleteOutlined />}>
-                  批量删除
-                </Button>
-              </Popconfirm>
-            </PermissionGate>
-          </Space>
+            </Popconfirm>
+          </PermissionGate>
+        )}
+        toolbar={
+          <PermissionGate permission="user.create">
+            <Button
+              icon={<PlusOutlined />}
+              type="primary"
+              onClick={() => {
+                setCurrentUserId(undefined);
+                setCurrentUser(undefined);
+                setModalOpen(true);
+              }}
+            >
+              新增
+            </Button>
+          </PermissionGate>
         }
       />
 

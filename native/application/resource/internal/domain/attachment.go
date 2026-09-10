@@ -4,7 +4,7 @@ package resource
 import (
 	"encoding/json"
 
-	"github.com/gcc798/lightning/internal/utils"
+	"github.com/gcc798/microservice-kit/internal/utils"
 )
 
 // 附件状态。

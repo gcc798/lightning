@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { App, Form } from 'antd';
+import { App, Form } from '@/components/ui';
 import { apiPermissionApi } from '@/api/apiPermission';
 import { BasicForm } from '@/components/common/BasicForm';
 import { BasicModal } from '@/components/common/BasicModal';

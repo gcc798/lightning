@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/gcc798/lightning/application/iam/internal/controller"
-	"github.com/gcc798/lightning/internal/constants"
-	"github.com/gcc798/lightning/internal/httpmiddleware"
-	"github.com/gcc798/lightning/internal/httpx"
+	"github.com/gcc798/microservice-kit/application/iam/internal/controller"
+	"github.com/gcc798/microservice-kit/internal/constants"
+	"github.com/gcc798/microservice-kit/internal/httpmiddleware"
+	"github.com/gcc798/microservice-kit/internal/httpx"
 )
 
 // registerRoleRoutes 注册角色管理路由

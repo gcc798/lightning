@@ -4,8 +4,8 @@ import (
 	"flag"
 	"os"
 
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf"
-	"github.com/gcc798/lightning/kratos/pkg/configx"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/pkg/configx"
 	"github.com/go-kratos/kratos/v2/log"
 )
 

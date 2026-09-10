@@ -28,7 +28,7 @@ definitions:
     required:
     - phone
     type: object
-  github_com_gcc798_lightning_application_iam_internal_response.Response:
+  github_com_gcc798_microservice-kit_application_iam_internal_response.Response:
     description: API 统一响应格式
     properties:
       code:
@@ -43,7 +43,7 @@ definitions:
         example: 操作成功
         type: string
     type: object
-  github_com_gcc798_lightning_application_sys_internal_response.Response:
+  github_com_gcc798_microservice-kit_application_sys_internal_response.Response:
     description: API 统一响应格式
     properties:
       code:
@@ -58,7 +58,7 @@ definitions:
         example: 操作成功
         type: string
     type: object
-  github_com_gcc798_lightning_internal_httpresponse.Response:
+  github_com_gcc798_microservice-kit_internal_httpresponse.Response:
     description: API 统一响应格式
     properties:
       code:
@@ -1447,8 +1447,8 @@ definitions:
 host: localhost:9009
 info:
   contact: {}
-  description: Lightning RESTful API
-  title: Lightning API
+  description: microservice-kit RESTful API
+  title: microservice-kit API
   version: "1.0"
 paths:
   /api/v1/attachment/{attachmentId}:
@@ -1473,7 +1473,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
       summary: 删除附件
       tags:
       - 附件管理
@@ -1499,7 +1499,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
             - properties:
                 data:
                   type: object
@@ -1535,7 +1535,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
       summary: 绑定附件到业务
       tags:
       - 附件管理
@@ -1593,7 +1593,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
             - properties:
                 data:
                   type: object
@@ -1629,7 +1629,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
             - properties:
                 data:
                   items:
@@ -1663,7 +1663,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
             - properties:
                 data:
                   type: object
@@ -1694,7 +1694,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response'
             - properties:
                 data:
                   type: object
@@ -1720,15 +1720,15 @@ paths:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 创建配置
@@ -1751,15 +1751,15 @@ paths:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 更新配置
@@ -1782,15 +1782,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 删除配置
@@ -1813,7 +1813,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.ConfigResponse'
@@ -1821,11 +1821,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询配置
@@ -1849,15 +1849,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 批量删除配置
@@ -1882,7 +1882,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.ConfigResponse'
@@ -1890,11 +1890,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       summary: 根据编码获取配置列表
       tags:
       - 配置管理
@@ -1917,7 +1917,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.ConfigDataResponse'
@@ -1925,11 +1925,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       summary: 根据编码获取配置数据
       tags:
       - 配置管理
@@ -1957,7 +1957,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -1965,7 +1965,7 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 分页查询配置列表
@@ -1989,15 +1989,15 @@ paths:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 创建字典
@@ -2020,15 +2020,15 @@ paths:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 更新字典
@@ -2051,15 +2051,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 删除字典
@@ -2082,7 +2082,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.DictDataResponse'
@@ -2090,11 +2090,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询字典
@@ -2118,15 +2118,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 批量删除字典
@@ -2157,7 +2157,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   type: string
@@ -2165,11 +2165,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       summary: 根据类型和键值获取标签
       tags:
       - 字典管理
@@ -2197,7 +2197,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -2207,11 +2207,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       summary: 根据类型获取字典列表
       tags:
       - 字典管理
@@ -2233,15 +2233,15 @@ paths:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 创建登录日志
@@ -2264,15 +2264,15 @@ paths:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 更新登录日志
@@ -2295,15 +2295,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 删除登录日志
@@ -2326,7 +2326,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.LoginLogResponse'
@@ -2334,11 +2334,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询登录日志
@@ -2362,15 +2362,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 批量删除登录日志
@@ -2394,15 +2394,15 @@ paths:
         "200":
           description: 清理成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 清理登录日志
@@ -2420,7 +2420,7 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -2430,7 +2430,7 @@ paths:
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 获取菜单列表
@@ -2453,15 +2453,15 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 创建菜单
@@ -2484,15 +2484,15 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 删除菜单
@@ -2515,7 +2515,7 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/model.Menu'
@@ -2523,15 +2523,15 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "404":
           description: 菜单不存在
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 获取菜单详情
@@ -2559,15 +2559,15 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 更新菜单
@@ -2585,7 +2585,7 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -2595,7 +2595,7 @@ paths:
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 获取菜单树
@@ -2613,7 +2613,7 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -2623,11 +2623,11 @@ paths:
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 获取用户菜单树
@@ -2651,15 +2651,15 @@ paths:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 创建操作日志
@@ -2682,15 +2682,15 @@ paths:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 更新操作日志
@@ -2713,15 +2713,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 删除操作日志
@@ -2744,7 +2744,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.OperLogResponse'
@@ -2752,11 +2752,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询操作日志
@@ -2780,15 +2780,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 批量删除操作日志
@@ -2812,15 +2812,15 @@ paths:
         "200":
           description: 清理成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 清理操作日志
@@ -2844,15 +2844,15 @@ paths:
         "200":
           description: 查询成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 分页查询操作日志列表
@@ -2882,7 +2882,7 @@ paths:
           description: 创建成功，返回组织ID
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   format: int64
@@ -2891,15 +2891,15 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 创建组织
@@ -2928,7 +2928,7 @@ paths:
           description: 删除成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: string
@@ -2936,19 +2936,19 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "404":
           description: 组织不存在
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 删除组织
@@ -2976,7 +2976,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -2984,19 +2984,19 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "404":
           description: 组织不存在
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 查询组织详情
@@ -3030,7 +3030,7 @@ paths:
           description: 更新成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: string
@@ -3038,19 +3038,19 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "404":
           description: 组织不存在
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 更新组织信息
@@ -3080,7 +3080,7 @@ paths:
           description: 删除成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: string
@@ -3088,15 +3088,15 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 批量删除组织
@@ -3126,7 +3126,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -3134,7 +3134,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 分页查询组织列表
@@ -3158,7 +3158,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -3168,11 +3168,11 @@ paths:
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       security:
       - Bearer: []
       summary: 获取组织树
@@ -3202,7 +3202,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/model.Role'
@@ -3210,7 +3210,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 创建角色
       tags:
       - 角色管理
@@ -3236,11 +3236,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 删除角色
       tags:
       - 角色管理
@@ -3266,7 +3266,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/model.Role'
@@ -3274,7 +3274,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 获取角色详情
       tags:
       - 角色管理
@@ -3305,11 +3305,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 更新角色
       tags:
       - 角色管理
@@ -3336,11 +3336,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 为用户分配角色
       tags:
       - 角色管理
@@ -3368,7 +3368,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -3403,11 +3403,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 移除用户的角色
       tags:
       - 角色管理
@@ -3434,7 +3434,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -3444,7 +3444,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 获取用户的所有角色
       tags:
       - 角色管理
@@ -3501,15 +3501,15 @@ paths:
         "200":
           description: 查询成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 分页查询字典列表
@@ -3577,15 +3577,15 @@ paths:
         "200":
           description: 查询成功
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response'
       security:
       - Bearer: []
       summary: 分页查询登录日志列表
@@ -3615,7 +3615,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -3623,7 +3623,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 创建用户
       tags:
       - 用户管理
@@ -3649,11 +3649,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 删除用户
       tags:
       - 用户管理
@@ -3679,7 +3679,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -3687,7 +3687,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 获取用户详情
       tags:
       - 用户管理
@@ -3718,11 +3718,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 更新用户
       tags:
       - 用户管理
@@ -3754,11 +3754,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 重置用户密码
       tags:
       - 用户管理
@@ -3785,11 +3785,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 批量删除用户
       tags:
       - 用户管理
@@ -3817,7 +3817,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -3825,7 +3825,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 批量导入用户
       tags:
       - 用户管理
@@ -3853,7 +3853,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: object
@@ -3861,7 +3861,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 分页查询用户列表
       tags:
       - 用户管理
@@ -3888,11 +3888,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 用户修改密码
       tags:
       - 用户管理
@@ -3915,7 +3915,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.RefreshTokenResponse'
@@ -3923,11 +3923,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 刷新访问令牌
       tags:
       - 认证
@@ -3949,7 +3949,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/captcha.CaptchaData'
@@ -3968,7 +3968,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/captcha.CaptchaData'
@@ -3994,7 +3994,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/captcha.CaptchaData'
@@ -4011,7 +4011,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   items:
@@ -4040,7 +4040,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/response.LoginResponse'
@@ -4048,11 +4048,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
       summary: 用户登录
       tags:
       - 认证
@@ -4063,7 +4063,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response'
             - properties:
                 data:
                   type: string

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Key } from 'react';
-import { App, Input, Radio, Space, Spin, Table, Tree } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import type { DataNode } from 'antd/es/tree';
+import { App, Input, Radio, Space, Spin, Table, Tree } from '@/components/ui';
+import type { ColumnsType } from '@/components/ui';
+import type { DataNode } from '@/components/ui';
 import { apiPermissionApi } from '@/api/apiPermission';
 import type { SnowflakeId } from '@/types/api';
 import type { ApiPermissionRecord } from '@/types/system';

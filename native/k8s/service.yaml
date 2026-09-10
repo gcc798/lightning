@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lightning-gateway
+  name: microservice-kit-gateway
 spec:
-  selector: { app: lightning-gateway }
+  selector: { app: microservice-kit-gateway }
   ports:
     - { name: http, port: 80, targetPort: http }
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: lightning-iam
+  name: microservice-kit-iam
 spec:
-  selector: { app: lightning-iam }
+  selector: { app: microservice-kit-iam }
   ports:
     - { name: http, port: 9010, targetPort: http }
     - { name: grpc, port: 9110, targetPort: grpc }
@@ -20,9 +20,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lightning-sys
+  name: microservice-kit-sys
 spec:
-  selector: { app: lightning-sys }
+  selector: { app: microservice-kit-sys }
   ports:
     - { name: http, port: 9011, targetPort: http }
     - { name: grpc, port: 9111, targetPort: grpc }
@@ -30,9 +30,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lightning-resource
+  name: microservice-kit-resource
 spec:
-  selector: { app: lightning-resource }
+  selector: { app: microservice-kit-resource }
   ports:
     - { name: http, port: 9012, targetPort: http }
     - { name: grpc, port: 9112, targetPort: grpc }
@@ -40,9 +40,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lightning-consul
+  name: microservice-kit-consul
 spec:
-  selector: { app: lightning-consul }
+  selector: { app: microservice-kit-consul }
   ports:
     - { name: http, port: 8500, targetPort: http }
     - { name: server, port: 8300, targetPort: server }

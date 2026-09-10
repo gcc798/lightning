@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/platform/storage"
-	"github.com/gcc798/lightning/internal/utils"
-	"github.com/gcc798/lightning/internal/utils/pagination"
+	"github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/platform/storage"
+	"github.com/gcc798/microservice-kit/internal/utils"
+	"github.com/gcc798/microservice-kit/internal/utils/pagination"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

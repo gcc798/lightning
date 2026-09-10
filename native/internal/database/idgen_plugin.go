@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/gcc798/lightning/internal/utils/idgen"
+	"github.com/gcc798/microservice-kit/internal/utils/idgen"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )

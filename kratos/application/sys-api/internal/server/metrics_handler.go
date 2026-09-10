@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	appmetrics "github.com/gcc798/lightning/kratos/pkg/metrics"
+	appmetrics "github.com/gcc798/microservice-kit/kratos/pkg/metrics"
 	"github.com/go-kratos/kratos/v2/middleware"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

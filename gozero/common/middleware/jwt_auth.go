@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/gcc798/lightning/common/auth"
+	"github.com/gcc798/microservice-kit/common/auth"
 )
 
 type JWTAuthConfig struct {

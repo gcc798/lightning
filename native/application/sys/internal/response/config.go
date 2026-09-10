@@ -3,8 +3,8 @@ package response
 import (
 	"encoding/json"
 
-	"github.com/gcc798/lightning/application/sys/internal/domain/model"
-	"github.com/gcc798/lightning/internal/utils"
+	"github.com/gcc798/microservice-kit/application/sys/internal/domain/model"
+	"github.com/gcc798/microservice-kit/internal/utils"
 )
 
 // ConfigResponse 配置响应

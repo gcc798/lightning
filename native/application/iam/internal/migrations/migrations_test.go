@@ -9,9 +9,9 @@ import (
 )
 
 func TestUpFromEmptyDatabase(t *testing.T) {
-	dsn := os.Getenv("LIGHTNING_TEST_POSTGRES_DSN")
+	dsn := os.Getenv("MS_K_TEST_POSTGRES_DSN")
 	if dsn == "" {
-		t.Skip("LIGHTNING_TEST_POSTGRES_DSN is not set")
+		t.Skip("MS_K_TEST_POSTGRES_DSN is not set")
 	}
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {
@@ -49,6 +49,35 @@ func TestUpFromEmptyDatabase(t *testing.T) {
 	}
 	if grantTypes != "password,email,sms,wechat" {
 		t.Fatalf("web-admin grant types = %q", grantTypes)
+	}
+
+	var menuCount int
+	if err := db.QueryRow(`SELECT COUNT(*) FROM s_menu WHERE remark IN ('系统内置目录', '系统内置菜单', '系统内置按钮')`).Scan(&menuCount); err != nil {
+		t.Fatal(err)
+	}
+	if menuCount != 38 {
+		t.Fatalf("built-in menu count = %d, want 38", menuCount)
+	}
+
+	var roleCount int
+	if err := db.QueryRow(`SELECT COUNT(*) FROM s_role WHERE role_key IN ('super_admin', 'user') AND status = 0`).Scan(&roleCount); err != nil {
+		t.Fatal(err)
+	}
+	if roleCount != 2 {
+		t.Fatalf("built-in role count = %d, want 2", roleCount)
+	}
+
+	var ordinaryUserMenuCount int
+	if err := db.QueryRow(`
+		SELECT COUNT(*)
+		FROM m_role_menu rm
+		JOIN s_role r ON r.id = rm.role_id
+		WHERE r.role_key = 'user'
+	`).Scan(&ordinaryUserMenuCount); err != nil {
+		t.Fatal(err)
+	}
+	if ordinaryUserMenuCount != 11 {
+		t.Fatalf("ordinary user menu count = %d, want 11", ordinaryUserMenuCount)
 	}
 
 	for _, index := range []string{"idx_s_user_email", "idx_s_user_phonenumber", "idx_s_user_open_id", "idx_s_user_union_id", "idx_user_role"} {

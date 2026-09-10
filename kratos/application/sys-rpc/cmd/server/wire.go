@@ -7,11 +7,11 @@ import (
 
 	"github.com/google/wire"
 
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/biz"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/conf"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/data"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/server"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/internal/service"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/biz"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/data"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/server"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/internal/service"
 	kratos "github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/registry"

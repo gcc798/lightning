@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { App, Button, Card, Form, Input } from 'antd';
-import { LockOutlined, ReloadOutlined, UserOutlined } from '@ant-design/icons';
+import { App, Button, Card, Form, Input } from '@/components/ui';
+import { LockOutlined, ReloadOutlined, UserOutlined } from '@/utils/icons';
 import { authApi } from '@/api/auth';
 import { ThemeSwitcher } from '@/components/common/ThemeSwitcher';
 import { DEFAULT_CLIENT_ID } from '@/constants/auth';
@@ -90,7 +90,6 @@ export default function LoginPage() {
         <ThemeSwitcher
           buttonClassName="login-theme-switch"
           entryClassName="login-theme-entry"
-          popoverClassName="login-theme-popover"
         />
       </div>
 
@@ -117,6 +116,7 @@ export default function LoginPage() {
             >
               <Input
                 allowClear
+                autoComplete="username"
                 prefix={
                   <span className="login-input-icon">
                     <UserOutlined />
@@ -134,6 +134,7 @@ export default function LoginPage() {
             >
               <Input.Password
                 allowClear
+                autoComplete="current-password"
                 prefix={
                   <span className="login-input-icon">
                     <LockOutlined />

@@ -1,8 +1,8 @@
 package response
 
 import (
-	"github.com/gcc798/lightning/application/sys/internal/domain/model"
-	"github.com/gcc798/lightning/internal/utils"
+	"github.com/gcc798/microservice-kit/application/sys/internal/domain/model"
+	"github.com/gcc798/microservice-kit/internal/utils"
 )
 
 // OperLogResponse 操作日志响应

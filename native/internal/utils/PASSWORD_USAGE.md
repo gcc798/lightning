@@ -22,7 +22,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gcc798/lightning/internal/utils"
+    "github.com/gcc798/microservice-kit/internal/utils"
 )
 
 func main() {
@@ -50,7 +50,7 @@ func main() {
 package main
 
 import (
-    "github.com/gcc798/lightning/internal/utils"
+    "github.com/gcc798/microservice-kit/internal/utils"
     "golang.org/x/crypto/bcrypt"
 )
 

@@ -6,9 +6,9 @@ package menu
 import (
 	"net/http"
 
-	"github.com/gcc798/lightning/application/sys-api/internal/logic/menu"
-	"github.com/gcc798/lightning/application/sys-api/internal/svc"
-	commonauth "github.com/gcc798/lightning/common/auth"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/logic/menu"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/svc"
+	commonauth "github.com/gcc798/microservice-kit/common/auth"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

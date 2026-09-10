@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
+	entpkg "github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )

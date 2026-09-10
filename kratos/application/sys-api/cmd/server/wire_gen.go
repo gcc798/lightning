@@ -7,11 +7,11 @@
 package main
 
 import (
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/biz"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/conf"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/data"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/server"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/service"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/biz"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/data"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/server"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/http"

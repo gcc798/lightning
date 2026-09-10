@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 import JSONbig from 'json-bigint';
-import { message } from 'antd';
+import { message } from '@/components/ui';
 import { DEFAULT_CLIENT_ID } from '@/constants/auth';
 import type { CommonResp } from '@/types/api';
 import { useAuthStore } from '@/store/auth';

@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
 import type { ReactNode } from 'react';
-import { ReloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Space, Switch, TreeSelect } from 'antd';
-import type { FormInstance } from 'antd';
+import { ReloadOutlined, SearchOutlined } from '@/utils/icons';
+import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Space, Switch, TreeSelect } from '@/components/ui';
+import type { FormInstance } from '@/components/ui';
 import type { FormSchema } from '@/types/form';
 import { MonacoEditor } from './MonacoEditor';
 import { IconPicker } from './IconPicker';
 
 interface BasicFormProps {
-  form: FormInstance;
+  form: FormInstance<any>;
   schemas: FormSchema[];
   initialValues?: Record<string, unknown>;
   layout?: 'horizontal' | 'vertical' | 'inline';
@@ -45,6 +45,14 @@ function renderField(schema: FormSchema, variant: 'default' | 'search' | 'modal'
 
     if (variant === 'search' && nextProps.allowClear === undefined) {
       nextProps.allowClear = true;
+    }
+
+    if (variant === 'search' && nextProps.size === undefined) {
+      nextProps.size = 'small';
+    }
+
+    if (variant === 'search' && nextProps['aria-label'] === undefined) {
+      nextProps['aria-label'] = schema.label;
     }
 
     if (
@@ -88,7 +96,7 @@ function SchemaFormItem({
   variant,
 }: {
   schema: FormSchema;
-  form: FormInstance;
+  form: FormInstance<any>;
   variant: 'default' | 'search' | 'modal';
 }) {
   const values = Form.useWatch([], form) ?? {};
@@ -197,10 +205,10 @@ export function BasicForm({
             <div className="search-form-actions">
               <Form.Item style={{ marginBottom: 0 }}>
                 <Space size={8}>
-                  <Button htmlType="submit" icon={<SearchOutlined />} type="primary">
+                  <Button size="small" htmlType="submit" icon={<SearchOutlined />} type="primary">
                     {submitText}
                   </Button>
-                  <Button icon={<ReloadOutlined />} onClick={handleReset}>
+                  <Button size="small" icon={<ReloadOutlined />} onClick={handleReset}>
                     {resetText}
                   </Button>
                 </Space>

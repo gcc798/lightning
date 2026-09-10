@@ -1,10 +1,10 @@
 x-database-environment: &database-environment
-  LIGHTNING_APP_ENV: prod
-  LIGHTNING_DATABASE_DSN: "host=postgres user=postgres password=${LIGHTNING_POSTGRES_PASSWORD:-post123} dbname=lightning port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+  MS_K_APP_ENV: prod
+  MS_K_DATABASE_DSN: "host=postgres user=postgres password=${MS_K_POSTGRES_PASSWORD:-post123} dbname=microservice_kit port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 
 x-registry-environment: &registry-environment
-  LIGHTNING_REGISTRY_DRIVER: consul
-  LIGHTNING_REGISTRY_ADDRESS: http://consul:8500
+  MS_K_REGISTRY_DRIVER: consul
+  MS_K_REGISTRY_ADDRESS: http://consul:8500
 
 services:
   gateway:
@@ -15,9 +15,9 @@ services:
     ports: ["9009:9009"]
     environment:
       <<: *registry-environment
-      LIGHTNING_APP_ENV: prod
-      LIGHTNING_SERVER_PORT: 9009
-      LIGHTNING_SERVICE_ID: ""
+      MS_K_APP_ENV: prod
+      MS_K_SERVER_PORT: 9009
+      MS_K_SERVICE_ID: ""
     depends_on:
       iam: { condition: service_healthy }
       sys: { condition: service_healthy }
@@ -36,11 +36,11 @@ services:
       args: { TARGET: iam }
     environment:
       <<: [*database-environment, *registry-environment]
-      LIGHTNING_SERVER_PORT: 9010
-      LIGHTNING_GRPC_PORT: 9110
-      LIGHTNING_REDIS_ADDR: redis:6379
-      LIGHTNING_REDIS_PASSWORD: "${LIGHTNING_REDIS_PASSWORD:-123456}"
-      LIGHTNING_JWT_SECRET: "${LIGHTNING_JWT_SECRET:?set LIGHTNING_JWT_SECRET}"
+      MS_K_SERVER_PORT: 9010
+      MS_K_GRPC_PORT: 9110
+      MS_K_REDIS_ADDR: redis:6379
+      MS_K_REDIS_PASSWORD: "${MS_K_REDIS_PASSWORD:-123456}"
+      MS_K_JWT_SECRET: "${MS_K_JWT_SECRET:?set MS_K_JWT_SECRET}"
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
@@ -59,10 +59,10 @@ services:
       args: { TARGET: sys }
     environment:
       <<: [*database-environment, *registry-environment]
-      LIGHTNING_SERVER_PORT: 9011
-      LIGHTNING_GRPC_PORT: 9111
-      LIGHTNING_REDIS_ADDR: redis:6379
-      LIGHTNING_REDIS_PASSWORD: "${LIGHTNING_REDIS_PASSWORD:-123456}"
+      MS_K_SERVER_PORT: 9011
+      MS_K_GRPC_PORT: 9111
+      MS_K_REDIS_ADDR: redis:6379
+      MS_K_REDIS_PASSWORD: "${MS_K_REDIS_PASSWORD:-123456}"
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
@@ -81,14 +81,14 @@ services:
       args: { TARGET: resource }
     environment:
       <<: [*database-environment, *registry-environment]
-      LIGHTNING_SERVER_PORT: 9012
-      LIGHTNING_GRPC_PORT: 9112
-      LIGHTNING_STORAGE_ENDPOINT: rustfs:9000
-      LIGHTNING_STORAGE_ACCESS_KEY: "${LIGHTNING_RUSTFS_ACCESS_KEY:-rustfsadmin}"
-      LIGHTNING_STORAGE_SECRET_KEY: "${LIGHTNING_RUSTFS_SECRET_KEY:-rustfsadmin}"
-      LIGHTNING_STORAGE_REGION: us-east-1
-      LIGHTNING_STORAGE_BUCKET: "${LIGHTNING_RUSTFS_BUCKET:-lightning}"
-      LIGHTNING_STORAGE_USE_SSL: "false"
+      MS_K_SERVER_PORT: 9012
+      MS_K_GRPC_PORT: 9112
+      MS_K_STORAGE_ENDPOINT: rustfs:9000
+      MS_K_STORAGE_ACCESS_KEY: "${MS_K_RUSTFS_ACCESS_KEY:-rustfsadmin}"
+      MS_K_STORAGE_SECRET_KEY: "${MS_K_RUSTFS_SECRET_KEY:-rustfsadmin}"
+      MS_K_STORAGE_REGION: us-east-1
+      MS_K_STORAGE_BUCKET: "${MS_K_RUSTFS_BUCKET:-microservice-kit}"
+      MS_K_STORAGE_USE_SSL: "false"
     depends_on:
       postgres: { condition: service_healthy }
       rustfs: { condition: service_healthy }
@@ -107,7 +107,7 @@ services:
       args: { TARGET: scheduler }
     environment:
       <<: [*database-environment, *registry-environment]
-      LIGHTNING_SERVICE_ID: ""
+      MS_K_SERVICE_ID: ""
     depends_on:
       sys: { condition: service_healthy }
       resource: { condition: service_healthy }
@@ -127,21 +127,21 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "${LIGHTNING_POSTGRES_PASSWORD:-post123}"
-      POSTGRES_DB: lightning
+      POSTGRES_PASSWORD: "${MS_K_POSTGRES_PASSWORD:-post123}"
+      POSTGRES_DB: microservice_kit
     volumes: ["postgres-data:/var/lib/postgresql/data"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d lightning"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d microservice_kit"]
       interval: 5s
       timeout: 3s
       retries: 20
 
   redis:
     image: redis:7-alpine
-    command: ["redis-server", "--requirepass", "${LIGHTNING_REDIS_PASSWORD:-123456}"]
+    command: ["redis-server", "--requirepass", "${MS_K_REDIS_PASSWORD:-123456}"]
     volumes: ["redis-data:/data"]
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli -a '${LIGHTNING_REDIS_PASSWORD:-123456}' ping >/dev/null"]
+      test: ["CMD-SHELL", "redis-cli -a '${MS_K_REDIS_PASSWORD:-123456}' ping >/dev/null"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -153,8 +153,8 @@ services:
       RUSTFS_ADDRESS: 0.0.0.0:9000
       RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
       RUSTFS_CONSOLE_ENABLE: "true"
-      RUSTFS_ACCESS_KEY: "${LIGHTNING_RUSTFS_ACCESS_KEY:-rustfsadmin}"
-      RUSTFS_SECRET_KEY: "${LIGHTNING_RUSTFS_SECRET_KEY:-rustfsadmin}"
+      RUSTFS_ACCESS_KEY: "${MS_K_RUSTFS_ACCESS_KEY:-rustfsadmin}"
+      RUSTFS_SECRET_KEY: "${MS_K_RUSTFS_SECRET_KEY:-rustfsadmin}"
     volumes: ["rustfs-data:/data"]
     depends_on:
       rustfs-volume-init: { condition: service_completed_successfully }

@@ -4,7 +4,7 @@
 
 ## 项目定位
 
-`lightning` 是一个渐进式微服务后台脚手架 Monorepo。它不是单一后端工程，而是同一套业务语义的三套 Go 实现，加上一个 React 前端工程：
+`microservice-kit` 是一个渐进式微服务后台脚手架 Monorepo。它不是单一后端工程，而是同一套业务语义的三套 Go 实现，加上一个 React 前端工程：
 
 - `native/`：不依赖完整微服务框架的原生 Go 渐进式微服务实现，是主要演进方向、业务语义和接口行为基线。
 - `kratos/`：基于 Kratos 开源微服务框架的跟进实现，开发进度可能阶段性落后于 `native/`。
@@ -28,7 +28,7 @@
 ## 根目录结构
 
 ```text
-lightning/
+microservice-kit/
 ├── native/      # 原生 Go 渐进式微服务实现，业务与 HTTP 契约基线
 ├── kratos/      # Kratos 微服务框架版本
 ├── gozero/      # go-zero 微服务框架版本
@@ -59,7 +59,7 @@ lightning/
 - `native/internal/database/`：共享数据库连接与 GORM 插件，不负责执行迁移。
 - `native/internal/`：多个进程共享、但通过 Go `internal` 规则禁止仓库外导入的技术能力；不得放领域业务实现。
 
-每个进程在自己的目录版本化 `conf.example.yaml` 和 `zaplogger.example.yaml`；开发者通过 `make init-config` 基于模板创建被 Git 忽略的 `*.dev.yaml` 和 `*.prod.yaml`。程序只按 `LIGHTNING_APP_ENV=dev|prod` 读取对应运行配置，不直接读取 example 文件；部署环境变量可覆盖其中的地址和敏感值。
+每个进程在自己的目录版本化 `conf.example.yaml` 和 `zaplogger.example.yaml`；开发者通过 `make init-config` 基于模板创建被 Git 忽略的 `*.dev.yaml` 和 `*.prod.yaml`。程序只按 `MS_K_APP_ENV=dev|prod` 读取对应运行配置，不直接读取 example 文件；部署环境变量可覆盖其中的地址和敏感值。
 每个服务的 YAML 模板只声明自身实际依赖，不得为了复用配置结构加入未使用字段。
 
 IAM、SYS、Resource 分别拥有 `application/<service>/internal/migrations/sql/`，启动时只执行自己的迁移，并使用独立的 `goose_<service>_version` 表。Scheduler 不执行迁移。

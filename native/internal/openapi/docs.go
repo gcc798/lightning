@@ -57,7 +57,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                                 },
                                 {
                                     "type": "object",
@@ -113,7 +113,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                                 },
                                 {
                                     "type": "object",
@@ -164,7 +164,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                                 },
                                 {
                                     "type": "object",
@@ -215,7 +215,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                                 },
                                 {
                                     "type": "object",
@@ -262,7 +262,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                         }
                     }
                 }
@@ -310,7 +310,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                         }
                     }
                 }
@@ -397,7 +397,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_internal_httpresponse.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_internal_httpresponse.Response"
                                 },
                                 {
                                     "type": "object",
@@ -446,19 +446,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -495,19 +495,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -546,19 +546,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -593,7 +593,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -609,13 +609,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -650,7 +650,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -666,13 +666,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -720,7 +720,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -736,7 +736,7 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -775,7 +775,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -791,13 +791,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -832,19 +832,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -883,19 +883,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -932,19 +932,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -983,19 +983,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1038,7 +1038,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1054,13 +1054,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1102,7 +1102,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1121,13 +1121,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1166,7 +1166,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1182,13 +1182,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1223,19 +1223,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1274,19 +1274,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1323,19 +1323,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1374,19 +1374,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1425,19 +1425,19 @@ const docTemplate = `{
                     "200": {
                         "description": "清理成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1476,7 +1476,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1492,13 +1492,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1533,19 +1533,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -1575,7 +1575,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1594,7 +1594,7 @@ const docTemplate = `{
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1631,19 +1631,19 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1673,7 +1673,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1692,7 +1692,7 @@ const docTemplate = `{
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1722,7 +1722,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1741,13 +1741,13 @@ const docTemplate = `{
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1786,7 +1786,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1802,19 +1802,19 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "404": {
                         "description": "菜单不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1858,19 +1858,19 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1905,19 +1905,19 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -1956,19 +1956,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2005,19 +2005,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2056,19 +2056,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2107,19 +2107,19 @@ const docTemplate = `{
                     "200": {
                         "description": "清理成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2158,19 +2158,19 @@ const docTemplate = `{
                     "200": {
                         "description": "查询成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2209,7 +2209,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2225,13 +2225,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2266,19 +2266,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -2326,7 +2326,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2343,19 +2343,19 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2403,7 +2403,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2419,19 +2419,19 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2479,7 +2479,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2495,7 +2495,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2534,7 +2534,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2553,13 +2553,13 @@ const docTemplate = `{
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2605,7 +2605,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2621,25 +2621,25 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2692,7 +2692,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2708,25 +2708,25 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2770,7 +2770,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2786,25 +2786,25 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2847,7 +2847,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2863,7 +2863,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2904,13 +2904,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -2953,7 +2953,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3009,13 +3009,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3056,7 +3056,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3075,7 +3075,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3116,7 +3116,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3132,7 +3132,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3178,13 +3178,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3221,13 +3221,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3314,19 +3314,19 @@ const docTemplate = `{
                     "200": {
                         "description": "查询成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -3426,19 +3426,19 @@ const docTemplate = `{
                     "200": {
                         "description": "查询成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_sys_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_sys_internal_response.Response"
                         }
                     }
                 }
@@ -3481,7 +3481,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3497,7 +3497,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3538,13 +3538,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3587,7 +3587,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3603,7 +3603,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3646,7 +3646,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3662,7 +3662,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3703,13 +3703,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3750,7 +3750,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3766,7 +3766,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3812,13 +3812,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3855,13 +3855,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3909,13 +3909,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -3951,7 +3951,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3967,13 +3967,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -4008,7 +4008,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4042,7 +4042,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4087,7 +4087,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4118,7 +4118,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4167,7 +4167,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4183,13 +4183,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                         }
                     }
                 }
@@ -4212,7 +4212,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_gcc798_lightning_application_iam_internal_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_microservice-kit_application_iam_internal_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4272,7 +4272,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_gcc798_lightning_application_iam_internal_response.Response": {
+        "github_com_gcc798_microservice-kit_application_iam_internal_response.Response": {
             "description": "API 统一响应格式",
             "type": "object",
             "properties": {
@@ -4292,7 +4292,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_gcc798_lightning_application_sys_internal_response.Response": {
+        "github_com_gcc798_microservice-kit_application_sys_internal_response.Response": {
             "description": "API 统一响应格式",
             "type": "object",
             "properties": {
@@ -4312,7 +4312,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_gcc798_lightning_internal_httpresponse.Response": {
+        "github_com_gcc798_microservice-kit_internal_httpresponse.Response": {
             "description": "API 统一响应格式",
             "type": "object",
             "properties": {
@@ -6212,8 +6212,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:9009",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "Lightning API",
-	Description:      "Lightning RESTful API",
+	Title:            "microservice-kit API",
+	Description:      "microservice-kit RESTful API",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

@@ -39,14 +39,14 @@ pnpm install
 
 ```bash
 cd gozero/application/sys-rpc
-GOCACHE=/tmp/lightning-go-build go run sys.go -f etc/sys-rpc.yaml
+GOCACHE=/tmp/microservice-kit-go-build go run sys.go -f etc/sys-rpc.yaml
 ```
 
 再启动 `sys-api`：
 
 ```bash
 cd gozero/application/sys-api
-GOCACHE=/tmp/lightning-go-build go run sys.go -f etc/sys-api.yaml
+GOCACHE=/tmp/microservice-kit-go-build go run sys.go -f etc/sys-api.yaml
 ```
 
 ### 2. 启动前端开发服务
@@ -104,7 +104,7 @@ pnpm preview
 示例：
 
 ```env
-VITE_APP_TITLE=lightning Admin React
+VITE_APP_TITLE=microservice-kit Admin React
 VITE_API_BASE_URL=http://localhost:9009
 VITE_CLIENT_KEY=web-admin
 VITE_CLIENT_SECRET=web-secret-2024

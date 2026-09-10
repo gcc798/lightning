@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/gcc798/lightning/internal/health"
-	"github.com/gcc798/lightning/internal/httpx"
+	"github.com/gcc798/microservice-kit/internal/health"
+	"github.com/gcc798/microservice-kit/internal/httpx"
 )
 
 // 注册公共路由（健康检查等）。

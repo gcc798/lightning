@@ -6,9 +6,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gcc798/lightning/internal/platform/captcha"
-	"github.com/gcc798/lightning/internal/platform/thirdparty/wechat"
-	"github.com/gcc798/lightning/internal/platform/websocket"
+	"github.com/gcc798/microservice-kit/internal/platform/captcha"
+	"github.com/gcc798/microservice-kit/internal/platform/thirdparty/wechat"
+	"github.com/gcc798/microservice-kit/internal/platform/websocket"
 )
 
 const (

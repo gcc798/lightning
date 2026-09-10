@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	logging "github.com/gcc798/lightning/internal/logger"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 
 	"github.com/robfig/cron/v3"
 	"go.opentelemetry.io/otel"
@@ -50,7 +50,7 @@ func (s *Scheduler) AddJob(spec string, name string, job func(context.Context)) 
 
 	// 添加任务到cron
 	entryID, err := s.cron.AddFunc(spec, func() {
-		ctx, span := otel.Tracer("github.com/gcc798/lightning/internal/platform/scheduler").Start(
+		ctx, span := otel.Tracer("github.com/gcc798/microservice-kit/internal/platform/scheduler").Start(
 			s.ctx, "scheduler.job", trace.WithAttributes(attribute.String("job.name", name)),
 		)
 		defer span.End()

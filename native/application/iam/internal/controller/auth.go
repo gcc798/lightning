@@ -3,14 +3,14 @@ package controller
 import (
 	"strings"
 
-	iam "github.com/gcc798/lightning/application/iam/internal/domain"
-	"github.com/gcc798/lightning/application/iam/internal/request"
-	"github.com/gcc798/lightning/application/iam/internal/response"
-	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
-	"github.com/gcc798/lightning/internal/config"
-	"github.com/gcc798/lightning/internal/container"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/modules"
+	iam "github.com/gcc798/microservice-kit/application/iam/internal/domain"
+	"github.com/gcc798/microservice-kit/application/iam/internal/request"
+	"github.com/gcc798/microservice-kit/application/iam/internal/response"
+	sysv1 "github.com/gcc798/microservice-kit/internal/api/sys/v1"
+	"github.com/gcc798/microservice-kit/internal/config"
+	"github.com/gcc798/microservice-kit/internal/container"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/modules"
 	"github.com/labstack/echo/v5"
 	"go.uber.org/zap"
 )

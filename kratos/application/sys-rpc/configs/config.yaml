@@ -19,13 +19,13 @@ auth:
   allowConcurrent: false
   shareToken: false
 jwt:
-  secret: "lightning-kratos-secret"
+  secret: "microservice-kit-kratos-secret"
   expire: 1800
   issuer: "NTZ-go"
 data:
   database:
     driver: postgres
-    dsn: host=127.0.0.1 user=postgres password=post123 dbname=lightning port=5433 sslmode=disable TimeZone=Asia/Shanghai
+    dsn: host=127.0.0.1 user=postgres password=post123 dbname=microservice_kit port=5433 sslmode=disable TimeZone=Asia/Shanghai
   redis:
     addr: 127.0.0.1:6379
     password: "123456"

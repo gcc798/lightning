@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/org"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/org"
 )
 
 // Org is the model entity for the Org schema.

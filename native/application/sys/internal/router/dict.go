@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/gcc798/lightning/application/sys/internal/controller"
-	"github.com/gcc798/lightning/internal/constants"
-	"github.com/gcc798/lightning/internal/httpmiddleware"
-	"github.com/gcc798/lightning/internal/httpx"
+	"github.com/gcc798/microservice-kit/application/sys/internal/controller"
+	"github.com/gcc798/microservice-kit/internal/constants"
+	"github.com/gcc798/microservice-kit/internal/httpmiddleware"
+	"github.com/gcc798/microservice-kit/internal/httpx"
 )
 
 // registerDictRoutes 注册字典管理路由

@@ -11,10 +11,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gcc798/lightning/application/sys-api/internal/svc"
-	"github.com/gcc798/lightning/application/sys-api/internal/types"
-	"github.com/gcc798/lightning/application/sys-rpc/client/sysservice"
-	commonauth "github.com/gcc798/lightning/common/auth"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/types"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/client/sysservice"
+	commonauth "github.com/gcc798/microservice-kit/common/auth"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/redis/go-redis/v9"
 )
@@ -203,7 +203,7 @@ func generateAccessToken(user *loginUser, client *authClient, secret string) (st
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expireAt),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			Issuer:    "LIGHTNING-gozero",
+			Issuer:    "MS_K-gozero",
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

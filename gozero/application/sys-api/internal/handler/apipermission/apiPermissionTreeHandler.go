@@ -6,8 +6,8 @@ package apipermission
 import (
 	"net/http"
 
-	"github.com/gcc798/lightning/application/sys-api/internal/logic/apipermission"
-	"github.com/gcc798/lightning/application/sys-api/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/logic/apipermission"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

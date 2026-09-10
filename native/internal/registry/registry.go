@@ -16,6 +16,22 @@ type ServiceInstance struct {
 	ID        string            `json:"id"`
 	Name      string            `json:"name"`
 	Endpoints map[string]string `json:"endpoints"`
+	Routes    []HTTPRoute       `json:"routes,omitempty"`
+}
+
+type HTTPRoute struct {
+	Method string `json:"m"`
+	Path   string `json:"p"`
+}
+
+type Options struct {
+	Driver    string
+	Address   string
+	Prefix    string
+	Namespace string
+	Group     string
+	Username  string
+	Password  string
 }
 
 type Watcher interface {
@@ -31,16 +47,19 @@ type Registry interface {
 	Close() error
 }
 
-func New(driver, address, prefix string) (Registry, error) {
-	switch driver {
+func New(options Options) (Registry, error) {
+	switch options.Driver {
 	case "consul":
-		return NewConsul(address), nil
+		return NewConsul(options.Address), nil
 	case "etcd":
-		return NewEtcd(address, prefix), nil
+		return NewEtcd(options.Address, options.Prefix), nil
+	case "nacos":
+		return NewNacos(options)
 	case "inprocess", "":
+		// Unit tests only: each process gets an isolated registry.
 		return NewInProcess(), nil
 	default:
-		return nil, fmt.Errorf("unsupported registry driver %q", driver)
+		return nil, fmt.Errorf("unsupported registry driver %q", options.Driver)
 	}
 }
 

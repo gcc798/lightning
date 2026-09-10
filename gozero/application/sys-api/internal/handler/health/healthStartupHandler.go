@@ -6,8 +6,8 @@ package health
 import (
 	"net/http"
 
-	"github.com/gcc798/lightning/application/sys-api/internal/logic/health"
-	"github.com/gcc798/lightning/application/sys-api/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/logic/health"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

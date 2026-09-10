@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: lightning-ingress
+  name: microservice-kit-ingress
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - api.yourdomain.com
-    secretName: lightning-tls
+    secretName: microservice-kit-tls
   rules:
   - host: api.yourdomain.com
     http:
@@ -18,6 +18,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: lightning-gateway
+            name: microservice-kit-gateway
             port:
               number: 80

@@ -12,9 +12,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/platform/jwt"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/platform/jwt"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )

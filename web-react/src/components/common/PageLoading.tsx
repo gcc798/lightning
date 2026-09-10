@@ -1,4 +1,4 @@
-import { Flex, Spin, Typography } from 'antd';
+import { Flex, Spin, Typography } from '@/components/ui';
 
 interface PageLoadingProps {
   tip?: string;

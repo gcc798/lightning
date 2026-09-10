@@ -1,6 +1,6 @@
 package model
 
-import "github.com/gcc798/lightning/internal/utils"
+import "github.com/gcc798/microservice-kit/internal/utils"
 
 // MMenuApiPermission declares which API permissions a menu requires.
 type MMenuApiPermission struct {

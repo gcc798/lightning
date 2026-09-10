@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { App, Input, Table, Tag } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import { SearchOutlined } from '@ant-design/icons';
+import { App, Input, Table, Tag } from '@/components/ui';
+import type { ColumnsType } from '@/components/ui';
+import { SearchOutlined } from '@/utils/icons';
 import { BasicModal } from '@/components/common/BasicModal';
 import { roleApi } from '@/api/role';
 import type { SnowflakeId } from '@/types/api';

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
 	"gorm.io/gorm"
 )
 

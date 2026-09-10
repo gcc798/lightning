@@ -1,7 +1,7 @@
 package response
 
 import (
-	httpresponse "github.com/gcc798/lightning/internal/httpresponse"
+	httpresponse "github.com/gcc798/microservice-kit/internal/httpresponse"
 	"github.com/labstack/echo/v5"
 )
 

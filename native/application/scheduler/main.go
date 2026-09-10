@@ -8,16 +8,16 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gcc798/lightning/application/scheduler/jobs"
-	resourcev1 "github.com/gcc798/lightning/internal/api/resource/v1"
-	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
-	"github.com/gcc798/lightning/internal/config"
-	"github.com/gcc798/lightning/internal/container"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/modules"
-	"github.com/gcc798/lightning/internal/registry"
-	"github.com/gcc798/lightning/internal/telemetry"
-	"github.com/gcc798/lightning/internal/transport"
+	"github.com/gcc798/microservice-kit/application/scheduler/jobs"
+	resourcev1 "github.com/gcc798/microservice-kit/internal/api/resource/v1"
+	sysv1 "github.com/gcc798/microservice-kit/internal/api/sys/v1"
+	"github.com/gcc798/microservice-kit/internal/config"
+	"github.com/gcc798/microservice-kit/internal/container"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/modules"
+	"github.com/gcc798/microservice-kit/internal/registry"
+	"github.com/gcc798/microservice-kit/internal/telemetry"
+	"github.com/gcc798/microservice-kit/internal/transport"
 	"go.uber.org/zap"
 )
 
@@ -59,7 +59,10 @@ func main() {
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
-	reg, err := registry.New(cfg.Registry.Driver, cfg.Registry.Address, cfg.Registry.Prefix)
+	reg, err := registry.New(registry.Options{
+		Driver: cfg.Registry.Driver, Address: cfg.Registry.Address, Prefix: cfg.Registry.Prefix,
+		Namespace: cfg.Registry.Namespace, Group: cfg.Registry.Group, Username: cfg.Registry.Username, Password: cfg.Registry.Password,
+	})
 	if err != nil {
 		log.Error("scheduler process exited with error", zap.Error(err))
 		exitCode = 1
@@ -76,17 +79,6 @@ func main() {
 		exitCode = 1
 		return
 	}
-	instance, err := transport.RegisterService(ctx, reg, string(config.ServiceScheduler), cfg.Service.ID, nil)
-	if err != nil {
-		log.Error("scheduler process exited with error", zap.Error(err))
-		exitCode = 1
-		return
-	}
-	defer func() {
-		shutdown, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		defer cancel()
-		_ = reg.Deregister(shutdown, instance)
-	}()
 	if err := cont.StartModules(ctx); err != nil {
 		log.Error("scheduler process exited with error", zap.Error(fmt.Errorf("start scheduler modules: %w", err)))
 		exitCode = 1

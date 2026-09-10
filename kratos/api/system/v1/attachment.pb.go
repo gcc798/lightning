@@ -900,7 +900,7 @@ const file_system_v1_attachment_proto_rawDesc = "" +
 	"\x0fPageAttachments\x12%.api.system.v1.PageAttachmentsRequest\x1a#.api.system.v1.PageAttachmentsReply\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/attachment/page\x12\x94\x01\n" +
 	"\x12DownloadAttachment\x12\".api.system.v1.AttachmentIdRequest\x1a&.api.system.v1.AttachmentDownloadReply\"2\x82\xd3\xe4\x93\x02,\x12*/api/v1/attachment/{attachmentId}/download\x12\x89\x01\n" +
 	"\x10GetAttachmentURL\x12#.api.system.v1.AttachmentURLRequest\x1a!.api.system.v1.AttachmentURLReply\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/attachment/{attachmentId}/url\x12~\n" +
-	"\x10DeleteAttachment\x12\".api.system.v1.AttachmentIdRequest\x1a\x1b.api.system.v1.MessageReply\")\x82\xd3\xe4\x93\x02#*!/api/v1/attachment/{attachmentId}B5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
+	"\x10DeleteAttachment\x12\".api.system.v1.AttachmentIdRequest\x1a\x1b.api.system.v1.MessageReply\")\x82\xd3\xe4\x93\x02#*!/api/v1/attachment/{attachmentId}B<Z:github.com/gcc798/microservice-kit/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_attachment_proto_rawDescOnce sync.Once

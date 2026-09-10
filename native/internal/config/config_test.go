@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gcc798/lightning/internal/platform/storage"
+	"github.com/gcc798/microservice-kit/internal/platform/storage"
 	"gopkg.in/yaml.v3"
 )
 
@@ -27,10 +27,10 @@ func TestDevelopmentConfigStartsWithoutRequiredEnvironmentOverrides(t *testing.T
 		t.Fatal(err)
 	}
 	t.Setenv(AppEnvVar, "dev")
-	t.Setenv("LIGHTNING_DATABASE_DSN", "")
-	t.Setenv("LIGHTNING_REDIS_ADDR", "")
-	t.Setenv("LIGHTNING_REDIS_PASSWORD", "")
-	t.Setenv("LIGHTNING_JWT_SECRET", "")
+	t.Setenv("MS_K_DATABASE_DSN", "")
+	t.Setenv("MS_K_REDIS_ADDR", "")
+	t.Setenv("MS_K_REDIS_PASSWORD", "")
+	t.Setenv("MS_K_JWT_SECRET", "")
 
 	cfg, _, err := Load(appDir, ServiceIAM)
 	if err != nil {
@@ -116,7 +116,7 @@ func TestLoadEnvironmentOverridesYAML(t *testing.T) {
 	content := []byte(`
 server: { port: 9010 }
 grpc: { port: 9110 }
-registry: { driver: consul, address: "http://consul:8500", prefix: "/lightning/services" }
+registry: { driver: consul, address: "http://consul:8500", prefix: "/microservice-kit/services" }
 service: { id: "", advertiseHost: "127.0.0.1" }
 database: { dsn: yaml-dsn, maxOpenConns: 100, maxIdleConns: 10, connMaxLifetimeMinutes: 60, slowThreshold: 500 }
 redis: { addr: "yaml-redis:6379", password: "", db: 0 }
@@ -130,11 +130,11 @@ websocket: { enabled: true, timeoutEnabled: true, readTimeoutSeconds: 60, writeT
 	}
 
 	t.Setenv(AppEnvVar, "dev")
-	t.Setenv("LIGHTNING_SERVER_PORT", "8080")
-	t.Setenv("LIGHTNING_SERVICE_ID", "iam-explicit")
-	t.Setenv("LIGHTNING_DATABASE_DSN", "environment-dsn")
-	t.Setenv("LIGHTNING_REDIS_ADDR", "environment-redis:6379")
-	t.Setenv("LIGHTNING_JWT_SECRET", "environment-secret-with-at-least-32-characters")
+	t.Setenv("MS_K_SERVER_PORT", "8080")
+	t.Setenv("MS_K_SERVICE_ID", "iam-explicit")
+	t.Setenv("MS_K_DATABASE_DSN", "environment-dsn")
+	t.Setenv("MS_K_REDIS_ADDR", "environment-redis:6379")
+	t.Setenv("MS_K_JWT_SECRET", "environment-secret-with-at-least-32-characters")
 
 	cfg, _, err := Load(dir, ServiceIAM)
 	if err != nil {
@@ -163,7 +163,7 @@ func TestConfigValidate(t *testing.T) {
 	valid := Config{
 		Server:    Server{Port: 9009},
 		GRPC:      Server{Port: 9100},
-		Registry:  Registry{Driver: "consul", Address: "http://consul:8500", Prefix: "/lightning/services"},
+		Registry:  Registry{Driver: "consul", Address: "http://consul:8500", Prefix: "/microservice-kit/services"},
 		Service:   ServiceEndpoint{AdvertiseHost: "127.0.0.1"},
 		Database:  Database{DSN: "postgres-dsn", MaxOpenConns: 100, MaxIdleConns: 10, ConnMaxLifetimeMinutes: 60, SlowThreshold: 500},
 		Redis:     Redis{Addr: "redis:6379"},
@@ -195,7 +195,7 @@ func TestConfigValidate(t *testing.T) {
 	}
 
 	scheduler := Config{
-		Registry: Registry{Driver: "consul", Address: "http://consul:8500", Prefix: "/lightning/services"},
+		Registry: Registry{Driver: "consul", Address: "http://consul:8500", Prefix: "/microservice-kit/services"},
 		Database: Database{DSN: "postgres-dsn", MaxOpenConns: 20, MaxIdleConns: 5, ConnMaxLifetimeMinutes: 60, SlowThreshold: 500},
 	}
 	if err := scheduler.Validate("prod", ServiceScheduler); err != nil {
@@ -209,7 +209,7 @@ func TestCurrentEnvMustBeExplicit(t *testing.T) {
 		t.Fatalf("CurrentEnv() = %q, want empty", got)
 	}
 	if _, _, err := Load(t.TempDir(), ServiceIAM); err == nil {
-		t.Fatal("Load() accepted a missing LIGHTNING_APP_ENV")
+		t.Fatal("Load() accepted a missing MS_K_APP_ENV")
 	}
 }
 
@@ -236,8 +236,8 @@ func TestEnvironmentName(t *testing.T) {
 	t.Parallel()
 
 	tests := map[string]string{
-		"database.maxOpenConns": "LIGHTNING_DATABASE_MAX_OPEN_CONNS",
-		"storage.useSSL":        "LIGHTNING_STORAGE_USE_SSL",
+		"database.maxOpenConns": "MS_K_DATABASE_MAX_OPEN_CONNS",
+		"storage.useSSL":        "MS_K_STORAGE_USE_SSL",
 	}
 	for key, want := range tests {
 		if got := environmentName(key); got != want {

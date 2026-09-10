@@ -6,7 +6,6 @@ server:
 registry:
   driver: consul
   address: http://127.0.0.1:8500
-  prefix: /lightning/services
 
 service:
   id: ""

@@ -15,8 +15,8 @@ import {
   PlusOutlined,
   TeamOutlined,
   UserSwitchOutlined,
-} from '@ant-design/icons';
-import { Button, Dropdown, Popconfirm, Space } from 'antd';
+} from '@/utils/icons';
+import { Button, Dropdown, Popconfirm, Space } from '@/components/ui';
 import { usePermissionStore } from '@/store/permission';
 
 export interface TableActionItem {

@@ -8,7 +8,7 @@ import (
 	"time"
 
 	miniredis "github.com/alicebob/miniredis/v2"
-	"github.com/gcc798/lightning/internal/platform/redislock"
+	"github.com/gcc798/microservice-kit/internal/platform/redislock"
 	"github.com/redis/go-redis/v9"
 )
 

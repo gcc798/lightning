@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/storageenv"
+	entpkg "github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/storageenv"
 )
 
 type storageObjectInfo struct {

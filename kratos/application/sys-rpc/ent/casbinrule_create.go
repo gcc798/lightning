@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/casbinrule"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/casbinrule"
 )
 
 // CasbinRuleCreate is the builder for creating a CasbinRule entity.

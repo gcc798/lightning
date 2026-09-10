@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/gcc798/lightning/internal/config"
-	"github.com/gcc798/lightning/internal/httpresponse"
-	"github.com/gcc798/lightning/internal/platform/jwt"
+	"github.com/gcc798/microservice-kit/internal/config"
+	"github.com/gcc798/microservice-kit/internal/httpresponse"
+	"github.com/gcc798/microservice-kit/internal/platform/jwt"
 	"github.com/labstack/echo/v5"
 )
 

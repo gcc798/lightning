@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"github.com/gcc798/lightning/internal/httpresponse"
-	logging "github.com/gcc798/lightning/internal/logger"
-	apperrors "github.com/gcc798/lightning/internal/utils/errors"
+	"github.com/gcc798/microservice-kit/internal/httpresponse"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	apperrors "github.com/gcc798/microservice-kit/internal/utils/errors"
 	"github.com/labstack/echo/v5"
 	"go.uber.org/zap"
 )

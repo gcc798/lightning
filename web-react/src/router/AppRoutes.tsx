@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useMemo } from 'react';
-import type { LazyExoticComponent } from 'react';
+import type { LazyExoticComponent, ReactElement } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
-import { message } from 'antd';
+import { message } from '@/components/ui';
 import type { MenuRouteRecord } from '@/types/menu';
 import type { MenuRecord } from '@/types/menu';
 import { PageLoading } from '@/components/common/PageLoading';
@@ -30,7 +30,7 @@ function normalizeComponentPath(component?: string) {
     .replace(/^\//, '');
 }
 
-function resolvePageComponent(menu: MenuRouteRecord): LazyExoticComponent<() => JSX.Element> {
+function resolvePageComponent(menu: MenuRouteRecord): LazyExoticComponent<() => ReactElement> {
   const normalized = normalizeComponentPath(menu.component);
   const candidate = `../pages/${normalized}.tsx`;
   const moduleLoader = pageModules[candidate] ?? pageModules['../pages/error/404.tsx'];
@@ -38,7 +38,7 @@ function resolvePageComponent(menu: MenuRouteRecord): LazyExoticComponent<() => 
   // 动态菜单只负责告诉前端“应该打开哪个页面”，真正的 React 页面文件
   // 仍然由本地 pages 目录承载。找不到时退回 404，避免白屏。
   return lazy(async () => {
-    const module = (await moduleLoader()) as { default: () => JSX.Element };
+    const module = (await moduleLoader()) as { default: () => ReactElement };
     return module;
   });
 }
@@ -84,11 +84,7 @@ function buildDynamicRoutes(menuTree: MenuRouteRecord[]): RouteObject[] {
     return {
       // useRoutes 下挂在根布局的子路由要使用相对 path，因此这里去掉前导 /。
       path: menu.fullPath.replace(/^\//, ''),
-      element: (
-        <Suspense fallback={<PageLoading />}>
-          <PageComponent />
-        </Suspense>
-      ),
+      element: <PageComponent />,
     };
   });
 }
@@ -203,21 +199,13 @@ export function AppRoutes() {
           },
           {
             path: 'dashboard',
-            element: (
-              <Suspense fallback={<PageLoading />}>
-                <DashboardPage />
-              </Suspense>
-            ),
+            element: <DashboardPage />,
           },
           ...directoryRedirectRoutes,
           ...dynamicRoutes,
           {
             path: '*',
-            element: (
-              <Suspense fallback={<PageLoading />}>
-                <NotFoundPage />
-              </Suspense>
-            ),
+            element: <NotFoundPage />,
           },
         ],
       },

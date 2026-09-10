@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	logging "github.com/gcc798/lightning/internal/logger"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )

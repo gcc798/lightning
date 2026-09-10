@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SystemService_RecordLogin_FullMethodName      = "/lightning.sys.v1.SystemService/RecordLogin"
-	SystemService_RecordOperations_FullMethodName = "/lightning.sys.v1.SystemService/RecordOperations"
-	SystemService_CleanLogs_FullMethodName        = "/lightning.sys.v1.SystemService/CleanLogs"
+	SystemService_RecordLogin_FullMethodName      = "/microservice_kit.sys.v1.SystemService/RecordLogin"
+	SystemService_RecordOperations_FullMethodName = "/microservice_kit.sys.v1.SystemService/RecordOperations"
+	SystemService_CleanLogs_FullMethodName        = "/microservice_kit.sys.v1.SystemService/CleanLogs"
 )
 
 // SystemServiceClient is the client API for SystemService service.
@@ -186,7 +186,7 @@ func _SystemService_CleanLogs_Handler(srv interface{}, ctx context.Context, dec 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SystemService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lightning.sys.v1.SystemService",
+	ServiceName: "microservice_kit.sys.v1.SystemService",
 	HandlerType: (*SystemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 
-	logging "github.com/gcc798/lightning/internal/logger"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"go.uber.org/zap"
 )
 

@@ -1,6 +1,6 @@
-# lightning native
+# microservice-kit native
 
-`native` 是 lightning 不依赖完整微服务框架的原生 Go 渐进式微服务实现，也是三套后端实现的业务与 HTTP 契约基线。它只保留真实微服务部署形态，不提供单体入口。
+`native` 是 microservice-kit 不依赖完整微服务框架的原生 Go 渐进式微服务实现，也是三套后端实现的业务与 HTTP 契约基线。它只保留真实微服务部署形态，不提供单体入口。
 
 ## 本地启动
 
@@ -9,7 +9,7 @@
 ```bash
 cd native
 make init-config
-export LIGHTNING_APP_ENV=dev
+export MS_K_APP_ENV=dev
 ```
 
 每个进程的配置位于自己的 `application/<service>/` 目录。修改对应服务的 `conf.dev.yaml` 后，分别启动微服务：
@@ -37,15 +37,17 @@ go run ./application/gateway
 go run ./application/scheduler
 ```
 
-服务间契约在 `api/<domain>/v1/*.proto`；修改后运行 `make proto`，`make verify` 会检查生成文件是否最新。默认注册中心为 Consul `http://127.0.0.1:8500`。切换 etcd v3 HTTP gateway 时设置 `LIGHTNING_REGISTRY_DRIVER=etcd` 和 `LIGHTNING_REGISTRY_ADDRESS=http://127.0.0.1:2379`；注册 key 前缀可用 `LIGHTNING_REGISTRY_PREFIX` 调整。
+服务间契约在 `api/<domain>/v1/*.proto`；修改后运行 `make proto`，`make verify` 会检查生成文件是否最新。默认注册中心为 Consul `http://127.0.0.1:8500`。注册中心支持 `consul`、`etcd` 和 `nacos`：etcd 使用 `MS_K_REGISTRY_PREFIX` 作为注册 key 前缀；Nacos 地址形如 `http://127.0.0.1:8848/nacos`，可选 namespace、group 和账号配置见 [`docs/configuration.md`](docs/configuration.md)。
 
-`LIGHTNING_APP_ENV` 必须显式设置为 `dev` 或 `prod`，用于在具体服务目录中选择 `conf.dev.yaml` 或 `conf.prod.yaml`。程序不会读取 `*.example.yaml`。配置没有代码默认值；每个服务使用的键必须在 YAML 或对应的 `LIGHTNING_*` 环境变量中显式出现，环境变量优先于 YAML。
+IAM、SYS、Resource 会把 Echo 中实际注册的业务 HTTP method/path 随实例写入注册中心。Gateway 启动时加载路由并每 5 秒刷新；RESTful 参数路由按 Echo 的 `:param`/`*` 语义匹配，新增或删除接口无需再修改 Gateway。`/health/*` 与 `/metrics` 不作为前端路由发布；Prometheus 应通过 Consul、Kubernetes 等服务发现直接抓取每个实例的 `/metrics`。
+
+`MS_K_APP_ENV` 必须显式设置为 `dev` 或 `prod`，用于在具体服务目录中选择 `conf.dev.yaml` 或 `conf.prod.yaml`。程序不会读取 `*.example.yaml`。配置没有代码默认值；每个服务使用的键必须在 YAML 或对应的 `MS_K_*` 环境变量中显式出现，环境变量优先于 YAML。
 
 各服务支持的环境变量、对应 YAML 键和约束见 [`docs/configuration.md`](docs/configuration.md)。日志配置只从 `zaplogger.<env>.yaml` 读取，不支持字段级环境变量覆盖。
 
-Git 只管理每个服务的 `conf.example.yaml` 和 `zaplogger.example.yaml`。`make init-config` 会在文件不存在时把模板分别复制为 `*.dev.yaml` 和 `*.prod.yaml`，不会覆盖已有配置；这些实际运行配置已被 Git 忽略。模板只声明该进程实际使用的配置段，例如 Gateway 只配置接入与注册中心，Resource 配置数据库和对象存储，Scheduler 配置数据库和注册中心。创建后应按环境修改地址和凭据；生产敏感值也可以通过对应的 `LIGHTNING_*` 环境变量注入。
+Git 只管理每个服务的 `conf.example.yaml` 和 `zaplogger.example.yaml`。`make init-config` 会在文件不存在时把模板分别复制为 `*.dev.yaml` 和 `*.prod.yaml`，不会覆盖已有配置；这些实际运行配置已被 Git 忽略。模板只声明该进程实际使用的配置段，例如 Gateway 只配置接入与注册中心，Resource 配置数据库和对象存储，Scheduler 配置数据库和注册中心。创建后应按环境修改地址和凭据；生产敏感值也可以通过对应的 `MS_K_*` 环境变量注入。
 
-Gateway、IAM、SYS、Resource、Scheduler 的 `service.id` 是注册中心中的实例唯一标识；留空时程序按“服务名 + 主机名”自动生成，只有需要固定实例 ID 时才填写。Gateway、IAM、SYS、Resource 的 `service.advertiseHost` 是写入注册中心、供其他进程访问该实例的地址；本机开发使用 `127.0.0.1`，容器部署使用实例自身可达的地址。它不是监听地址，HTTP/gRPC 仍由 `server.port` 和 `grpc.port` 监听。Scheduler 不提供网络 endpoint，因此只配置实例 ID。
+Gateway、IAM、SYS、Resource 的 `service.id` 是注册中心中的实例唯一标识；留空时程序按“服务名 + 主机名”自动生成，只有需要固定实例 ID 时才填写。它们的 `service.advertiseHost` 是写入注册中心、供其他进程访问该实例的地址；本机开发使用 `127.0.0.1`，容器部署使用实例自身可达的地址。它不是监听地址，HTTP/gRPC 仍由 `server.port` 和 `grpc.port` 监听。Scheduler 不提供网络 endpoint，因此只使用注册中心发现其他服务，不注册自身。
 
 生产环境默认关闭 CORS，前后端通过 Nginx 同源代理；开发环境可在 `conf.dev.yaml` 中开启。
 
@@ -55,17 +57,19 @@ Gateway、IAM、SYS、Resource、Scheduler 的 `service.id` 是注册中心中�
 
 IAM、SYS、Resource 启动时分别执行自己嵌入二进制的 Goose 迁移，SQL 位于 `application/<service>/internal/migrations/sql/`，版本表分别为 `goose_iam_version`、`goose_sys_version`、`goose_resource_version`。数据库结构不使用 GORM AutoMigrate；Scheduler 不执行迁移。
 
-迁移会创建逻辑客户端 `web-admin` 和内置角色，但不会写入默认管理员或默认密码。创建首个管理员：
+IAM 迁移会创建逻辑客户端 `web-admin`、内置角色、后台基础菜单及其 API 权限映射。普通用户角色默认拥有全部业务页面的只读权限；超级管理员通过角色标识读取全部菜单和 API 权限。
+
+迁移不会写入默认管理员或默认密码。创建首个管理员并绑定 `super_admin` 角色：
 
 ```bash
-export LIGHTNING_USERMGR_PASSWORD='replace-with-a-strong-password'
+export MS_K_USERMGR_PASSWORD='replace-with-a-strong-password'
 go run ./cmd/usermgr --operation=create --username=admin --nickname=管理员 --role=super_admin
 ```
 
 重置密码：
 
 ```bash
-export LIGHTNING_USERMGR_PASSWORD='replace-with-a-new-strong-password'
+export MS_K_USERMGR_PASSWORD='replace-with-a-new-strong-password'
 go run ./cmd/usermgr --operation=reset --username=admin
 ```
 
@@ -94,14 +98,14 @@ make ci     # verify + Docker build
 
 ```bash
 make init-config
-export LIGHTNING_JWT_SECRET='replace-with-at-least-32-random-characters'
+export MS_K_JWT_SECRET='replace-with-at-least-32-random-characters'
 docker compose up -d --build
 ```
 
 所有进程使用根目录唯一的 `Dockerfile`，通过 `TARGET=gateway|iam|sys|resource|scheduler` 选择构建入口。例如：
 
 ```bash
-docker build --build-arg TARGET=scheduler -t lightning-native-scheduler .
+docker build --build-arg TARGET=scheduler -t microservice-kit-native-scheduler .
 ```
 
 Compose 默认启动 Consul、gateway、iam、sys、resource、scheduler、PostgreSQL、Redis 和 RustFS，即完整微服务形态。Consul UI/API 映射到宿主机 `8501`，所有前端 HTTP 请求统一进入 gateway 的 `9009`。
@@ -109,15 +113,15 @@ Compose 默认启动 Consul、gateway、iam、sys、resource、scheduler、Postg
 启动固定的本地扩容拓扑（Gateway 1、Scheduler 1、IAM 3、SYS 5、Resource 1）：
 
 ```bash
-export LIGHTNING_JWT_SECRET='replace-with-at-least-32-random-characters'
+export MS_K_JWT_SECRET='replace-with-at-least-32-random-characters'
 ./scripts/microservices.sh start
 ./scripts/microservices.sh stop     # 停止但保留容器和数据
 ./scripts/microservices.sh destroy  # 删除容器、网络和数据卷
 ```
 
-Consul 服务列表访问 `http://localhost:8501/ui/dc1/services`。容器入口会在未显式设置 `LIGHTNING_SERVICE_ADVERTISE_HOST` 时注入当前容器 IP，使每个扩容副本注册自己的真实 HTTP/gRPC 地址。PostgreSQL、Redis 和 RustFS 只在 Compose 网络内提供给服务使用，不占用宿主机端口。
+Consul 服务列表访问 `http://localhost:8501/ui/dc1/services`。容器入口会在未显式设置 `MS_K_SERVICE_ADVERTISE_HOST` 时注入当前容器 IP，使每个扩容副本注册自己的真实 HTTP/gRPC 地址。PostgreSQL、Redis 和 RustFS 只在 Compose 网络内提供给服务使用，不占用宿主机端口。
 
-PostgreSQL、Redis 和 RustFS 带有本地默认值；需要覆盖时使用 `LIGHTNING_POSTGRES_PASSWORD`、`LIGHTNING_REDIS_PASSWORD` 和 `LIGHTNING_RUSTFS_*`。RustFS 提供 S3 兼容对象存储；resource 启动时会检查并按需创建 `lightning` Bucket。
+PostgreSQL、Redis 和 RustFS 带有本地默认值；需要覆盖时使用 `MS_K_POSTGRES_PASSWORD`、`MS_K_REDIS_PASSWORD` 和 `MS_K_RUSTFS_*`。RustFS 提供 S3 兼容对象存储；resource 启动时会检查并按需创建 `microservice-kit` Bucket。
 
 Kubernetes 清单位于 `k8s/`，包含上述五个服务进程、Scheduler、持久化单节点 Consul、ClusterIP、Ingress 和 gateway HPA。部署前需替换镜像名并基于 `k8s/secret.yaml.example` 创建 Secret；PostgreSQL、Redis 和 RustFS 服务地址按现有 ConfigMap 接入。
 
@@ -133,7 +137,7 @@ cmd/usermgr            一次性管理工具
 api                    Proto 源文件
 internal/api           gRPC 契约生成代码与薄适配
 internal/httpserver    共享 HTTP 生命周期，不包含业务路由
-internal/registry      in-process、Consul、etcd 注册发现
+internal/registry      in-process、Consul、etcd、Nacos 注册发现
 internal/transport     gRPC server 与动态 client 连接池
 internal               多个进程共享、但禁止仓库外导入的技术能力；不放领域业务代码
 ```

@@ -1,8 +1,8 @@
 package server
 
 import (
-	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/service"
+	v1 "github.com/gcc798/microservice-kit/kratos/api/system/v1"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/service"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 )
 

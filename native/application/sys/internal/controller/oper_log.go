@@ -3,11 +3,11 @@ package controller
 import (
 	"strconv"
 
-	sys "github.com/gcc798/lightning/application/sys/internal/domain"
-	"github.com/gcc798/lightning/application/sys/internal/request"
-	"github.com/gcc798/lightning/application/sys/internal/response"
-	"github.com/gcc798/lightning/internal/container"
-	_ "github.com/gcc798/lightning/internal/utils/pagination"
+	sys "github.com/gcc798/microservice-kit/application/sys/internal/domain"
+	"github.com/gcc798/microservice-kit/application/sys/internal/request"
+	"github.com/gcc798/microservice-kit/application/sys/internal/response"
+	"github.com/gcc798/microservice-kit/internal/container"
+	_ "github.com/gcc798/microservice-kit/internal/utils/pagination"
 	"github.com/labstack/echo/v5"
 )
 

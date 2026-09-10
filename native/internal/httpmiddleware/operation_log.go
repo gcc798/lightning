@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/utils"
-	"github.com/gcc798/lightning/internal/utils/idgen"
+	sysv1 "github.com/gcc798/microservice-kit/internal/api/sys/v1"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/utils"
+	"github.com/gcc798/microservice-kit/internal/utils/idgen"
 	"github.com/labstack/echo/v5"
 	"go.uber.org/zap"
 )
@@ -505,7 +505,7 @@ func formatOperName(userId, userName string) string {
 
 // shouldSkipLogging 判断是否应该跳过日志记录
 func shouldSkipLogging(path string) bool {
-	if path == "/health/live" {
+	if path == "/metrics" || path == "/health" || strings.HasPrefix(path, "/health/") {
 		return true
 	}
 

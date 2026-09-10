@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	appmetrics "github.com/gcc798/lightning/kratos/pkg/metrics"
+	appmetrics "github.com/gcc798/microservice-kit/kratos/pkg/metrics"
 	"github.com/redis/go-redis/v9"
 )
 

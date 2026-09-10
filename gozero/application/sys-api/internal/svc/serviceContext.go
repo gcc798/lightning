@@ -4,8 +4,8 @@
 package svc
 
 import (
-	"github.com/gcc798/lightning/application/sys-api/internal/config"
-	"github.com/gcc798/lightning/application/sys-rpc/client/sysservice"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/config"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/client/sysservice"
 	"github.com/redis/go-redis/v9"
 	"github.com/zeromicro/go-zero/zrpc"
 )

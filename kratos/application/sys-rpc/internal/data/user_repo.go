@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
-	entpkg "github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
+	v1 "github.com/gcc798/microservice-kit/kratos/api/system/v1"
+	entpkg "github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent"
 	"golang.org/x/crypto/bcrypt"
 )
 

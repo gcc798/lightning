@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package lightning.resource.v1;
+package microservice_kit.resource.v1;
 
-option go_package = "github.com/gcc798/lightning/internal/api/resource/v1;resourcev1";
+option go_package = "github.com/gcc798/microservice-kit/internal/api/resource/v1;resourcev1";
 
 // ResourceService 提供资源领域的内部 gRPC 能力。
 service ResourceService {

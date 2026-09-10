@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Popconfirm, Space, Tag } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Popconfirm, Tag } from '@/components/ui';
+import { DeleteOutlined, PlusOutlined } from '@/utils/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { ApiPermissionAssignModal } from '@/components/common/ApiPermissionAssignModal';
 import { PermissionGate } from '@/components/common/PermissionGate';
@@ -134,41 +134,37 @@ export default function RolePage() {
         rowKey="id"
         searchSchemas={searchSchemas}
         scroll={{ x: 'max-content' }}
-        toolbar={
-          <Space>
-            <PermissionGate permission="role.create">
-              <Button
-                icon={<PlusOutlined />}
-                type="primary"
-                onClick={() => {
-                  setCurrentRoleId(undefined);
-                  setCurrentRole(undefined);
-                  setModalOpen(true);
-                }}
-              >
-                新增
+        bulkActions={(
+          <PermissionGate permission="role.delete">
+            <Popconfirm
+              title="确定删除选中的角色吗？"
+              onConfirm={async () => {
+                const rows = tableRef.current?.getSelectedRows() ?? [];
+                await Promise.all(rows.map((row) => roleApi.delete(row.id)));
+                message.success('批量删除成功');
+                tableRef.current?.reload();
+              }}
+            >
+              <Button danger icon={<DeleteOutlined />}>
+                删除所选
               </Button>
-            </PermissionGate>
-            <PermissionGate permission="role.delete">
-              <Popconfirm
-                title="确定删除选中的角色吗？"
-                onConfirm={async () => {
-                  const rows = tableRef.current?.getSelectedRows() ?? [];
-                  if (!rows.length) {
-                    message.warning('请先选择角色');
-                    return;
-                  }
-                  await Promise.all(rows.map((row) => roleApi.delete(row.id)));
-                  message.success('批量删除成功');
-                  tableRef.current?.reload();
-                }}
-              >
-                <Button danger icon={<DeleteOutlined />}>
-                  批量删除
-                </Button>
-              </Popconfirm>
-            </PermissionGate>
-          </Space>
+            </Popconfirm>
+          </PermissionGate>
+        )}
+        toolbar={
+          <PermissionGate permission="role.create">
+            <Button
+              icon={<PlusOutlined />}
+              type="primary"
+              onClick={() => {
+                setCurrentRoleId(undefined);
+                setCurrentRole(undefined);
+                setModalOpen(true);
+              }}
+            >
+              新增
+            </Button>
+          </PermissionGate>
         }
       />
 

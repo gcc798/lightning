@@ -54,3 +54,11 @@ func TestIsSensitiveField(t *testing.T) {
 		}
 	}
 }
+
+func TestOperationalEndpointsSkipOperationLog(t *testing.T) {
+	for _, path := range []string{"/metrics", "/health", "/health/live", "/health/ready"} {
+		if !shouldSkipLogging(path) {
+			t.Errorf("shouldSkipLogging(%q) = false", path)
+		}
+	}
+}

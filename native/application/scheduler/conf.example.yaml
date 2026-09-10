@@ -1,5 +1,5 @@
 database:
-  dsn: "host=127.0.0.1 user=postgres password=post123 dbname=lightning port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+  dsn: "host=127.0.0.1 user=postgres password=post123 dbname=microservice_kit port=5432 sslmode=disable TimeZone=Asia/Shanghai"
   maxOpenConns: 20
   maxIdleConns: 5
   connMaxLifetimeMinutes: 60
@@ -8,7 +8,6 @@ database:
 registry:
   driver: consul
   address: http://127.0.0.1:8500
-  prefix: /lightning/services
 
 service:
   id: ""

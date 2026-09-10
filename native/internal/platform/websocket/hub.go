@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	logging "github.com/gcc798/lightning/internal/logger"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"github.com/gorilla/websocket"
 	"go.uber.org/zap"
 )

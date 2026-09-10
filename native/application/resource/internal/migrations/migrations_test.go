@@ -9,9 +9,9 @@ import (
 )
 
 func TestUpFromEmptyDatabase(t *testing.T) {
-	dsn := os.Getenv("LIGHTNING_TEST_POSTGRES_DSN")
+	dsn := os.Getenv("MS_K_TEST_POSTGRES_DSN")
 	if dsn == "" {
-		t.Skip("LIGHTNING_TEST_POSTGRES_DSN is not set")
+		t.Skip("MS_K_TEST_POSTGRES_DSN is not set")
 	}
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {

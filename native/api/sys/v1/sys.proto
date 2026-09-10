@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package lightning.sys.v1;
+package microservice_kit.sys.v1;
 
-option go_package = "github.com/gcc798/lightning/internal/api/sys/v1;sysv1";
+option go_package = "github.com/gcc798/microservice-kit/internal/api/sys/v1;sysv1";
 
 // SystemService 提供系统配置、登录日志和操作日志的内部 gRPC 能力。
 service SystemService {

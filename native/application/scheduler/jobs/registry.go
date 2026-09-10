@@ -3,9 +3,9 @@ package jobs
 import (
 	"context"
 
-	resourcev1 "github.com/gcc798/lightning/internal/api/resource/v1"
-	sysv1 "github.com/gcc798/lightning/internal/api/sys/v1"
-	logging "github.com/gcc798/lightning/internal/logger"
+	resourcev1 "github.com/gcc798/microservice-kit/internal/api/resource/v1"
+	sysv1 "github.com/gcc798/microservice-kit/internal/api/sys/v1"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"go.uber.org/zap"
 )
 

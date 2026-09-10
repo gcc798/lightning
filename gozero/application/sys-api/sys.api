@@ -1,7 +1,7 @@
 syntax = "v1"
 
 info (
-	title:  "lightning sys-api"
+	title:  "microservice-kit sys-api"
 	desc:   "go-zero contracts for native/web compatibility"
 	author: "gcc798"
 )

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gcc798/lightning/application/iam/internal/domain/model"
-	logging "github.com/gcc798/lightning/internal/logger"
+	"github.com/gcc798/microservice-kit/application/iam/internal/domain/model"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )

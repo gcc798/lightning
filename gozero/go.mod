@@ -1,4 +1,4 @@
-module github.com/gcc798/lightning
+module github.com/gcc798/microservice-kit
 
 go 1.25.0
 

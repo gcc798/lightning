@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pb;
 
-option go_package = "github.com/gcc798/lightning/application/sys-rpc/pb";
+option go_package = "github.com/gcc798/microservice-kit/application/sys-rpc/pb";
 
 
 

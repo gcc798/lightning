@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Card, Form, Popconfirm, Space, Table, Tag } from 'antd';
-import { DeleteOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PlusOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Card, Form, Popconfirm, Space, Table, Tag } from '@/components/ui';
+import { DeleteOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PlusOutlined } from '@/utils/icons';
 import { BasicForm } from '@/components/common/BasicForm';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
@@ -105,9 +105,9 @@ export default function OrgPage() {
       const values = form.getFieldsValue();
       const filtered = filterTree(
         data,
-        values.orgName ?? '',
-        values.orgCode ?? '',
-        values.status,
+        String(values.orgName ?? ''),
+        String(values.orgCode ?? ''),
+        toOptionalNumber(values.status),
       );
       setTableData(filtered);
       setExpandedRowKeys(expandAll ? collectKeys(filtered) : []);

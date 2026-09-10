@@ -6,14 +6,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gcc798/lightning/internal/platform/redislock"
+	"github.com/gcc798/microservice-kit/internal/platform/redislock"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
 const (
-	cacheKeyPrefix = "lightning:config:"
-	lockKeyPrefix  = "lightning:lock:config:"
+	cacheKeyPrefix = "microservice-kit:config:"
+	lockKeyPrefix  = "microservice-kit:lock:config:"
 )
 
 // Source loads persistent configuration when Redis has no value.

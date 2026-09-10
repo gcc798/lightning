@@ -3,7 +3,7 @@ package data
 import (
 	"github.com/google/wire"
 
-	"github.com/gcc798/lightning/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-api/internal/conf"
 )
 
 // ProviderSet is data providers.

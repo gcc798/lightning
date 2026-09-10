@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package lightning.iam.v1;
+package microservice_kit.iam.v1;
 
-option go_package = "github.com/gcc798/lightning/internal/api/iam/v1;iamv1";
+option go_package = "github.com/gcc798/microservice-kit/internal/api/iam/v1;iamv1";
 
 // IAMService 提供身份认证和权限校验的内部 gRPC 能力。
 service IAMService {

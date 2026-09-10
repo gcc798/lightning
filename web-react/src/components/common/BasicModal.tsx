@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Modal } from 'antd';
+import { Modal } from '@/components/ui';
 
 interface BasicModalProps {
   open: boolean;

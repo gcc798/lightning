@@ -3,8 +3,8 @@ package router
 import (
 	"fmt"
 
-	"github.com/gcc798/lightning/application/iam/internal/controller"
-	"github.com/gcc798/lightning/internal/httpx"
+	"github.com/gcc798/microservice-kit/application/iam/internal/controller"
+	"github.com/gcc798/microservice-kit/internal/httpx"
 )
 
 // 注册认证相关路由。

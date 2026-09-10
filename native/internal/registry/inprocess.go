@@ -5,6 +5,7 @@ import (
 	"sync"
 )
 
+// InProcess is a unit-test-only registry; its state cannot be shared across processes.
 type InProcess struct {
 	mu       sync.RWMutex
 	services map[string]map[string]ServiceInstance

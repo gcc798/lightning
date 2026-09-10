@@ -499,7 +499,7 @@ var File_api_sys_v1_sys_proto protoreflect.FileDescriptor
 
 const file_api_sys_v1_sys_proto_rawDesc = "" +
 	"\n" +
-	"\x14api/sys/v1/sys.proto\x12\x10lightning.sys.v1\"\a\n" +
+	"\x14api/sys/v1/sys.proto\x12\x17microservice_kit.sys.v1\"\a\n" +
 	"\x05Empty\"\x8c\x02\n" +
 	"\x12RecordLoginRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
@@ -534,19 +534,19 @@ const file_api_sys_v1_sys_proto_rawDesc = "" +
 	"\vcost_millis\x18\x0e \x01(\x03R\n" +
 	"costMillis\x12\x1d\n" +
 	"\n" +
-	"user_agent\x18\x0f \x01(\tR\tuserAgent\"M\n" +
-	"\x17RecordOperationsRequest\x122\n" +
-	"\x04logs\x18\x01 \x03(\v2\x1e.lightning.sys.v1.OperationLogR\x04logs\"&\n" +
+	"user_agent\x18\x0f \x01(\tR\tuserAgent\"T\n" +
+	"\x17RecordOperationsRequest\x129\n" +
+	"\x04logs\x18\x01 \x03(\v2%.microservice_kit.sys.v1.OperationLogR\x04logs\"&\n" +
 	"\x10CleanLogsRequest\x12\x12\n" +
 	"\x04days\x18\x01 \x01(\x05R\x04days\"Y\n" +
 	"\x11CleanLogsResponse\x12\x1d\n" +
 	"\n" +
 	"login_logs\x18\x01 \x01(\x03R\tloginLogs\x12%\n" +
-	"\x0eoperation_logs\x18\x02 \x01(\x03R\roperationLogs2\x8b\x02\n" +
-	"\rSystemService\x12L\n" +
-	"\vRecordLogin\x12$.lightning.sys.v1.RecordLoginRequest\x1a\x17.lightning.sys.v1.Empty\x12V\n" +
-	"\x10RecordOperations\x12).lightning.sys.v1.RecordOperationsRequest\x1a\x17.lightning.sys.v1.Empty\x12T\n" +
-	"\tCleanLogs\x12\".lightning.sys.v1.CleanLogsRequest\x1a#.lightning.sys.v1.CleanLogsResponseB7Z5github.com/gcc798/lightning/internal/api/sys/v1;sysv1b\x06proto3"
+	"\x0eoperation_logs\x18\x02 \x01(\x03R\roperationLogs2\xb5\x02\n" +
+	"\rSystemService\x12Z\n" +
+	"\vRecordLogin\x12+.microservice_kit.sys.v1.RecordLoginRequest\x1a\x1e.microservice_kit.sys.v1.Empty\x12d\n" +
+	"\x10RecordOperations\x120.microservice_kit.sys.v1.RecordOperationsRequest\x1a\x1e.microservice_kit.sys.v1.Empty\x12b\n" +
+	"\tCleanLogs\x12).microservice_kit.sys.v1.CleanLogsRequest\x1a*.microservice_kit.sys.v1.CleanLogsResponseB>Z<github.com/gcc798/microservice-kit/internal/api/sys/v1;sysv1b\x06proto3"
 
 var (
 	file_api_sys_v1_sys_proto_rawDescOnce sync.Once
@@ -562,21 +562,21 @@ func file_api_sys_v1_sys_proto_rawDescGZIP() []byte {
 
 var file_api_sys_v1_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_api_sys_v1_sys_proto_goTypes = []any{
-	(*Empty)(nil),                   // 0: lightning.sys.v1.Empty
-	(*RecordLoginRequest)(nil),      // 1: lightning.sys.v1.RecordLoginRequest
-	(*OperationLog)(nil),            // 2: lightning.sys.v1.OperationLog
-	(*RecordOperationsRequest)(nil), // 3: lightning.sys.v1.RecordOperationsRequest
-	(*CleanLogsRequest)(nil),        // 4: lightning.sys.v1.CleanLogsRequest
-	(*CleanLogsResponse)(nil),       // 5: lightning.sys.v1.CleanLogsResponse
+	(*Empty)(nil),                   // 0: microservice_kit.sys.v1.Empty
+	(*RecordLoginRequest)(nil),      // 1: microservice_kit.sys.v1.RecordLoginRequest
+	(*OperationLog)(nil),            // 2: microservice_kit.sys.v1.OperationLog
+	(*RecordOperationsRequest)(nil), // 3: microservice_kit.sys.v1.RecordOperationsRequest
+	(*CleanLogsRequest)(nil),        // 4: microservice_kit.sys.v1.CleanLogsRequest
+	(*CleanLogsResponse)(nil),       // 5: microservice_kit.sys.v1.CleanLogsResponse
 }
 var file_api_sys_v1_sys_proto_depIdxs = []int32{
-	2, // 0: lightning.sys.v1.RecordOperationsRequest.logs:type_name -> lightning.sys.v1.OperationLog
-	1, // 1: lightning.sys.v1.SystemService.RecordLogin:input_type -> lightning.sys.v1.RecordLoginRequest
-	3, // 2: lightning.sys.v1.SystemService.RecordOperations:input_type -> lightning.sys.v1.RecordOperationsRequest
-	4, // 3: lightning.sys.v1.SystemService.CleanLogs:input_type -> lightning.sys.v1.CleanLogsRequest
-	0, // 4: lightning.sys.v1.SystemService.RecordLogin:output_type -> lightning.sys.v1.Empty
-	0, // 5: lightning.sys.v1.SystemService.RecordOperations:output_type -> lightning.sys.v1.Empty
-	5, // 6: lightning.sys.v1.SystemService.CleanLogs:output_type -> lightning.sys.v1.CleanLogsResponse
+	2, // 0: microservice_kit.sys.v1.RecordOperationsRequest.logs:type_name -> microservice_kit.sys.v1.OperationLog
+	1, // 1: microservice_kit.sys.v1.SystemService.RecordLogin:input_type -> microservice_kit.sys.v1.RecordLoginRequest
+	3, // 2: microservice_kit.sys.v1.SystemService.RecordOperations:input_type -> microservice_kit.sys.v1.RecordOperationsRequest
+	4, // 3: microservice_kit.sys.v1.SystemService.CleanLogs:input_type -> microservice_kit.sys.v1.CleanLogsRequest
+	0, // 4: microservice_kit.sys.v1.SystemService.RecordLogin:output_type -> microservice_kit.sys.v1.Empty
+	0, // 5: microservice_kit.sys.v1.SystemService.RecordOperations:output_type -> microservice_kit.sys.v1.Empty
+	5, // 6: microservice_kit.sys.v1.SystemService.CleanLogs:output_type -> microservice_kit.sys.v1.CleanLogsResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

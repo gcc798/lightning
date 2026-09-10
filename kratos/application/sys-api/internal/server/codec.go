@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	v1 "github.com/gcc798/lightning/kratos/api/system/v1"
+	v1 "github.com/gcc798/microservice-kit/kratos/api/system/v1"
 	kerrors "github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/transport"
 	"google.golang.org/protobuf/types/known/structpb"

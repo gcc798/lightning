@@ -3,8 +3,8 @@ package modules
 import (
 	"context"
 
-	logging "github.com/gcc798/lightning/internal/logger"
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	logging "github.com/gcc798/microservice-kit/internal/logger"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )

@@ -326,7 +326,7 @@ const file_system_v1_captcha_proto_rawDesc = "" +
 	"\x14GenerateImageCaptcha\x12*.api.system.v1.GenerateImageCaptchaRequest\x1a\x1b.api.system.v1.CaptchaReply\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/captcha/image\x12l\n" +
 	"\x0eSendSMSCaptcha\x12$.api.system.v1.SendSMSCaptchaRequest\x1a\x1b.api.system.v1.CaptchaReply\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/captcha/sms\x12r\n" +
 	"\x10SendEmailCaptcha\x12&.api.system.v1.SendEmailCaptchaRequest\x1a\x1b.api.system.v1.CaptchaReply\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/captcha/email\x12}\n" +
-	"\x0fGetEnabledTypes\x12%.api.system.v1.GetEnabledTypesRequest\x1a#.api.system.v1.GetEnabledTypesReply\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/captcha/enabled-typesB5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
+	"\x0fGetEnabledTypes\x12%.api.system.v1.GetEnabledTypesRequest\x1a#.api.system.v1.GetEnabledTypesReply\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/captcha/enabled-typesB<Z:github.com/gcc798/microservice-kit/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_captcha_proto_rawDescOnce sync.Once

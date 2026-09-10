@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent"
 )
 
 // The AttachmentFunc type is an adapter to allow the use of ordinary

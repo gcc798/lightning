@@ -794,7 +794,7 @@ const file_system_v1_auth_proto_rawDesc = "" +
 	"\x06Logout\x12\x1c.api.system.v1.LogoutRequest\x1a\x1b.api.system.v1.MessageReply\"\x0f\x82\xd3\xe4\x93\x02\t\"\a/logout\x12n\n" +
 	"\fRefreshToken\x12\".api.system.v1.RefreshTokenRequest\x1a .api.system.v1.RefreshTokenReply\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/auth/refresh\x12i\n" +
 	"\x13ValidateAccessToken\x12).api.system.v1.ValidateAccessTokenRequest\x1a'.api.system.v1.ValidateAccessTokenReply\x12]\n" +
-	"\x0fCheckPermission\x12%.api.system.v1.CheckPermissionRequest\x1a#.api.system.v1.CheckPermissionReplyB5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
+	"\x0fCheckPermission\x12%.api.system.v1.CheckPermissionRequest\x1a#.api.system.v1.CheckPermissionReplyB<Z:github.com/gcc798/microservice-kit/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_auth_proto_rawDescOnce sync.Once

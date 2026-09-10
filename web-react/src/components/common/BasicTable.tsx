@@ -1,8 +1,8 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { PushpinFilled, PushpinOutlined, ReloadOutlined } from '@ant-design/icons';
-import { Button, Card, Form, Space, Table, Tooltip } from 'antd';
-import type { TableColumnsType, TableProps } from 'antd';
+import { PushpinFilled, PushpinOutlined, ReloadOutlined } from '@/utils/icons';
+import { Button, Form, Space, Table, Tooltip } from '@/components/ui';
+import type { TableColumnsType, TableProps } from '@/components/ui';
 import { useLocation } from 'react-router-dom';
 import type { FormSchema } from '@/types/form';
 import type { PageData } from '@/types/api';
@@ -20,6 +20,7 @@ interface BasicTableProps<T extends object> {
   rowKey: keyof T | ((record: T) => string | number);
   searchSchemas?: FormSchema[];
   toolbar?: ReactNode;
+  bulkActions?: ReactNode;
   scroll?: TableProps<T>['scroll'];
   selectable?: boolean;
 }
@@ -46,6 +47,7 @@ function InnerBasicTable<T extends object>(
     rowKey,
     searchSchemas = [],
     toolbar,
+    bulkActions,
     scroll,
     selectable = true,
   }: BasicTableProps<T>,
@@ -131,7 +133,7 @@ function InnerBasicTable<T extends object>(
   );
 
   return (
-    <>
+    <section className="data-table-workspace">
       {searchSchemas.length ? (
         <div className="page-search">
           <BasicForm
@@ -155,79 +157,81 @@ function InnerBasicTable<T extends object>(
         </div>
       ) : null}
 
-      <Card className="page-card data-table-card" variant="borderless">
-        <div className="page-toolbar">
-          <div className="page-toolbar-main">{toolbar}</div>
-          <Space className="page-toolbar-tools" size={8}>
+      <div className="page-toolbar" role="toolbar" aria-label="数据表格操作">
+        <div className="page-toolbar-main" role="group" aria-label="业务操作">{toolbar}</div>
+        <Space className="page-toolbar-tools" size={6} role="group" aria-label="表格工具">
+          <Tooltip title="刷新数据">
             <Button
-              className="table-utility-btn"
+              aria-label="刷新数据"
+              className="table-utility-btn table-toolbar-icon-btn"
               icon={<ReloadOutlined />}
               loading={loading}
               onClick={() => void loadData()}
-            >
-              刷新
-            </Button>
-            {supportsFixedColumnToggle ? (
-              <Tooltip title={fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}>
-                <Button
-                  aria-label={fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}
-                  className="table-fixed-toggle-btn table-toolbar-icon-btn"
-                  icon={fixedColumnsEnabled ? <PushpinFilled /> : <PushpinOutlined />}
-                  onClick={() => {
-                    const nextValue = !fixedColumnsEnabled;
-                    setFixedColumnsEnabled(nextValue);
+            />
+          </Tooltip>
+          {supportsFixedColumnToggle ? (
+            <Tooltip title={fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}>
+              <Button
+                aria-label={fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}
+                className="table-fixed-toggle-btn table-toolbar-icon-btn"
+                icon={fixedColumnsEnabled ? <PushpinFilled /> : <PushpinOutlined />}
+                onClick={() => {
+                  const nextValue = !fixedColumnsEnabled;
+                  setFixedColumnsEnabled(nextValue);
 
-                    if (typeof window !== 'undefined') {
-                      window.localStorage.setItem(fixedColumnStorageKey, nextValue ? '1' : '0');
-                    }
-                  }}
-                />
-              </Tooltip>
-            ) : null}
-          </Space>
-        </div>
+                  if (typeof window !== 'undefined') {
+                    window.localStorage.setItem(fixedColumnStorageKey, nextValue ? '1' : '0');
+                  }
+                }}
+              />
+            </Tooltip>
+          ) : null}
+        </Space>
+      </div>
 
-        {selectable && selectedRowKeys.length > 0 ? (
-          <div className="table-selection-bar">
-            <span>
-              已选择 <strong>{selectedRowKeys.length}</strong> 项
-            </span>
+      {selectable && selectedRowKeys.length > 0 ? (
+        <div className="table-selection-bar">
+          <span>
+            已选择 <strong>{selectedRowKeys.length}</strong> 项
+          </span>
+          <Space size={8}>
+            {bulkActions}
             <Button size="small" type="link" onClick={() => setSelectedRowKeys([])}>
               清空选择
             </Button>
-          </div>
-        ) : null}
+          </Space>
+        </div>
+      ) : null}
 
-        <Table<T>
-          className={fixedColumnsEnabled ? undefined : 'table-fixed-disabled'}
-          columns={columns}
-          dataSource={dataSource}
-          loading={loading}
-          rowKey={rowKey as TableProps<T>['rowKey']}
-          rowSelection={
-            selectable
-              ? {
-                  selectedRowKeys,
-                  onChange: setSelectedRowKeys,
-                }
-              : undefined
-          }
-          scroll={scroll}
-          pagination={{
-            current: pageNum,
-            pageSize,
-            total,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (currentTotal) => `共 ${currentTotal} 条`,
-            onChange: (nextPage, nextSize) => {
-              setPageNum(nextPage);
-              setPageSize(nextSize);
-            },
-          }}
-        />
-      </Card>
-    </>
+      <Table<T>
+        className={fixedColumnsEnabled ? undefined : 'table-fixed-disabled'}
+        columns={columns}
+        dataSource={dataSource}
+        loading={loading}
+        rowKey={rowKey as TableProps<T>['rowKey']}
+        rowSelection={
+          selectable
+            ? {
+                selectedRowKeys,
+                onChange: setSelectedRowKeys,
+              }
+            : undefined
+        }
+        scroll={scroll}
+        pagination={{
+          current: pageNum,
+          pageSize,
+          total,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          showTotal: (currentTotal) => `共 ${currentTotal} 条`,
+          onChange: (nextPage, nextSize) => {
+            setPageNum(nextPage);
+            setPageSize(nextSize);
+          },
+        }}
+      />
+    </section>
   );
 }
 

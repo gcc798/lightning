@@ -3,7 +3,7 @@ package modules
 import (
 	"context"
 
-	"github.com/gcc798/lightning/internal/platform/websocket"
+	"github.com/gcc798/microservice-kit/internal/platform/websocket"
 )
 
 // WebSocketModule 拥有进程内 WebSocket Hub 的生命周期。

@@ -11,8 +11,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/systemconfig"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/systemconfig"
 )
 
 // SystemConfigQuery is the builder for querying SystemConfig entities.

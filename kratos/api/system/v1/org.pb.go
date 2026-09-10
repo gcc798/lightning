@@ -872,7 +872,7 @@ const file_system_v1_org_proto_rawDesc = "" +
 	"GetOrgById\x12\x1b.api.system.v1.OrgIdRequest\x1a\x16.api.system.v1.OrgItem\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/org/{id}\x12e\n" +
 	"\n" +
 	"GetOrgTree\x12 .api.system.v1.GetOrgTreeRequest\x1a\x1b.api.system.v1.OrgTreeReply\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/org/tree\x12d\n" +
-	"\aPageOrg\x12\x1e.api.system.v1.PageOrgsRequest\x1a\x1c.api.system.v1.PageOrgsReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/org/pageB5Z3github.com/gcc798/lightning/kratos/api/system/v1;v1b\x06proto3"
+	"\aPageOrg\x12\x1e.api.system.v1.PageOrgsRequest\x1a\x1c.api.system.v1.PageOrgsReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/org/pageB<Z:github.com/gcc798/microservice-kit/kratos/api/system/v1;v1b\x06proto3"
 
 var (
 	file_system_v1_org_proto_rawDescOnce sync.Once

@@ -3,8 +3,8 @@ package iam
 import (
 	"context"
 
-	iamv1 "github.com/gcc798/lightning/internal/api/iam/v1"
-	"github.com/gcc798/lightning/internal/platform/jwt"
+	iamv1 "github.com/gcc798/microservice-kit/internal/api/iam/v1"
+	"github.com/gcc798/microservice-kit/internal/platform/jwt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

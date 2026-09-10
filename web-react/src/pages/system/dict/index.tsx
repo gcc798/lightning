@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Popconfirm, Space, Tag } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import type { ColumnsType } from '@/components/ui';
+import { App, Button, Popconfirm, Tag } from '@/components/ui';
+import { DeleteOutlined, PlusOutlined } from '@/utils/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
@@ -124,40 +124,36 @@ export default function DictPage() {
         rowKey="id"
         searchSchemas={searchSchemas}
         scroll={{ x: 1300 }}
-        toolbar={
-          <Space>
-            <PermissionGate permission="dict.create">
-              <Button
-                icon={<PlusOutlined />}
-                type="primary"
-                onClick={() => {
-                  setCurrentDictId(undefined);
-                  setModalOpen(true);
-                }}
-              >
-                新增
+        bulkActions={(
+          <PermissionGate permission="dict.delete">
+            <Popconfirm
+              title="确定批量删除选中的字典吗？"
+              onConfirm={async () => {
+                const rows = tableRef.current?.getSelectedRows() ?? [];
+                await dictApi.batchDelete(rows.map((row) => row.id));
+                message.success('批量删除成功');
+                tableRef.current?.reload();
+              }}
+            >
+              <Button danger icon={<DeleteOutlined />}>
+                删除所选
               </Button>
-            </PermissionGate>
-            <PermissionGate permission="dict.delete">
-              <Popconfirm
-                title="确定批量删除选中的字典吗？"
-                onConfirm={async () => {
-                  const rows = tableRef.current?.getSelectedRows() ?? [];
-                  if (!rows.length) {
-                    message.warning('请先选择字典');
-                    return;
-                  }
-                  await dictApi.batchDelete(rows.map((row) => row.id));
-                  message.success('批量删除成功');
-                  tableRef.current?.reload();
-                }}
-              >
-                <Button danger icon={<DeleteOutlined />}>
-                  批量删除
-                </Button>
-              </Popconfirm>
-            </PermissionGate>
-          </Space>
+            </Popconfirm>
+          </PermissionGate>
+        )}
+        toolbar={
+          <PermissionGate permission="dict.create">
+            <Button
+              icon={<PlusOutlined />}
+              type="primary"
+              onClick={() => {
+                setCurrentDictId(undefined);
+                setModalOpen(true);
+              }}
+            >
+              新增
+            </Button>
+          </PermissionGate>
         }
       />
 

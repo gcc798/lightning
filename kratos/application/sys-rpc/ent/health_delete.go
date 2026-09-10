@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/health"
-	"github.com/gcc798/lightning/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/health"
+	"github.com/gcc798/microservice-kit/kratos/application/sys-rpc/ent/predicate"
 )
 
 // HealthDelete is the builder for deleting a Health entity.

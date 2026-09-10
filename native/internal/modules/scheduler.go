@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	pkgscheduler "github.com/gcc798/lightning/internal/platform/scheduler"
-	"github.com/gcc798/lightning/internal/runtimeconfig"
+	pkgscheduler "github.com/gcc798/microservice-kit/internal/platform/scheduler"
+	"github.com/gcc798/microservice-kit/internal/runtimeconfig"
 	"go.uber.org/zap"
 )
 

@@ -1,5 +1,14 @@
-import type { FormItemProps } from 'antd';
-import type { ColProps } from 'antd/es/grid/col';
+import type { ColProps } from '@/components/ui';
+
+export interface FormRule {
+  required?: boolean;
+  message?: string;
+  min?: number;
+  max?: number;
+  type?: 'email';
+  pattern?: RegExp;
+  validator?: (_rule: FormRule, value: unknown) => Promise<void> | void;
+}
 
 export type SchemaComponent =
   | 'Input'
@@ -17,7 +26,7 @@ export interface FormSchema {
   name: string;
   label: string;
   component: SchemaComponent;
-  rules?: FormItemProps['rules'];
+  rules?: FormRule[];
   props?: Record<string, unknown>;
   colProps?: ColProps;
   modalColProps?: ColProps;

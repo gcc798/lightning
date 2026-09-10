@@ -3,9 +3,9 @@ package menu
 import (
 	"context"
 
-	"github.com/gcc798/lightning/application/sys-api/internal/svc"
-	"github.com/gcc798/lightning/application/sys-api/internal/types"
-	"github.com/gcc798/lightning/application/sys-rpc/client/sysservice"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/svc"
+	"github.com/gcc798/microservice-kit/application/sys-api/internal/types"
+	"github.com/gcc798/microservice-kit/application/sys-rpc/client/sysservice"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
